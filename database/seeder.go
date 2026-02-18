@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+
 	"github.com/Caknoooo/go-gin-clean-starter/database/seeders/seeds"
 	"gorm.io/gorm"
 )

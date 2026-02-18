@@ -6,6 +6,7 @@ import (
 
 	"github.com/Caknoooo/go-gin-clean-starter/middlewares"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/auth"
+	"github.com/Caknoooo/go-gin-clean-starter/modules/employee"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/user"
 	"github.com/Caknoooo/go-gin-clean-starter/providers"
 	"github.com/Caknoooo/go-gin-clean-starter/script"
@@ -64,6 +65,7 @@ func main() {
 	// Register module routes
 	user.RegisterRoutes(server, injector)
 	auth.RegisterRoutes(server, injector)
+	employee.RegisterRoutes(server, injector)
 
 	run(server)
 }
