@@ -1,0 +1,17 @@
+[
+  {
+    "id": "e6f4cf8a-8c3d-4c3e-9c7f-1d8a9d1e1bf2",
+    "name": "Technology",
+    "description": "Handles all technology and software development."
+  },
+  {
+    "id": "a2a10e11-c351-4e42-8c93-5b8d80e95610",
+    "name": "Human Resources",
+    "description": "Manages employee relations, recruitment, and benefits."
+  },
+  {
+    "id": "f5a5c5d5-c5e5-4a5a-a5c5-a5c5a5c5a5c5",
+    "name": "Finance",
+    "description": "Manages company finances, accounting, and payroll."
+  }
+]

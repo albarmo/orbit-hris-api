@@ -1,0 +1,34 @@
+[
+  {
+    "role_name": "Super Admin",
+    "permission_name": "view_users"
+  },
+  {
+    "role_name": "Super Admin",
+    "permission_name": "manage_users"
+  },
+  {
+    "role_name": "Super Admin",
+    "permission_name": "view_employees"
+  },
+  {
+    "role_name": "Super Admin",
+    "permission_name": "manage_employees"
+  },
+  {
+    "role_name": "Super Admin",
+    "permission_name": "manage_roles_permissions"
+  },
+  {
+    "role_name": "Super Admin",
+    "permission_name": "view_reports"
+  },
+  {
+    "role_name": "HR Manager",
+    "permission_name": "view_employees"
+  },
+  {
+    "role_name": "HR Manager",
+    "permission_name": "manage_employees"
+  }
+]

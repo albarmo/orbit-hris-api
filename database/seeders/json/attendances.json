@@ -1,0 +1,26 @@
+[
+  {
+    "id": "a1b2c3d4-1111-4e67-a6f6-4a5d6a7f8b9c",
+    "employee_id": "e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c",
+    "location_id": "f8d8c3b1-3e4a-4b6a-8b6e-3d1f8a7b3c2d",
+    "check_in_time": "2024-07-22T09:01:15+07:00",
+    "check_out_time": "2024-07-22T18:05:30+07:00",
+    "status": "Present"
+  },
+  {
+    "id": "a1b2c3d4-2222-4e67-a6f6-4a5d6a7f8b9c",
+    "employee_id": "e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c",
+    "location_id": "f8d8c3b1-3e4a-4b6a-8b6e-3d1f8a7b3c2d",
+    "check_in_time": "2024-07-23T08:58:00+07:00",
+    "check_out_time": "2024-07-23T17:59:00+07:00",
+    "status": "Present"
+  },
+    {
+    "id": "a1b2c3d4-3333-4e67-a6f6-4a5d6a7f8b9c",
+    "employee_id": "e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c",
+    "location_id": "f8d8c3b1-3e4a-4b6a-8b6e-3d1f8a7b3c2d",
+    "check_in_time": "2024-07-24T09:10:00+07:00",
+    "check_out_time": null,
+    "status": "On-going"
+  }
+]

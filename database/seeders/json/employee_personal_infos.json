@@ -1,0 +1,15 @@
+[
+  {
+    "id": "c1a6b4a2-9f3c-4d5a-8b1e-7c6d5a4b3c2d",
+    "employee_id": "e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c",
+    "nik": "3201234567890001",
+    "gender": "Male",
+    "birth_place": "Jakarta",
+    "birth_date": "1990-05-20T00:00:00Z",
+    "marital_status": "Married",
+    "religion": "Islam",
+    "nationality": "Indonesian",
+    "personal_email": "johndoe.personal@example.com",
+    "personal_phone": "081234567890"
+  }
+]

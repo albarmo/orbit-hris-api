@@ -1,0 +1,13 @@
+[
+  {
+    "id": "e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c",
+    "user_id": "344faa2e-074b-4a45-b57c-123654f1a158",
+    "employee_code": "EMP001",
+    "supervisor_id": null,
+    "department_id": "e6f4cf8a-8c3d-4c3e-9c7f-1d8a9d1e1bf2",
+    "position_id": "1b3a4c17-7c73-4f51-b2e6-a8cf21e25a22",
+    "join_date": "2023-01-15T00:00:00Z",
+    "employment_type": "Permanent",
+    "employment_status": "Active"
+  }
+]

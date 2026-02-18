@@ -1,0 +1,18 @@
+[
+  {
+    "id": "f8d8c3b1-3e4a-4b6a-8b6e-3d1f8a7b3c2d",
+    "name": "Main Office",
+    "latitude": -6.2088,
+    "longitude": 106.8456,
+    "radius_meters": 100,
+    "is_active": true
+  },
+  {
+    "id": "c1b2a3d4-e5f6-7890-1234-567890abcdef",
+    "name": "Branch Office",
+    "latitude": -6.9175,
+    "longitude": 107.6191,
+    "radius_meters": 50,
+    "is_active": true
+  }
+]

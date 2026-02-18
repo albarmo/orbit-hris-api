@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1b3a4c17-7c73-4f51-b2e6-a8cf21e25a22",
+    "department_id": "e6f4cf8a-8c3d-4c3e-9c7f-1d8a9d1e1bf2",
+    "name": "Backend Engineer",
+    "level": "Senior"
+  },
+  {
+    "id": "8d3e6e37-9252-4467-8025-45a8fe430f5c",
+    "department_id": "e6f4cf8a-8c3d-4c3e-9c7f-1d8a9d1e1bf2",
+    "name": "Frontend Engineer",
+    "level": "Senior"
+  },
+  {
+    "id": "d04b341c-8e43-4b68-8097-1505c8c65f24",
+    "department_id": "a2a10e11-c351-4e42-8c93-5b8d80e95610",
+    "name": "HR Generalist",
+    "level": "Staff"
+  },
+  {
+    "id": "5e1f7c5e-8f5a-4b6e-8e8e-8e8e8e8e8e8e",
+    "department_id": "f5a5c5d5-c5e5-4a5a-a5c5-a5c5a5c5a5c5",
+    "name": "Accountant",
+    "level": "Staff"
+  }
+]

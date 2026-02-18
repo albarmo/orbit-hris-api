@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1e53c3e8-8933-4f16-8968-39591460b377",
+    "name": "view_users",
+    "description": "Can view user list"
+  },
+  {
+    "id": "c5f5915d-8386-42d8-9e3e-4e4f107c1348",
+    "name": "manage_users",
+    "description": "Can create, edit, delete users"
+  },
+  {
+    "id": "e43e7c81-10e3-4b47-88f5-4a6f23695d33",
+    "name": "view_employees",
+    "description": "Can view employee data"
+  },
+  {
+    "id": "f5e97669-9854-4e20-84c1-9d8f36c53a67",
+    "name": "manage_employees",
+    "description": "Can manage employee data"
+  },
+  {
+    "id": "b3d5c5f8-3a26-4fa2-94f7-29e2f6764a75",
+    "name": "manage_roles_permissions",
+    "description": "Can manage roles and permissions"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "name": "view_reports",
+    "description": "Can view HR reports"
+  }
+]

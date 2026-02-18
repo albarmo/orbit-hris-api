@@ -1,0 +1,17 @@
+[
+  {
+    "id": "92e69292-06bd-469c-a5a3-793563a6473b",
+    "name": "Super Admin",
+    "description": "Has all permissions"
+  },
+  {
+    "id": "199e3a6b-2321-4f11-8549-342f5aa2a700",
+    "name": "HR Manager",
+    "description": "Manages HR-related tasks"
+  },
+  {
+    "id": "a933393a-8b2b-472a-9e6b-357d6051cf33",
+    "name": "Employee",
+    "description": "Regular employee access"
+  }
+]
