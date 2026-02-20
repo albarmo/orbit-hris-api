@@ -18,6 +18,7 @@ import (
 type (
 	UserController interface {
 		Me(ctx *gin.Context)
+		GetUserById(ctx *gin.Context)
 		GetAllUser(ctx *gin.Context)
 		Update(ctx *gin.Context)
 		Delete(ctx *gin.Context)
@@ -56,6 +57,20 @@ func (c *userController) GetAllUser(ctx *gin.Context) {
 	paginationResponse := pagination.CalculatePagination(filter.Pagination, total)
 	response := pagination.NewPaginatedResponse(http.StatusOK, dto.MESSAGE_SUCCESS_GET_LIST_USER, users, paginationResponse)
 	ctx.JSON(http.StatusOK, response)
+}
+
+func (c *userController) GetUserById(ctx *gin.Context) {
+	userId := ctx.Param("id")
+
+	result, err := c.userService.GetUserById(ctx.Request.Context(), userId)
+	if err != nil {
+		res := utils.BuildResponseFailed(dto.MESSAGE_FAILED_GET_USER, err.Error(), nil)
+		ctx.JSON(http.StatusBadRequest, res)
+		return
+	}
+
+	res := utils.BuildResponseSuccess(dto.MESSAGE_SUCCESS_GET_USER, result)
+	ctx.JSON(http.StatusOK, res)
 }
 
 func (c *userController) Me(ctx *gin.Context) {

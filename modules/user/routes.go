@@ -17,6 +17,7 @@ func RegisterRoutes(server *gin.Engine, injector *do.Injector) {
 	{
 		userRoutes.GET("", userController.GetAllUser)
 		userRoutes.GET("/me", middlewares.Authenticate(jwtService), userController.Me)
+		userRoutes.GET("/:id", userController.GetUserById)
 		userRoutes.PUT("/:id", middlewares.Authenticate(jwtService), userController.Update)
 		userRoutes.DELETE("/:id", middlewares.Authenticate(jwtService), userController.Delete)
 	}

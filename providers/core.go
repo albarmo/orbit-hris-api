@@ -2,6 +2,9 @@ package providers
 
 import (
 	"github.com/Caknoooo/go-gin-clean-starter/config"
+	attendanceController "github.com/Caknoooo/go-gin-clean-starter/modules/attendance/controller"
+	attendanceRepository "github.com/Caknoooo/go-gin-clean-starter/modules/attendance/repository"
+	attendanceService "github.com/Caknoooo/go-gin-clean-starter/modules/attendance/service"
 	authController "github.com/Caknoooo/go-gin-clean-starter/modules/auth/controller"
 	authRepo "github.com/Caknoooo/go-gin-clean-starter/modules/auth/repository"
 	authService "github.com/Caknoooo/go-gin-clean-starter/modules/auth/service"
@@ -36,12 +39,12 @@ func RegisterDependencies(injector *do.Injector) {
 	userRepository := repository.NewUserRepository(db)
 	refreshTokenRepository := authRepo.NewRefreshTokenRepository(db)
 	employeeRepository := employeeRepository.NewEmployeeRepository(db)
-	
+	attendanceRepository := attendanceRepository.NewAttendanceRepository(db)
 
 	userService := userService.NewUserService(userRepository, db)
 	authService := authService.NewAuthService(userRepository, refreshTokenRepository, jwtService, db)
 	employeeService := employeeService.NewEmployeeService(employeeRepository, db)
-
+	attendanceService := attendanceService.NewAttendanceService(attendanceRepository, db)
 
 	do.Provide(
 		injector, func(i *do.Injector) (userController.UserController, error) {
@@ -58,6 +61,12 @@ func RegisterDependencies(injector *do.Injector) {
 	do.Provide(
 		injector, func(i *do.Injector) (employeeController.EmployeeController, error) {
 			return employeeController.NewEmployeeController(employeeService), nil
+		},
+	)
+
+	do.Provide(
+		injector, func(i *do.Injector) (attendanceController.AttendanceController, error) {
+			return attendanceController.NewAttendanceController(i, attendanceService), nil
 		},
 	)
 }
