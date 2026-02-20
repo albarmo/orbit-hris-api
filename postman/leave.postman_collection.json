@@ -1,0 +1,65 @@
+{
+  "info": {
+    "name": "go-gin-clean-starter - Leave",
+    "_postman_id": "leave-collection",
+    "description": "Collection for Leave module endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Get Leaves",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": { "raw": "{{baseUrl}}/api/leaves", "host": ["{{baseUrl}}"], "path": ["api","leaves"] }
+      }
+    },
+    {
+      "name": "Get Leave by ID",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": { "raw": "{{baseUrl}}/api/leaves/:id", "host": ["{{baseUrl}}"], "path": ["api","leaves",":id"] }
+      }
+    },
+    {
+      "name": "Create Leave",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"employee_id\": \"<employee-uuid>\",\n  \"start_date\": \"2026-03-01\",\n  \"end_date\": \"2026-03-05\",\n  \"reason\": \"Vacation\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/leaves", "host": ["{{baseUrl}}"], "path": ["api","leaves"] }
+      }
+    },
+    {
+      "name": "Update Leave",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": { "mode": "raw", "raw": "{\n  \"status\": \"approved\"\n}" },
+        "url": { "raw": "{{baseUrl}}/api/leaves/:id", "host": ["{{baseUrl}}"], "path": ["api","leaves",":id"] }
+      }
+    },
+    {
+      "name": "Delete Leave",
+      "request": {
+        "method": "DELETE",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": { "raw": "{{baseUrl}}/api/leaves/:id", "host": ["{{baseUrl}}"], "path": ["api","leaves",":id"] }
+      }
+    }
+  ]
+}
