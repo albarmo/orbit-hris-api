@@ -184,6 +184,7 @@ func (r *rbacRepository) GetRolesByUser(ctx context.Context, db *gorm.DB, userID
 	var roles []entities.Role
 	// join user_roles
 	if err := db.WithContext(ctx).Model(&entities.Role{}).
+		Preload("Permissions").
 		Joins("JOIN user_roles ur ON ur.role_id = roles.id").
 		Where("ur.user_id = ?", userID).
 		Find(&roles).Error; err != nil {
