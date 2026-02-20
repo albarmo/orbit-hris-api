@@ -14,3 +14,23 @@ func NewRbacValidation() *RbacValidation {
 		validate: validate,
 	}
 }
+
+func (v *RbacValidation) ValidateRoleCreate(req interface{}) error {
+	return v.validate.Struct(req)
+}
+
+func (v *RbacValidation) ValidateRoleUpdate(req interface{}) error {
+	return v.validate.Struct(req)
+}
+
+func (v *RbacValidation) ValidatePermissionCreate(req interface{}) error {
+	return v.validate.Struct(req)
+}
+
+func (v *RbacValidation) ValidatePermissionUpdate(req interface{}) error {
+	return v.validate.Struct(req)
+}
+
+func (v *RbacValidation) ValidateAssignRole(req interface{}) error {
+	return v.validate.Struct(req)
+}

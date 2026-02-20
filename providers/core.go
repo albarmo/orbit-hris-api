@@ -14,6 +14,9 @@ import (
 	masterController "github.com/Caknoooo/go-gin-clean-starter/modules/master/controller"
 	masterRepository "github.com/Caknoooo/go-gin-clean-starter/modules/master/repository"
 	masterService "github.com/Caknoooo/go-gin-clean-starter/modules/master/service"
+	rbacController "github.com/Caknoooo/go-gin-clean-starter/modules/rbac/controller"
+	rbacRepositoryPkg "github.com/Caknoooo/go-gin-clean-starter/modules/rbac/repository"
+	rbacService "github.com/Caknoooo/go-gin-clean-starter/modules/rbac/service"
 	userController "github.com/Caknoooo/go-gin-clean-starter/modules/user/controller"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/user/repository"
 	userService "github.com/Caknoooo/go-gin-clean-starter/modules/user/service"
@@ -45,11 +48,14 @@ func RegisterDependencies(injector *do.Injector) {
 	attendanceRepository := attendanceRepository.NewAttendanceRepository(db)
 	masterRepository := masterRepository.NewMasterRepository(db)
 
+	rbacRepository := rbacRepositoryPkg.NewRbacRepository(db)
+
 	userService := userService.NewUserService(userRepository, db)
 	authService := authService.NewAuthService(userRepository, refreshTokenRepository, jwtService, db)
 	employeeService := employeeService.NewEmployeeService(employeeRepository, db)
 	attendanceService := attendanceService.NewAttendanceService(attendanceRepository, db)
 	masterService := masterService.NewMasterService(masterRepository, db)
+	rbacService := rbacService.NewRbacService(rbacRepository, db)
 
 	do.Provide(
 		injector, func(i *do.Injector) (userController.UserController, error) {
@@ -78,6 +84,12 @@ func RegisterDependencies(injector *do.Injector) {
 	do.Provide(
 		injector, func(i *do.Injector) (masterController.MasterController, error) {
 			return masterController.NewMasterController(masterService), nil
+		},
+	)
+
+	do.Provide(
+		injector, func(i *do.Injector) (rbacController.RbacController, error) {
+			return rbacController.NewRbacController(i, rbacService), nil
 		},
 	)
 }

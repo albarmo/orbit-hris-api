@@ -6,9 +6,39 @@ const (
 )
 
 type (
-	RbacCreateRequest struct {
+	RoleCreateRequest struct {
+		Name        string `json:"name" binding:"required"`
+		Description string `json:"description"`
 	}
 
-	RbacResponse struct {
+	RoleUpdateRequest struct {
+		Name        string `json:"name"`
+		Description string `json:"description"`
+	}
+
+	RoleResponse struct {
+		ID          string `json:"id"`
+		Name        string `json:"name"`
+		Description string `json:"description"`
+	}
+
+	PermissionCreateRequest struct {
+		Name        string `json:"name" binding:"required"`
+		Description string `json:"description"`
+	}
+
+	PermissionUpdateRequest struct {
+		Name        string `json:"name"`
+		Description string `json:"description"`
+	}
+
+	PermissionResponse struct {
+		ID          string `json:"id"`
+		Name        string `json:"name"`
+		Description string `json:"description"`
+	}
+
+	AssignRoleRequest struct {
+		RoleID string `json:"role_id" binding:"required"`
 	}
 )
