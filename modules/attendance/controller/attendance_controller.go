@@ -18,6 +18,7 @@ type (
 	AttendanceController interface {
 		GetAll(ctx *gin.Context)
 		GetByID(ctx *gin.Context)
+		GetByEmployeeID(ctx *gin.Context)
 		CheckIn(ctx *gin.Context)
 		CheckOut(ctx *gin.Context)
 		Update(ctx *gin.Context)
@@ -84,6 +85,23 @@ func (c *attendanceController) GetByID(ctx *gin.Context) {
 		return
 	}
 	res := utils.BuildResponseSuccess("success", result)
+	ctx.JSON(http.StatusOK, res)
+}
+
+func (c *attendanceController) GetByEmployeeID(ctx *gin.Context) {
+	employeeID := ctx.Param("employee_id")
+
+	var filter = pagination.Filter{}
+	filter.Bind(ctx)
+
+	page, err := c.service.FindByEmployeeID(ctx.Request.Context(), employeeID, &filter)
+	if err != nil {
+		res := utils.BuildResponseFailed("failed get attendances by employee", err.Error(), nil)
+		ctx.JSON(http.StatusBadRequest, res)
+		return
+	}
+
+	res := utils.BuildResponseSuccess("success", page)
 	ctx.JSON(http.StatusOK, res)
 }
 

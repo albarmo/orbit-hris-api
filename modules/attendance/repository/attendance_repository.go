@@ -12,6 +12,7 @@ import (
 
 type AttendanceRepository interface {
 	FindAll(ctx context.Context, db *gorm.DB, filter *pagination.Filter) (*pagination.Page[entities.Attendance], error)
+	FindByEmployeeID(ctx context.Context, db *gorm.DB, filter *pagination.Filter, employeeID uuid.UUID) (*pagination.Page[entities.Attendance], error)
 	FindByID(id uuid.UUID) (*entities.Attendance, error)
 	FindTodayByEmployeeID(employeeID uuid.UUID) (*entities.Attendance, error)
 	Create(attendance *entities.Attendance) (*entities.Attendance, error)
@@ -62,6 +63,27 @@ func (r *attendanceRepository) FindAll(ctx context.Context, db *gorm.DB, filter 
 	var page pagination.Page[entities.Attendance]
 
 	paginator, err := pagination.NewPaginator(db.WithContext(ctx).Model(&entities.Attendance{}).Preload("Employee").Preload("Location"), filter)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := paginator.Find(&attendances).Error; err != nil {
+		return nil, err
+	}
+
+	page.Set(attendances, paginator.Page, paginator.Limit, paginator.Total)
+	return &page, nil
+}
+
+func (r *attendanceRepository) FindByEmployeeID(ctx context.Context, db *gorm.DB, filter *pagination.Filter, employeeID uuid.UUID) (*pagination.Page[entities.Attendance], error) {
+	if db == nil {
+		db = r.db
+	}
+
+	var attendances []entities.Attendance
+	var page pagination.Page[entities.Attendance]
+
+	paginator, err := pagination.NewPaginator(db.WithContext(ctx).Model(&entities.Attendance{}).Where("employee_id = ?", employeeID).Preload("Employee").Preload("Location"), filter)
 	if err != nil {
 		return nil, err
 	}

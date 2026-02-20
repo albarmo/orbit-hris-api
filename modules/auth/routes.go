@@ -13,6 +13,10 @@ func RegisterRoutes(server *gin.Engine, injector *do.Injector) {
 	{
 		authRoutes.POST("/register", authController.Register)
 		authRoutes.POST("/login", authController.Login)
+		authRoutes.POST("/login-face", authController.LoginByFace)
+		authRoutes.POST("/enroll-face", authController.EnrollFace)
+		authRoutes.GET("/person/:name", authController.GetPerson)
+		authRoutes.GET("/photo/:id", authController.GetPhoto)
 		authRoutes.POST("/refresh", authController.RefreshToken)
 		authRoutes.POST("/logout", authController.Logout)
 		authRoutes.POST("/send-verification-email", authController.SendVerificationEmail)

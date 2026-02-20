@@ -21,6 +21,7 @@ type AttendanceService interface {
 	Approve(id string, req dto.ApproveAttendanceDTO) (*entities.Attendance, error)
 	Delete(id string) error
 	FindAll(ctx context.Context, filter *pagination.Filter) (*pagination.Page[entities.Attendance], error)
+	FindByEmployeeID(ctx context.Context, employeeID string, filter *pagination.Filter) (*pagination.Page[entities.Attendance], error)
 }
 
 type attendanceService struct {
@@ -54,6 +55,18 @@ func (s *attendanceService) GetByID(id string) (*entities.Attendance, error) {
 
 func (s *attendanceService) FindAll(ctx context.Context, filter *pagination.Filter) (*pagination.Page[entities.Attendance], error) {
 	page, err := s.attendanceRepository.FindAll(ctx, s.db, filter)
+	if err != nil {
+		return nil, err
+	}
+	return page, nil
+}
+
+func (s *attendanceService) FindByEmployeeID(ctx context.Context, employeeID string, filter *pagination.Filter) (*pagination.Page[entities.Attendance], error) {
+	uid, err := uuid.Parse(employeeID)
+	if err != nil {
+		return nil, errors.New("invalid employee id")
+	}
+	page, err := s.attendanceRepository.FindByEmployeeID(ctx, s.db, filter, uid)
 	if err != nil {
 		return nil, err
 	}

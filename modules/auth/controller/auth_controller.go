@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"io"
 	"net/http"
 
 	"github.com/Caknoooo/go-gin-clean-starter/modules/auth/dto"
@@ -18,6 +19,10 @@ type (
 	AuthController interface {
 		Register(ctx *gin.Context)
 		Login(ctx *gin.Context)
+		LoginByFace(ctx *gin.Context)
+		EnrollFace(ctx *gin.Context)
+		GetPerson(ctx *gin.Context)
+		GetPhoto(ctx *gin.Context)
 		RefreshToken(ctx *gin.Context)
 		Logout(ctx *gin.Context)
 		SendVerificationEmail(ctx *gin.Context)
@@ -202,4 +207,125 @@ func (c *authController) ResetPassword(ctx *gin.Context) {
 
 	res := utils.BuildResponseSuccess(dto.MESSAGE_SUCCESS_RESET_PASSWORD, nil)
 	ctx.JSON(http.StatusOK, res)
+}
+
+// LoginByFace handles face ID login using external face-search API
+func (c *authController) LoginByFace(ctx *gin.Context) {
+	// receive uploaded image file from form field "image"
+	fileHeader, err := ctx.FormFile("image")
+	if err != nil {
+		res := utils.BuildResponseFailed("failed get file", err.Error(), nil)
+		ctx.JSON(http.StatusBadRequest, res)
+		return
+	}
+
+	file, err := fileHeader.Open()
+	if err != nil {
+		res := utils.BuildResponseFailed("failed open file", err.Error(), nil)
+		ctx.JSON(http.StatusBadRequest, res)
+		return
+	}
+	defer file.Close()
+
+	// read file bytes
+	imgBytes, err := io.ReadAll(file)
+	if err != nil {
+		res := utils.BuildResponseFailed("failed read file", err.Error(), nil)
+		ctx.JSON(http.StatusBadRequest, res)
+		return
+	}
+
+	// call service to authenticate by face
+	result, err := c.authService.LoginByFace(ctx.Request.Context(), imgBytes, fileHeader.Filename)
+	if err != nil {
+		res := utils.BuildResponseFailed("failed login by face", err.Error(), nil)
+		ctx.JSON(http.StatusUnauthorized, res)
+		return
+	}
+
+	res := utils.BuildResponseSuccess("success", result)
+	ctx.JSON(http.StatusOK, res)
+}
+
+// EnrollFace registers a new person/photo to external face service
+func (c *authController) EnrollFace(ctx *gin.Context) {
+	name := ctx.Query("name")
+	if name == "" {
+		res := utils.BuildResponseFailed("name query param required", "", nil)
+		ctx.JSON(http.StatusBadRequest, res)
+		return
+	}
+
+	fileHeader, err := ctx.FormFile("image")
+	if err != nil {
+		res := utils.BuildResponseFailed("failed get file", err.Error(), nil)
+		ctx.JSON(http.StatusBadRequest, res)
+		return
+	}
+	file, err := fileHeader.Open()
+	if err != nil {
+		res := utils.BuildResponseFailed("failed open file", err.Error(), nil)
+		ctx.JSON(http.StatusBadRequest, res)
+		return
+	}
+	defer file.Close()
+
+	imgBytes, err := io.ReadAll(file)
+	if err != nil {
+		res := utils.BuildResponseFailed("failed read file", err.Error(), nil)
+		ctx.JSON(http.StatusBadRequest, res)
+		return
+	}
+
+	resp, err := c.authService.EnrollFace(ctx.Request.Context(), imgBytes, fileHeader.Filename, name)
+	if err != nil {
+		res := utils.BuildResponseFailed("enroll failed", err.Error(), nil)
+		ctx.JSON(http.StatusBadRequest, res)
+		return
+	}
+
+	res := utils.BuildResponseSuccess("enroll success", resp)
+	ctx.JSON(http.StatusOK, res)
+}
+
+// GetPerson returns person info from external face service
+func (c *authController) GetPerson(ctx *gin.Context) {
+	name := ctx.Param("name")
+	if name == "" {
+		res := utils.BuildResponseFailed("name required", "", nil)
+		ctx.JSON(http.StatusBadRequest, res)
+		return
+	}
+
+	resp, err := c.authService.GetPerson(ctx.Request.Context(), name)
+	if err != nil {
+		res := utils.BuildResponseFailed("failed get person", err.Error(), nil)
+		ctx.JSON(http.StatusBadRequest, res)
+		return
+	}
+
+	res := utils.BuildResponseSuccess("success", resp)
+	ctx.JSON(http.StatusOK, res)
+}
+
+// GetPhoto proxies photo bytes from external face service
+func (c *authController) GetPhoto(ctx *gin.Context) {
+	photoID := ctx.Param("id")
+	if photoID == "" {
+		res := utils.BuildResponseFailed("photo id required", "", nil)
+		ctx.JSON(http.StatusBadRequest, res)
+		return
+	}
+
+	contentType, data, err := c.authService.GetPhoto(ctx.Request.Context(), photoID)
+	if err != nil {
+		res := utils.BuildResponseFailed("failed get photo", err.Error(), nil)
+		ctx.JSON(http.StatusBadRequest, res)
+		return
+	}
+
+	if contentType == "" {
+		contentType = "application/octet-stream"
+	}
+	ctx.Data(http.StatusOK, contentType, data)
 }

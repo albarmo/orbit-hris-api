@@ -1,0 +1,152 @@
+{
+  "info": {
+    "name": "Master API",
+    "_postman_id": "master-collection",
+    "description": "Collection for Departments, Locations, and Positions endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8080" },
+    { "key": "access_token", "value": "" },
+    { "key": "page", "value": "1" },
+    { "key": "limit", "value": "10" }
+  ],
+  "item": [
+    {
+      "name": "Departments",
+      "item": [
+        {
+          "name": "List Departments",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{access_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/master/departments?page={{page}}&limit={{limit}}&name={{name}}",
+              "host": ["{{base_url}}"],
+              "path": ["api","master","departments"]
+            }
+          }
+        },
+        {
+          "name": "Get Department",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" } ],
+            "url": { "raw": "{{base_url}}/api/master/departments/:id", "host": ["{{base_url}}"], "path": ["api","master","departments",":id"] }
+          }
+        },
+        {
+          "name": "Create Department",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{access_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Engineering\",\n  \"description\": \"Engineering dept\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/master/departments", "host": ["{{base_url}}"], "path": ["api","master","departments"] }
+          }
+        },
+        {
+          "name": "Update Department",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{access_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Engineering Updated\",\n  \"description\": \"Updated\"\n}" },
+            "url": { "raw": "{{base_url}}/api/master/departments/:id", "host": ["{{base_url}}"], "path": ["api","master","departments",":id"] }
+          }
+        },
+        {
+          "name": "Delete Department",
+          "request": {
+            "method": "DELETE",
+            "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" } ],
+            "url": { "raw": "{{base_url}}/api/master/departments/:id", "host": ["{{base_url}}"], "path": ["api","master","departments",":id"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Locations",
+      "item": [
+        {
+          "name": "List Locations",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" } ],
+            "url": { "raw": "{{base_url}}/api/master/locations?page={{page}}&limit={{limit}}&name={{name}}", "host": ["{{base_url}}"], "path": ["api","master","locations"] }
+          }
+        },
+        {
+          "name": "Get Location",
+          "request": { "method": "GET", "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" } ], "url": { "raw": "{{base_url}}/api/master/locations/:id", "host": ["{{base_url}}"], "path": ["api","master","locations",":id"] } }
+        },
+        {
+          "name": "Create Location",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"HQ\",\n  \"latitude\": -6.2,\n  \"longitude\": 106.8,\n  \"radius_meters\": 50\n}" },
+            "url": { "raw": "{{base_url}}/api/master/locations", "host": ["{{base_url}}"], "path": ["api","master","locations"] }
+          }
+        },
+        {
+          "name": "Update Location",
+          "request": {
+            "method": "PUT",
+            "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"HQ Updated\",\n  \"latitude\": -6.21,\n  \"longitude\": 106.81,\n  \"radius_meters\": 100\n}" },
+            "url": { "raw": "{{base_url}}/api/master/locations/:id", "host": ["{{base_url}}"], "path": ["api","master","locations",":id"] }
+          }
+        },
+        {
+          "name": "Delete Location",
+          "request": { "method": "DELETE", "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" } ], "url": { "raw": "{{base_url}}/api/master/locations/:id", "host": ["{{base_url}}"], "path": ["api","master","locations",":id"] } }
+        }
+      ]
+    },
+    {
+      "name": "Positions",
+      "item": [
+        {
+          "name": "List Positions",
+          "request": { "method": "GET", "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" } ], "url": { "raw": "{{base_url}}/api/master/positions?page={{page}}&limit={{limit}}&name={{name}}&department_id={{department_id}}", "host": ["{{base_url}}"], "path": ["api","master","positions"] } }
+        },
+        {
+          "name": "Get Position",
+          "request": { "method": "GET", "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" } ], "url": { "raw": "{{base_url}}/api/master/positions/:id", "host": ["{{base_url}}"], "path": ["api","master","positions",":id"] } }
+        },
+        {
+          "name": "Create Position",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"department_id\": \"<department-uuid>\",\n  \"name\": \"Senior Developer\",\n  \"level\": \"Senior\"\n}" },
+            "url": { "raw": "{{base_url}}/api/master/positions", "host": ["{{base_url}}"], "path": ["api","master","positions"] }
+          }
+        },
+        {
+          "name": "Update Position",
+          "request": {
+            "method": "PUT",
+            "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"department_id\": \"<department-uuid>\",\n  \"name\": \"Lead Developer\",\n  \"level\": \"Lead\"\n}" },
+            "url": { "raw": "{{base_url}}/api/master/positions/:id", "host": ["{{base_url}}"], "path": ["api","master","positions",":id"] }
+          }
+        },
+        {
+          "name": "Delete Position",
+          "request": { "method": "DELETE", "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" } ], "url": { "raw": "{{base_url}}/api/master/positions/:id", "host": ["{{base_url}}"], "path": ["api","master","positions",":id"] } }
+        }
+      ]
+    }
+  ]
+}

@@ -11,6 +11,9 @@ import (
 	employeeController "github.com/Caknoooo/go-gin-clean-starter/modules/employee/controller"
 	employeeRepository "github.com/Caknoooo/go-gin-clean-starter/modules/employee/repository"
 	employeeService "github.com/Caknoooo/go-gin-clean-starter/modules/employee/service"
+	masterController "github.com/Caknoooo/go-gin-clean-starter/modules/master/controller"
+	masterRepository "github.com/Caknoooo/go-gin-clean-starter/modules/master/repository"
+	masterService "github.com/Caknoooo/go-gin-clean-starter/modules/master/service"
 	userController "github.com/Caknoooo/go-gin-clean-starter/modules/user/controller"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/user/repository"
 	userService "github.com/Caknoooo/go-gin-clean-starter/modules/user/service"
@@ -40,11 +43,13 @@ func RegisterDependencies(injector *do.Injector) {
 	refreshTokenRepository := authRepo.NewRefreshTokenRepository(db)
 	employeeRepository := employeeRepository.NewEmployeeRepository(db)
 	attendanceRepository := attendanceRepository.NewAttendanceRepository(db)
+	masterRepository := masterRepository.NewMasterRepository(db)
 
 	userService := userService.NewUserService(userRepository, db)
 	authService := authService.NewAuthService(userRepository, refreshTokenRepository, jwtService, db)
 	employeeService := employeeService.NewEmployeeService(employeeRepository, db)
 	attendanceService := attendanceService.NewAttendanceService(attendanceRepository, db)
+	masterService := masterService.NewMasterService(masterRepository, db)
 
 	do.Provide(
 		injector, func(i *do.Injector) (userController.UserController, error) {
@@ -67,6 +72,12 @@ func RegisterDependencies(injector *do.Injector) {
 	do.Provide(
 		injector, func(i *do.Injector) (attendanceController.AttendanceController, error) {
 			return attendanceController.NewAttendanceController(i, attendanceService), nil
+		},
+	)
+
+	do.Provide(
+		injector, func(i *do.Injector) (masterController.MasterController, error) {
+			return masterController.NewMasterController(masterService), nil
 		},
 	)
 }
