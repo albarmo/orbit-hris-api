@@ -1,32 +1,42 @@
 [
-  {
-    "id": "1e53c3e8-8933-4f16-8968-39591460b377",
-    "name": "view_users",
-    "description": "Can view user list"
-  },
-  {
-    "id": "c5f5915d-8386-42d8-9e3e-4e4f107c1348",
-    "name": "manage_users",
-    "description": "Can create, edit, delete users"
-  },
-  {
-    "id": "e43e7c81-10e3-4b47-88f5-4a6f23695d33",
-    "name": "view_employees",
-    "description": "Can view employee data"
-  },
-  {
-    "id": "f5e97669-9854-4e20-84c1-9d8f36c53a67",
-    "name": "manage_employees",
-    "description": "Can manage employee data"
-  },
-  {
-    "id": "b3d5c5f8-3a26-4fa2-94f7-29e2f6764a75",
-    "name": "manage_roles_permissions",
-    "description": "Can manage roles and permissions"
-  },
-  {
-    "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-    "name": "view_reports",
-    "description": "Can view HR reports"
-  }
+  {"id":"1e53c3e8-8933-4f16-8968-39591460b377","name":"view_users","description":"Can view users"},
+  {"id":"c5f5915d-8386-42d8-9e3e-4e4f107c1348","name":"manage_users","description":"Can manage users (create/edit/delete)"},
+  {"id":"e43e7c81-10e3-4b47-88f5-4a6f23695d33","name":"view_employees","description":"Can view employees"},
+  {"id":"f5e97669-9854-4e20-84c1-9d8f36c53a67","name":"manage_employees","description":"Can manage employees (create/edit/delete)"},
+  {"id":"2a7b9d8f-1111-4f16-9999-111111111111","name":"view_attendances","description":"Can view attendances"},
+  {"id":"2a7b9d8f-2222-4f16-9999-222222222222","name":"manage_attendances","description":"Can manage attendances"},
+  {"id":"3b8c0e11-3333-4f16-aaaa-333333333333","name":"view_expenses","description":"Can view expenses"},
+  {"id":"3b8c0e11-4444-4f16-aaaa-444444444444","name":"manage_expenses","description":"Can manage expenses"},
+  {"id":"3b8c0e11-5555-4f16-aaaa-555555555555","name":"view_expense_categories","description":"Can view expense categories"},
+  {"id":"3b8c0e11-6666-4f16-aaaa-666666666666","name":"manage_expense_categories","description":"Can manage expense categories"},
+  {"id":"4c9d1f22-7777-4f16-bbbb-777777777777","name":"view_leaves","description":"Can view leaves"},
+  {"id":"4c9d1f22-8888-4f16-bbbb-888888888888","name":"manage_leaves","description":"Can manage leaves"},
+  {"id":"5d0e2f33-9999-4f16-cccc-999999999999","name":"view_leave_types","description":"Can view leave types"},
+  {"id":"5d0e2f33-aaaa-4f16-cccc-aaaaaaaaaaaa","name":"manage_leave_types","description":"Can manage leave types"},
+  {"id":"6e1f3044-bbbb-4f16-dddd-bbbbbbbbbbbb","name":"view_master_departments","description":"Can view departments"},
+  {"id":"6e1f3044-cccc-4f16-dddd-cccccccccccc","name":"manage_master_departments","description":"Can manage departments"},
+  {"id":"7f203155-dddd-4f16-eeee-dddddddddddd","name":"view_master_locations","description":"Can view locations"},
+  {"id":"7f203155-eeee-4f16-eeee-eeeeeeeeeeee","name":"manage_master_locations","description":"Can manage locations"},
+  {"id":"8a314266-ffff-4f16-ffff-ffffffffffff","name":"view_master_positions","description":"Can view positions"},
+  {"id":"8a314266-0000-4f16-ffff-000000000000","name":"manage_master_positions","description":"Can manage positions"},
+  {"id":"9a425377-1212-4f16-0000-121212121212","name":"view_shifts","description":"Can view shifts"},
+  {"id":"9a425377-3434-4f16-0000-343434343434","name":"manage_shifts","description":"Can manage shifts"},
+  {"id":"a452e488-5656-4f16-1111-565656565656","name":"view_payroll","description":"Can view payroll"},
+  {"id":"a452e488-7878-4f16-1111-787878787878","name":"manage_payroll","description":"Can manage payroll"},
+  {"id":"b563f599-9090-4f16-2222-909090909090","name":"manage_payroll_items","description":"Can manage payroll items"},
+  {"id":"c67406aa-abab-4f16-3333-abababababab","name":"view_notifications","description":"Can view notifications"},
+  {"id":"c67406aa-cdcd-4f16-3333-cdcdcdcdcdcd","name":"manage_notifications","description":"Can manage notifications"},
+  {"id":"b3d5c5f8-3a26-4fa2-94f7-29e2f6764a75","name":"manage_roles_permissions","description":"Can manage roles and permissions"},
+  {"id":"a1b2c3d4-e5f6-7890-1234-567890abcdef","name":"view_reports","description":"Can view reports and dashboards"}
+
+  ,{"id":"11111111-1111-1111-1111-111111111111","name":"view_employee_personal_info","description":"Can view employee personal info"},
+  {"id":"11111111-1111-1111-1111-222222222222","name":"manage_employee_personal_info","description":"Can manage employee personal info"},
+  {"id":"11111111-1111-1111-1111-333333333333","name":"view_employee_addresses","description":"Can view employee addresses"},
+  {"id":"11111111-1111-1111-1111-444444444444","name":"manage_employee_addresses","description":"Can manage employee addresses"},
+  {"id":"11111111-1111-1111-1111-555555555555","name":"view_employee_legal_info","description":"Can view employee legal info"},
+  {"id":"11111111-1111-1111-1111-666666666666","name":"manage_employee_legal_info","description":"Can manage employee legal info"},
+  {"id":"11111111-1111-1111-1111-777777777777","name":"view_employee_payroll_profile","description":"Can view employee payroll profile"},
+  {"id":"11111111-1111-1111-1111-888888888888","name":"manage_employee_payroll_profile","description":"Can manage employee payroll profile"},
+  {"id":"11111111-1111-1111-1111-999999999999","name":"view_employee_emergency_contacts","description":"Can view employee emergency contacts"},
+  {"id":"11111111-1111-1111-1111-aaaaaaaaaaaa","name":"manage_employee_emergency_contacts","description":"Can manage employee emergency contacts"}
 ]

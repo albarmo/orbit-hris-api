@@ -1,190 +1,114 @@
 {
   "info": {
-    "_postman_id": "45bdc085-f3b9-45ac-9efb-3e6b381b567c",
+    "_postman_id": "a3b40c43-6692-4769-84ca-fe16c3095dec",
     "name": "BG_HRIS",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "12857741"
+    "_exporter_id": "12857741",
+    "_collection_link": "https://go.postman.co/collection/12857741-a3b40c43-6692-4769-84ca-fe16c3095dec?source=collection_link"
   },
   "item": [
     {
-      "name": "User",
-      "item": [
-        {
-          "name": "Me",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{token}}",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{BASE_URL}}/api/user/me",
-              "host": [
-                "{{BASE_URL}}"
-              ],
-              "path": [
-                "api",
-                "user",
-                "me"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Get By ID",
-          "request": {
-            "auth": {
-              "type": "noauth"
-            },
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{BASE_URL}}/api/user/:id",
-              "host": [
-                "{{BASE_URL}}"
-              ],
-              "path": [
-                "api",
-                "user",
-                ":id"
-              ],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "344faa2e-074b-4a45-b57c-123654f1a158"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Get All Users",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{BASE_URL}}/api/user",
-              "host": [
-                "{{BASE_URL}}"
-              ],
-              "path": [
-                "api",
-                "user"
-              ],
-              "query": [
-                {
-                  "key": "page",
-                  "value": "1",
-                  "disabled": true
-                },
-                {
-                  "key": "per_page",
-                  "value": "10",
-                  "disabled": true
-                },
-                {
-                  "key": "search",
-                  "value": "",
-                  "disabled": true
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Update",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{token}}",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "PUT",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"name\": \"test update\",\r\n    \"telp_number\": \"0812912812212\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{BASE_URL}}/api/user/:id",
-              "host": [
-                "{{BASE_URL}}"
-              ],
-              "path": [
-                "api",
-                "user",
-                ":id"
-              ],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Delete",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{token}}",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{BASE_URL}}/api/user/:id",
-              "host": [
-                "{{BASE_URL}}"
-              ],
-              "path": [
-                "api",
-                "user",
-                ":id"
-              ],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
       "name": "Auth",
       "item": [
+        {
+          "name": "Admin Password Resets",
+          "item": [
+            {
+              "name": "Create (Admin)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"user_id\": \"<uuid>\",\n    \"expires_at\": \"2026-01-01T00:00:00Z\"\n}"
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/api/auth/password-resets",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "password-resets"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get By Token (Admin)",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/auth/password-resets/:token",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "password-resets",
+                    ":token"
+                  ],
+                  "variable": [
+                    {
+                      "key": "token",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete (Admin)",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/auth/password-resets/:id",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "password-resets",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
         {
           "name": "Register",
           "request": {
@@ -266,7 +190,70 @@
               ]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "Login",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"albar@bitgroup.co.id\",\r\n    \"password\": \"Password123!\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/api/auth/login",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                },
+                {
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 23 Feb 2026 14:21:06 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "412"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"success login\",\n    \"data\": {\n        \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMzQ0ZmFhMmUtMDc0Yi00YTQ1LWI1N2MtMTIzNjU0ZjFhMTU4Iiwicm9sZSI6IkZyb250ZW5kIERldmVsb3BlciIsImlzcyI6IlRlbXBsYXRlIiwiZXhwIjoxNzcxODU3MzY2LCJpYXQiOjE3NzE4NTY0NjZ9.UzFSvAW0na0aiy8vrTEzoESfQQvJBIRglS9p2N7qCHk\",\n        \"refresh_token\": \"uBJBOcoLu3u7UAwUbwHj21IcLqAxKgKmGRGSxAS5auc=\",\n        \"role\": \"Frontend Developer\"\n    }\n}"
+            }
+          ]
         },
         {
           "name": "Logout",
@@ -336,7 +323,7 @@
                 {
                   "key": "image",
                   "type": "file",
-                  "src": []
+                  "src": "/Users/albarbitgroup/Desktop/hris/albar_search.jpg"
                 }
               ]
             },
@@ -370,7 +357,7 @@
                 {
                   "key": "image",
                   "type": "file",
-                  "src": []
+                  "value": null
                 }
               ]
             },
@@ -567,105 +554,182 @@
             }
           },
           "response": []
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Me",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/user/me",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "user",
+                "me"
+              ]
+            }
+          },
+          "response": []
         },
         {
-          "name": "Admin Password Resets",
-          "item": [
-            {
-              "name": "Create (Admin)",
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{token}}"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n    \"user_id\": \"<uuid>\",\n    \"expires_at\": \"2026-01-01T00:00:00Z\"\n}"
-                },
-                "url": {
-                  "raw": "{{BASE_URL}}/api/auth/password-resets",
-                  "host": [
-                    "{{BASE_URL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "auth",
-                    "password-resets"
-                  ]
-                }
-              },
-              "response": []
+          "name": "Get By ID",
+          "request": {
+            "auth": {
+              "type": "noauth"
             },
-            {
-              "name": "Get By Token (Admin)",
-              "request": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{token}}"
-                  }
-                ],
-                "url": {
-                  "raw": "{{BASE_URL}}/api/auth/password-resets/:token",
-                  "host": [
-                    "{{BASE_URL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "auth",
-                    "password-resets",
-                    ":token"
-                  ],
-                  "variable": [
-                    {
-                      "key": "token",
-                      "value": ""
-                    }
-                  ]
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/user/:id",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "user",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "344faa2e-074b-4a45-b57c-123654f1a158"
                 }
-              },
-              "response": []
-            },
-            {
-              "name": "Delete (Admin)",
-              "request": {
-                "method": "DELETE",
-                "header": [
-                  {
-                    "key": "Authorization",
-                    "value": "Bearer {{token}}"
-                  }
-                ],
-                "url": {
-                  "raw": "{{BASE_URL}}/api/auth/password-resets/:id",
-                  "host": [
-                    "{{BASE_URL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "auth",
-                    "password-resets",
-                    ":id"
-                  ],
-                  "variable": [
-                    {
-                      "key": "id",
-                      "value": ""
-                    }
-                  ]
-                }
-              },
-              "response": []
+              ]
             }
-          ]
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/user",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "user"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "per_page",
+                  "value": "10",
+                  "disabled": true
+                },
+                {
+                  "key": "search",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"test update\",\r\n    \"telp_number\": \"0812912812212\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/user/:id",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "user",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/user/:id",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "user",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
         }
       ]
     },
@@ -691,7 +755,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"full_name\": \"Budi Santoso\",\n  \"birth_date\": \"1995-06-15\",\n  \"gender\": \"male\",\n  \"marital_status\": \"single\"\n}"
+                  "raw": "{\n  \"full_name\": \"Budi Santoso\",\n  \"birth_date\": \"2024-01-15T00:00:00Z\",\n  \"gender\": \"male\",\n  \"marital_status\": \"single\",\n\n  \"nik\": \"3171234567890001\",\n  \"birth_place\": \"Jakarta\",\n  \"religion\": \"Islam\",\n  \"nationality\": \"Indonesia\",\n  \"personal_email\": \"budi.personal@gmail.com\",\n  \"personal_phone\": \"081234567890\"\n}"
                 },
                 "url": {
                   "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/personal_info",
@@ -706,7 +770,75 @@
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Create Personal Info",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"full_name\": \"Budi Santoso\",\n  \"birth_date\": \"2024-01-15T00:00:00Z\",\n  \"gender\": \"male\",\n  \"marital_status\": \"single\",\n\n  \"nik\": \"3171234567890001\",\n  \"birth_place\": \"Jakarta\",\n  \"religion\": \"Islam\",\n  \"nationality\": \"Indonesia\",\n  \"personal_email\": \"budi.personal@gmail.com\",\n  \"personal_phone\": \"081234567890\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/personal_info",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "employee",
+                        "{{employee_id}}",
+                        "personal_info"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 14:03:19 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "312"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success create personal info\",\n    \"data\": {\n        \"nik\": \"3171234567890001\",\n        \"gender\": \"male\",\n        \"birth_place\": \"Jakarta\",\n        \"birth_date\": \"2024-01-15T00:00:00Z\",\n        \"marital_status\": \"single\",\n        \"religion\": \"Islam\",\n        \"nationality\": \"Indonesia\",\n        \"personal_email\": \"budi.personal@gmail.com\",\n        \"personal_phone\": \"081234567890\"\n    }\n}"
+                }
+              ]
             },
             {
               "name": "Get Personal Info",
@@ -731,7 +863,67 @@
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Get Personal Info",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/personal_info",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "employee",
+                        "{{employee_id}}",
+                        "personal_info"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 14:01:27 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "316"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success get personal info\",\n    \"data\": {\n        \"nik\": \"3201234567890001\",\n        \"gender\": \"Male\",\n        \"birth_place\": \"Jakarta\",\n        \"birth_date\": \"1990-05-20T00:00:00Z\",\n        \"marital_status\": \"Married\",\n        \"religion\": \"Islam\",\n        \"nationality\": \"Indonesian\",\n        \"personal_email\": \"johndoe.personal@example.com\",\n        \"personal_phone\": \"081234567890\"\n    }\n}"
+                }
+              ]
             },
             {
               "name": "Update Personal Info",
@@ -749,7 +941,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"marital_status\": \"married\"\n}"
+                  "raw": "{\n    \"marital_status\": \"married\"\n}"
                 },
                 "url": {
                   "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/personal_info",
@@ -764,7 +956,75 @@
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Update Personal Info",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"marital_status\": \"married\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/personal_info",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "employee",
+                        "{{employee_id}}",
+                        "personal_info"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 14:01:41 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "132"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success update personal info\",\n    \"data\": {\n        \"marital_status\": \"married\",\n        \"personal_email\": \"\",\n        \"personal_phone\": \"\"\n    }\n}"
+                }
+              ]
             },
             {
               "name": "Delete Personal Info",
@@ -789,7 +1049,67 @@
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Delete Personal Info",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/personal_info",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "employee",
+                        "{{employee_id}}",
+                        "personal_info"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 14:03:13 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "56"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success delete personal info\"\n}"
+                }
+              ]
             }
           ]
         },
@@ -812,7 +1132,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"address\": \"Jl. Sudirman No.10\",\n  \"city\": \"Jakarta\",\n  \"province\": \"DKI Jakarta\",\n  \"postal_code\": \"10220\"\n}"
+                  "raw": "{\n    \"type\": \"home\",\n    \"address\": \"Jl. Contoh No.1\",\n    \"city\": \"Jakarta\",\n    \"province\": \"DKI Jakarta\",\n    \"postal_code\": \"12345\"\n}"
                 },
                 "url": {
                   "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/addresses",
@@ -827,7 +1147,75 @@
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Create Address",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"type\": \"home\",\n    \"address\": \"Jl. Contoh No.1\",\n    \"city\": \"Jakarta\",\n    \"province\": \"DKI Jakarta\",\n    \"postal_code\": \"12345\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/addresses",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "employee",
+                        "{{employee_id}}",
+                        "addresses"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 13:57:34 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "165"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success create address\",\n    \"data\": {\n        \"type\": \"home\",\n        \"address\": \"Jl. Contoh No.1\",\n        \"city\": \"Jakarta\",\n        \"province\": \"DKI Jakarta\",\n        \"postal_code\": \"12345\"\n    }\n}"
+                }
+              ]
             },
             {
               "name": "List Addresses",
@@ -852,7 +1240,67 @@
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "List Addresses",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/addresses",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "employee",
+                        "{{employee_id}}",
+                        "addresses"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 13:54:19 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "317"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success get addresses\",\n    \"data\": [\n        {\n            \"type\": \"KTP\",\n            \"address\": \"Jl. Jenderal Sudirman No. 123\",\n            \"city\": \"Jakarta Selatan\",\n            \"province\": \"DKI Jakarta\",\n            \"postal_code\": \"12190\"\n        },\n        {\n            \"type\": \"Domicile\",\n            \"address\": \"Jl. Gatot Subroto No. 456\",\n            \"city\": \"Jakarta Selatan\",\n            \"province\": \"DKI Jakarta\",\n            \"postal_code\": \"12710\"\n        }\n    ]\n}"
+                }
+              ]
             },
             {
               "name": "Get Address Detail",
@@ -865,7 +1313,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/addresses/{{address_id}}",
+                  "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/addresses/:address_id",
                   "host": [
                     "{{BASE_URL}}"
                   ],
@@ -874,11 +1322,84 @@
                     "employee",
                     "{{employee_id}}",
                     "addresses",
-                    "{{address_id}}"
+                    ":address_id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "address_id",
+                      "value": "d2b7c5b3-1a4d-5e6b-9c2f-8d7e6b5a4c3e"
+                    }
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Get Address Detail",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/addresses/:address_id",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "employee",
+                        "{{employee_id}}",
+                        "addresses",
+                        ":address_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "address_id",
+                          "value": "d2b7c5b3-1a4d-5e6b-9c2f-8d7e6b5a4c3e"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 14:07:33 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "227"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success get address\",\n    \"data\": {\n        \"id\": \"00000000-0000-0000-0000-000000000000\",\n        \"type\": \"KTP\",\n        \"address\": \"Jl. Jenderal Sudirman No. 123\",\n        \"city\": \"Jakarta Selatan\",\n        \"province\": \"DKI Jakarta\",\n        \"postal_code\": \"12190\"\n    }\n}"
+                }
+              ]
             },
             {
               "name": "Update Address",
@@ -899,7 +1420,7 @@
                   "raw": "{\n  \"city\": \"Bandung\"\n}"
                 },
                 "url": {
-                  "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/addresses/{{address_id}}",
+                  "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/addresses/:address_id",
                   "host": [
                     "{{BASE_URL}}"
                   ],
@@ -908,11 +1429,92 @@
                     "employee",
                     "{{employee_id}}",
                     "addresses",
-                    "{{address_id}}"
+                    ":address_id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "address_id",
+                      "value": "{{address_id}}"
+                    }
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Update Address",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"city\": \"Bandung\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/addresses/:address_id",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "employee",
+                        "{{employee_id}}",
+                        "addresses",
+                        ":address_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "address_id",
+                          "value": "{{address_id}}"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 14:08:15 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "174"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success update address\",\n    \"data\": {\n        \"id\": \"d2b7c5b3-1a4d-5e6b-9c2f-8d7e6b5a4c3e\",\n        \"type\": \"\",\n        \"address\": \"\",\n        \"city\": \"Bandung\",\n        \"province\": \"\",\n        \"postal_code\": \"\"\n    }\n}"
+                }
+              ]
             },
             {
               "name": "Delete Address",
@@ -925,7 +1527,7 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/addresses/{{address_id}}",
+                  "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/addresses/:address_id",
                   "host": [
                     "{{BASE_URL}}"
                   ],
@@ -934,11 +1536,84 @@
                     "employee",
                     "{{employee_id}}",
                     "addresses",
-                    "{{address_id}}"
+                    ":address_id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "address_id",
+                      "value": "d2b7c5b3-1a4d-5e6b-9c2f-8d7e6b5a4c3e"
+                    }
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Delete Address",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/addresses/:address_id",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "employee",
+                        "{{employee_id}}",
+                        "addresses",
+                        ":address_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "address_id",
+                          "value": "d2b7c5b3-1a4d-5e6b-9c2f-8d7e6b5a4c3e"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 14:08:37 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "50"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success delete address\"\n}"
+                }
+              ]
             }
           ]
         },
@@ -961,7 +1636,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"nik\": \"317xxxxxxxxxxxxx\",\n  \"npwp\": \"12.345.678.9-012.000\"\n}"
+                  "raw": "{\n    \"npwp\": \"123456789\",\n    \"bpjs_kesehatan\": \"BPJS-123\",\n    \"bpjs_ketenagakerjaan\": \"BPJS-456\",\n    \"passport_number\": \"A12345\",\n    \"passport_expired_date\": \"2028-01-01T00:00:00Z\"\n}"
                 },
                 "url": {
                   "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/legal_info",
@@ -976,7 +1651,75 @@
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Create Legal Info",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"npwp\": \"123456789\",\n    \"bpjs_kesehatan\": \"BPJS-123\",\n    \"bpjs_ketenagakerjaan\": \"BPJS-456\",\n    \"passport_number\": \"A12345\",\n    \"passport_expired_date\": \"2028-01-01T00:00:00Z\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/legal_info",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "employee",
+                        "{{employee_id}}",
+                        "legal_info"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 13:53:53 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "217"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success create legal info\",\n    \"data\": {\n        \"npwp\": \"123456789\",\n        \"bpjs_kesehatan\": \"BPJS-123\",\n        \"bpjs_ketenagakerjaan\": \"BPJS-456\",\n        \"passport_number\": \"A12345\",\n        \"passport_expired_date\": \"2028-01-01T00:00:00Z\"\n    }\n}"
+                }
+              ]
             },
             {
               "name": "Get Legal Info",
@@ -1001,7 +1744,67 @@
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Get Legal Info",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/legal_info",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "employee",
+                        "{{employee_id}}",
+                        "legal_info"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 13:51:36 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "229"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success get legal info\",\n    \"data\": {\n        \"npwp\": \"09.254.294.3-407.000\",\n        \"bpjs_kesehatan\": \"0001234567890\",\n        \"bpjs_ketenagakerjaan\": \"1234567890123\",\n        \"passport_number\": \"\",\n        \"passport_expired_date\": \"0001-01-01T00:00:00Z\"\n    }\n}"
+                }
+              ]
             },
             {
               "name": "Update Legal Info",
@@ -1034,7 +1837,75 @@
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Update Legal Info",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"npwp\": \"98.765.432.1-000.000\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/legal_info",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "employee",
+                        "{{employee_id}}",
+                        "legal_info"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 13:51:45 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "206"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success update legal info\",\n    \"data\": {\n        \"npwp\": \"98.765.432.1-000.000\",\n        \"bpjs_kesehatan\": \"\",\n        \"bpjs_ketenagakerjaan\": \"\",\n        \"passport_number\": \"\",\n        \"passport_expired_date\": \"0001-01-01T00:00:00Z\"\n    }\n}"
+                }
+              ]
             },
             {
               "name": "Delete Legal Info",
@@ -1059,7 +1930,67 @@
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Delete Legal Info",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/legal_info",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "employee",
+                        "{{employee_id}}",
+                        "legal_info"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 13:51:51 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "53"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success delete legal info\"\n}"
+                }
+              ]
             }
           ]
         },
@@ -1082,7 +2013,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"bank_name\": \"BCA\",\n  \"account_number\": \"1234567890\",\n  \"salary\": 10000000\n}"
+                  "raw": "{\n    \"basic_salary\": 5000000,\n    \"bank_name\": \"BCA\",\n    \"bank_account_number\": \"1234567890\",\n    \"bank_account_holder\": \"John Doe\"\n}"
                 },
                 "url": {
                   "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/payroll_profile",
@@ -1097,7 +2028,75 @@
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Create Payroll Profile",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"basic_salary\": 5000000,\n    \"bank_name\": \"BCA\",\n    \"bank_account_number\": \"1234567890\",\n    \"bank_account_holder\": \"John Doe\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/payroll_profile",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "employee",
+                        "{{employee_id}}",
+                        "payroll_profile"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 13:51:10 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "176"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success create payroll profile\",\n    \"data\": {\n        \"basic_salary\": 5000000,\n        \"bank_name\": \"BCA\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_account_holder\": \"John Doe\"\n    }\n}"
+                }
+              ]
             },
             {
               "name": "Get Payroll Profile",
@@ -1122,7 +2121,67 @@
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Get Payroll Profile",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/payroll_profile",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "employee",
+                        "{{employee_id}}",
+                        "payroll_profile"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 13:46:27 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "174"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success get payroll profile\",\n    \"data\": {\n        \"basic_salary\": 15000000,\n        \"bank_name\": \"BCA\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_account_holder\": \"John Doe\"\n    }\n}"
+                }
+              ]
             },
             {
               "name": "Update Payroll Profile",
@@ -1155,7 +2214,75 @@
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Update Payroll Profile",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"salary\": 12000000\n}"
+                    },
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/payroll_profile",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "employee",
+                        "{{employee_id}}",
+                        "payroll_profile"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 13:46:35 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "149"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success update payroll profile\",\n    \"data\": {\n        \"basic_salary\": 0,\n        \"bank_name\": \"\",\n        \"bank_account_number\": \"\",\n        \"bank_account_holder\": \"\"\n    }\n}"
+                }
+              ]
             },
             {
               "name": "Delete Payroll Profile",
@@ -1180,7 +2307,67 @@
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Delete Payroll Profile",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/employee/{{employee_id}}/payroll_profile",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "employee",
+                        "{{employee_id}}",
+                        "payroll_profile"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 13:50:55 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "58"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success delete payroll profile\"\n}"
+                }
+              ]
             }
           ]
         },
@@ -1224,7 +2411,81 @@
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Create",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"Jane Doe\",\n  \"relationship\": \"Spouse\",\n  \"phone\": \"08123456789\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/employee/:id/emergency_contacts",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "employee",
+                        ":id",
+                        "emergency_contacts"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "{{employee_id}}"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 13:45:26 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "212"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success create\",\n    \"data\": {\n        \"id\": \"db95a3b7-4cb4-4f49-8b34-bd58a2cdc783\",\n        \"employee_id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n        \"name\": \"Jane Doe\",\n        \"relationship\": \"Spouse\",\n        \"phone\": \"08123456789\"\n    }\n}"
+                }
+              ]
             },
             {
               "name": "Get By Employee",
@@ -1255,7 +2516,138 @@
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Get By Employee",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/employee/:id/emergency_contacts",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "employee",
+                        ":id",
+                        "emergency_contacts"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "{{employee_id}}"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 13:45:19 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "51"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success get\",\n    \"data\": null\n}"
+                },
+                {
+                  "name": "Get By Employee",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/employee/:id/emergency_contacts",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "employee",
+                        ":id",
+                        "emergency_contacts"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "{{employee_id}}"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 13:45:40 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "211"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success get\",\n    \"data\": [\n        {\n            \"id\": \"db95a3b7-4cb4-4f49-8b34-bd58a2cdc783\",\n            \"employee_id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n            \"name\": \"Jane Doe\",\n            \"relationship\": \"Spouse\",\n            \"phone\": \"08123456789\"\n        }\n    ]\n}"
+                }
+              ]
             },
             {
               "name": "Delete",
@@ -1286,12 +2678,83 @@
                     },
                     {
                       "key": "contact_id",
-                      "value": ""
+                      "value": "16e7a0e0-b80c-4d46-a189-4bee1bdaf97f"
                     }
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Delete",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/employee/:id/emergency_contacts/:contact_id",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "employee",
+                        ":id",
+                        "emergency_contacts",
+                        ":contact_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "{{employee_id}}"
+                        },
+                        {
+                          "key": "contact_id",
+                          "value": "16e7a0e0-b80c-4d46-a189-4bee1bdaf97f"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 13:46:09 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "42"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success delete\"\n}"
+                }
+              ]
             }
           ]
         },
@@ -1317,7 +2780,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"user_id\": \"a117854f-1db9-4f32-925b-3469afd0abbc\",\n    \"employee_code\": \"EMP-001\",\n    \"supervisor_id\": null,\n    \"department_id\": \"f5a5c5d5-c5e5-4a5a-a5c5-a5c5a5c5a5c5\",\n    \"position_id\": \"5e1f7c5e-8f5a-4b6e-8e8e-8e8e8e8e8e8e\",\n    \"join_date\": \"2024-01-15T00:00:00Z\",\n    \"employment_type\": \"full_time\",\n    \"employment_status\": \"active\",\n    \"personal_info\": {\n        \"nik\": \"1234567890123456\",\n        \"gender\": \"male\",\n        \"birth_place\": \"Jakarta\",\n        \"birth_date\": \"2024-01-15T00:00:00Z\",\n        \"marital_status\": \"single\",\n        \"religion\": \"islam\",\n        \"nationality\": \"indonesia\",\n        \"personal_email\": \"person@example.com\",\n        \"personal_phone\": \"+628123456789\"\n    },\n    \"addresses\": [\n        {\n            \"type\": \"home\",\n            \"address\": \"Jl. Example No.1\",\n            \"city\": \"Jakarta\",\n            \"province\": \"DKI Jakarta\",\n            \"postal_code\": \"10001\"\n        }\n    ],\n    \"legal_info\": {\n        \"npwp\": \"09.123.456.7-890.000\",\n        \"bpjs_kesehatan\": \"BPJS-K-123456\",\n        \"bpjs_ketenagakerjaan\": \"BPJS-TK-123456\"\n    },\n    \"payroll_info\": {\n        \"basic_salary\": 15000000,\n        \"bank_name\": \"Bank Contoh\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_account_holder\": \"Nama Karyawan\"\n    }\n}",
+              "raw": "{\n    \"user_id\": \"bcfa6d56-212f-4232-82fa-99004a6d5dc8\",\n    \"employee_code\": \"EMP-003\",\n    \"supervisor_id\": null,\n    \"department_id\": \"f5a5c5d5-c5e5-4a5a-a5c5-a5c5a5c5a5c5\",\n    \"position_id\": \"5e1f7c5e-8f5a-4b6e-8e8e-8e8e8e8e8e8e\",\n    \"join_date\": \"2024-01-15T00:00:00Z\",\n    \"employment_type\": \"full_time\",\n    \"employment_status\": \"active\",\n    \"personal_info\": {\n        \"nik\": \"1234567890123454\",\n        \"gender\": \"male\",\n        \"birth_place\": \"Jakarta\",\n        \"birth_date\": \"2024-01-15T00:00:00Z\",\n        \"marital_status\": \"single\",\n        \"religion\": \"islam\",\n        \"nationality\": \"indonesia\",\n        \"personal_email\": \"person@example.com\",\n        \"personal_phone\": \"+628123456789\"\n    },\n    \"addresses\": [\n        {\n            \"type\": \"home\",\n            \"address\": \"Jl. Example No.1\",\n            \"city\": \"Jakarta\",\n            \"province\": \"DKI Jakarta\",\n            \"postal_code\": \"10001\"\n        }\n    ],\n    \"legal_info\": {\n        \"npwp\": \"09.123.456.7-890.000\",\n        \"bpjs_kesehatan\": \"BPJS-K-123456\",\n        \"bpjs_ketenagakerjaan\": \"BPJS-TK-123456\"\n    },\n    \"payroll_info\": {\n        \"basic_salary\": 15000000,\n        \"bank_name\": \"Bank Contoh\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_account_holder\": \"Nama Karyawan\"\n    }\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1335,7 +2798,146 @@
               ]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "Create Employee",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"user_id\": \"a117854f-1db9-4f32-925b-3469afd0abbc\",\n    \"employee_code\": \"EMP-001\",\n    \"supervisor_id\": null,\n    \"department_id\": \"f5a5c5d5-c5e5-4a5a-a5c5-a5c5a5c5a5c5\",\n    \"position_id\": \"5e1f7c5e-8f5a-4b6e-8e8e-8e8e8e8e8e8e\",\n    \"join_date\": \"2024-01-15T00:00:00Z\",\n    \"employment_type\": \"full_time\",\n    \"employment_status\": \"active\",\n    \"personal_info\": {\n        \"nik\": \"1234567890123456\",\n        \"gender\": \"male\",\n        \"birth_place\": \"Jakarta\",\n        \"birth_date\": \"2024-01-15T00:00:00Z\",\n        \"marital_status\": \"single\",\n        \"religion\": \"islam\",\n        \"nationality\": \"indonesia\",\n        \"personal_email\": \"person@example.com\",\n        \"personal_phone\": \"+628123456789\"\n    },\n    \"addresses\": [\n        {\n            \"type\": \"home\",\n            \"address\": \"Jl. Example No.1\",\n            \"city\": \"Jakarta\",\n            \"province\": \"DKI Jakarta\",\n            \"postal_code\": \"10001\"\n        }\n    ],\n    \"legal_info\": {\n        \"npwp\": \"09.123.456.7-890.000\",\n        \"bpjs_kesehatan\": \"BPJS-K-123456\",\n        \"bpjs_ketenagakerjaan\": \"BPJS-TK-123456\"\n    },\n    \"payroll_info\": {\n        \"basic_salary\": 15000000,\n        \"bank_name\": \"Bank Contoh\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_account_holder\": \"Nama Karyawan\"\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/api/employee",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "employee"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "",
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                },
+                {
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 23 Feb 2026 13:40:09 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "158"
+                }
+              ],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\n    \"status\": false,\n    \"message\": \"failed create employee\",\n    \"error\": \"ERROR: duplicate key value violates unique constraint \\\"employees_user_id_key\\\" (SQLSTATE 23505)\"\n}"
+            },
+            {
+              "name": "Create Employee",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"user_id\": \"bcfa6d56-212f-4232-82fa-99004a6d5dc8\",\n    \"employee_code\": \"EMP-002\",\n    \"supervisor_id\": null,\n    \"department_id\": \"f5a5c5d5-c5e5-4a5a-a5c5-a5c5a5c5a5c5\",\n    \"position_id\": \"5e1f7c5e-8f5a-4b6e-8e8e-8e8e8e8e8e8e\",\n    \"join_date\": \"2024-01-15T00:00:00Z\",\n    \"employment_type\": \"full_time\",\n    \"employment_status\": \"active\",\n    \"personal_info\": {\n        \"nik\": \"1234567890123455\",\n        \"gender\": \"male\",\n        \"birth_place\": \"Jakarta\",\n        \"birth_date\": \"2024-01-15T00:00:00Z\",\n        \"marital_status\": \"single\",\n        \"religion\": \"islam\",\n        \"nationality\": \"indonesia\",\n        \"personal_email\": \"person@example.com\",\n        \"personal_phone\": \"+628123456789\"\n    },\n    \"addresses\": [\n        {\n            \"type\": \"home\",\n            \"address\": \"Jl. Example No.1\",\n            \"city\": \"Jakarta\",\n            \"province\": \"DKI Jakarta\",\n            \"postal_code\": \"10001\"\n        }\n    ],\n    \"legal_info\": {\n        \"npwp\": \"09.123.456.7-890.000\",\n        \"bpjs_kesehatan\": \"BPJS-K-123456\",\n        \"bpjs_ketenagakerjaan\": \"BPJS-TK-123456\"\n    },\n    \"payroll_info\": {\n        \"basic_salary\": 15000000,\n        \"bank_name\": \"Bank Contoh\",\n        \"bank_account_number\": \"1234567890\",\n        \"bank_account_holder\": \"Nama Karyawan\"\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/api/employee",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "employee"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                },
+                {
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 23 Feb 2026 13:40:56 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "810"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"success create employee\",\n    \"data\": {\n        \"id\": \"15435c3b-c63f-47bb-a999-a5a08bfce415\",\n        \"user_id\": \"bcfa6d56-212f-4232-82fa-99004a6d5dc8\",\n        \"employee_code\": \"EMP-002\",\n        \"supervisor_id\": null,\n        \"department_id\": \"f5a5c5d5-c5e5-4a5a-a5c5-a5c5a5c5a5c5\",\n        \"position_id\": \"5e1f7c5e-8f5a-4b6e-8e8e-8e8e8e8e8e8e\",\n        \"join_date\": \"2024-01-15T00:00:00Z\",\n        \"end_date\": \"0001-01-01T00:00:00Z\",\n        \"employment_type\": \"full_time\",\n        \"employment_status\": \"active\",\n        \"probation_end_date\": \"0001-01-01T00:00:00Z\",\n        \"user\": {\n            \"id\": \"bcfa6d56-212f-4232-82fa-99004a6d5dc8\",\n            \"name\": \"Pak CEO\",\n            \"email\": \"admin1234@gmail.com\",\n            \"telp_number\": \"08123456789\",\n            \"role\": \"admin\",\n            \"image_url\": \"\",\n            \"is_verified\": true\n        },\n        \"department\": {\n            \"id\": \"f5a5c5d5-c5e5-4a5a-a5c5-a5c5a5c5a5c5\",\n            \"name\": \"Finance\"\n        },\n        \"position\": {\n            \"id\": \"5e1f7c5e-8f5a-4b6e-8e8e-8e8e8e8e8e8e\",\n            \"name\": \"Accountant\"\n        }\n    }\n}"
+            }
+          ]
         },
         {
           "name": "Get All Employee",
@@ -1378,7 +2980,74 @@
               ]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "Get All Employee",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/employee?page=1&per_page=1&search=cakno",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "employee"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "search",
+                      "value": "cakno"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                },
+                {
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 23 Feb 2026 13:40:03 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1504"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"success get list employee\",\n    \"data\": {\n        \"page\": 1,\n        \"limit\": 10,\n        \"total\": 2,\n        \"total_pages\": 1,\n        \"data\": [\n            {\n                \"id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n                \"user_id\": \"344faa2e-074b-4a45-b57c-123654f1a158\",\n                \"employee_code\": \"EMP001\",\n                \"supervisor_id\": null,\n                \"department_id\": \"e6f4cf8a-8c3d-4c3e-9c7f-1d8a9d1e1bf2\",\n                \"position_id\": \"1b3a4c17-7c73-4f51-b2e6-a8cf21e25a22\",\n                \"join_date\": \"2023-01-15T00:00:00Z\",\n                \"end_date\": \"0001-01-01T00:00:00Z\",\n                \"employment_type\": \"Permanent\",\n                \"employment_status\": \"Active\",\n                \"probation_end_date\": \"0001-01-01T00:00:00Z\",\n                \"user\": {\n                    \"id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"name\": \"\",\n                    \"email\": \"\",\n                    \"telp_number\": \"\",\n                    \"role\": \"\",\n                    \"image_url\": \"\",\n                    \"is_verified\": false\n                },\n                \"department\": {\n                    \"id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"name\": \"\"\n                },\n                \"position\": {\n                    \"id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"name\": \"\"\n                }\n            },\n            {\n                \"id\": \"3dbfa338-7968-495a-8ed8-3484e4fa7cb1\",\n                \"user_id\": \"a117854f-1db9-4f32-925b-3469afd0abbc\",\n                \"employee_code\": \"EMP-001\",\n                \"supervisor_id\": null,\n                \"department_id\": \"f5a5c5d5-c5e5-4a5a-a5c5-a5c5a5c5a5c5\",\n                \"position_id\": \"5e1f7c5e-8f5a-4b6e-8e8e-8e8e8e8e8e8e\",\n                \"join_date\": \"2024-01-15T00:00:00Z\",\n                \"end_date\": \"0001-01-01T00:00:00Z\",\n                \"employment_type\": \"full_time\",\n                \"employment_status\": \"active\",\n                \"probation_end_date\": \"0001-01-01T00:00:00Z\",\n                \"user\": {\n                    \"id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"name\": \"\",\n                    \"email\": \"\",\n                    \"telp_number\": \"\",\n                    \"role\": \"\",\n                    \"image_url\": \"\",\n                    \"is_verified\": false\n                },\n                \"department\": {\n                    \"id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"name\": \"\"\n                },\n                \"position\": {\n                    \"id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"name\": \"\"\n                }\n            }\n        ]\n    }\n}"
+            }
+          ]
         },
         {
           "name": "Get All Employee Detail",
@@ -1413,7 +3082,170 @@
               ]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "Get All Employee Detail",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/employee/:id",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "employee",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "3dbfa338-7968-495a-8ed8-3484e4fa7cb1"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                },
+                {
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 23 Feb 2026 13:24:21 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "802"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"success get employee\",\n    \"data\": {\n        \"id\": \"3dbfa338-7968-495a-8ed8-3484e4fa7cb1\",\n        \"user_id\": \"a117854f-1db9-4f32-925b-3469afd0abbc\",\n        \"employee_code\": \"EMP-001\",\n        \"supervisor_id\": null,\n        \"department_id\": \"f5a5c5d5-c5e5-4a5a-a5c5-a5c5a5c5a5c5\",\n        \"position_id\": \"5e1f7c5e-8f5a-4b6e-8e8e-8e8e8e8e8e8e\",\n        \"join_date\": \"2024-01-15T00:00:00Z\",\n        \"end_date\": \"0001-01-01T00:00:00Z\",\n        \"employment_type\": \"full_time\",\n        \"employment_status\": \"active\",\n        \"probation_end_date\": \"0001-01-01T00:00:00Z\",\n        \"user\": {\n            \"id\": \"a117854f-1db9-4f32-925b-3469afd0abbc\",\n            \"name\": \"user\",\n            \"email\": \"user1234@gmail.com\",\n            \"telp_number\": \"08123456789\",\n            \"role\": \"user\",\n            \"image_url\": \"\",\n            \"is_verified\": true\n        },\n        \"department\": {\n            \"id\": \"f5a5c5d5-c5e5-4a5a-a5c5-a5c5a5c5a5c5\",\n            \"name\": \"Finance\"\n        },\n        \"position\": {\n            \"id\": \"5e1f7c5e-8f5a-4b6e-8e8e-8e8e8e8e8e8e\",\n            \"name\": \"Accountant\"\n        }\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get All Employee Me",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let jsonData = pm.response.json();",
+                  "",
+                  "if (jsonData.status === true && jsonData.data && jsonData.data.id) {",
+                  "    pm.environment.set(\"employee_id\", jsonData.data.id);",
+                  "    console.log(\"employee_id set:\", jsonData.data.id);",
+                  "} else {",
+                  "    console.log(\"Failed to set employee_id. Response not valid.\");",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/employee/me",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "employee",
+                "me"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get All Employee Me",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/employee/me",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "employee",
+                    "me"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                },
+                {
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 23 Feb 2026 13:29:58 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "885"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"Success get employee\",\n    \"data\": {\n        \"id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n        \"user_id\": \"344faa2e-074b-4a45-b57c-123654f1a158\",\n        \"employee_code\": \"EMP001\",\n        \"supervisor_id\": null,\n        \"department_id\": \"e6f4cf8a-8c3d-4c3e-9c7f-1d8a9d1e1bf2\",\n        \"position_id\": \"1b3a4c17-7c73-4f51-b2e6-a8cf21e25a22\",\n        \"join_date\": \"2023-01-15T00:00:00Z\",\n        \"end_date\": \"0001-01-01T00:00:00Z\",\n        \"employment_type\": \"Permanent\",\n        \"employment_status\": \"Active\",\n        \"probation_end_date\": \"0001-01-01T00:00:00Z\",\n        \"user\": {\n            \"id\": \"344faa2e-074b-4a45-b57c-123654f1a158\",\n            \"name\": \"Albar Moerhamsa\",\n            \"email\": \"albar@bitgroup.co.id\",\n            \"telp_number\": \"081280709980\",\n            \"role\": \"Frontend Developer\",\n            \"image_url\": \"https://ik.imagekit.io/barmox/albar%20(1).jpeg\",\n            \"is_verified\": false\n        },\n        \"department\": {\n            \"id\": \"e6f4cf8a-8c3d-4c3e-9c7f-1d8a9d1e1bf2\",\n            \"name\": \"Technology\"\n        },\n        \"position\": {\n            \"id\": \"1b3a4c17-7c73-4f51-b2e6-a8cf21e25a22\",\n            \"name\": \"Backend Engineer\"\n        }\n    }\n}"
+            }
+          ]
         }
       ]
     },
@@ -2737,7 +4569,66 @@
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "List Roles",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/rbac/roles",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "rbac",
+                        "roles"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 14:21:17 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "413"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"status\": true,\n    \"message\": \"success\",\n    \"data\": {\n        \"page\": 1,\n        \"limit\": 10,\n        \"total\": 3,\n        \"total_pages\": 1,\n        \"data\": [\n            {\n                \"id\": \"92e69292-06bd-469c-a5a3-793563a6473b\",\n                \"name\": \"Super Admin\",\n                \"description\": \"Has all permissions\"\n            },\n            {\n                \"id\": \"199e3a6b-2321-4f11-8549-342f5aa2a700\",\n                \"name\": \"HR Manager\",\n                \"description\": \"Manages HR-related tasks\"\n            },\n            {\n                \"id\": \"a933393a-8b2b-472a-9e6b-357d6051cf33\",\n                \"name\": \"Employee\",\n                \"description\": \"Regular employee access\"\n            }\n        ]\n    }\n}"
+                }
+              ]
             },
             {
               "name": "Get Role",

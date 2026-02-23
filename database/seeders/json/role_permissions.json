@@ -1,34 +1,54 @@
 [
-  {
-    "role_name": "Super Admin",
-    "permission_name": "view_users"
-  },
-  {
-    "role_name": "Super Admin",
-    "permission_name": "manage_users"
-  },
-  {
-    "role_name": "Super Admin",
-    "permission_name": "view_employees"
-  },
-  {
-    "role_name": "Super Admin",
-    "permission_name": "manage_employees"
-  },
-  {
-    "role_name": "Super Admin",
-    "permission_name": "manage_roles_permissions"
-  },
-  {
-    "role_name": "Super Admin",
-    "permission_name": "view_reports"
-  },
-  {
-    "role_name": "HR Manager",
-    "permission_name": "view_employees"
-  },
-  {
-    "role_name": "HR Manager",
-    "permission_name": "manage_employees"
-  }
+  {"role_name":"Super Admin","permission_name":"view_users"},
+  {"role_name":"Super Admin","permission_name":"manage_users"},
+  {"role_name":"Super Admin","permission_name":"view_employees"},
+  {"role_name":"Super Admin","permission_name":"manage_employees"},
+  {"role_name":"Super Admin","permission_name":"view_attendances"},
+  {"role_name":"Super Admin","permission_name":"manage_attendances"},
+  {"role_name":"Super Admin","permission_name":"view_expenses"},
+  {"role_name":"Super Admin","permission_name":"manage_expenses"},
+  {"role_name":"Super Admin","permission_name":"view_expense_categories"},
+  {"role_name":"Super Admin","permission_name":"manage_expense_categories"},
+  {"role_name":"Super Admin","permission_name":"view_leaves"},
+  {"role_name":"Super Admin","permission_name":"manage_leaves"},
+  {"role_name":"Super Admin","permission_name":"view_leave_types"},
+  {"role_name":"Super Admin","permission_name":"manage_leave_types"},
+  {"role_name":"Super Admin","permission_name":"view_master_departments"},
+  {"role_name":"Super Admin","permission_name":"manage_master_departments"},
+  {"role_name":"Super Admin","permission_name":"view_master_locations"},
+  {"role_name":"Super Admin","permission_name":"manage_master_locations"},
+  {"role_name":"Super Admin","permission_name":"view_master_positions"},
+  {"role_name":"Super Admin","permission_name":"manage_master_positions"},
+  {"role_name":"Super Admin","permission_name":"view_shifts"},
+  {"role_name":"Super Admin","permission_name":"manage_shifts"},
+  {"role_name":"Super Admin","permission_name":"view_payroll"},
+  {"role_name":"Super Admin","permission_name":"manage_payroll"},
+  {"role_name":"Super Admin","permission_name":"manage_payroll_items"},
+  {"role_name":"Super Admin","permission_name":"view_notifications"},
+  {"role_name":"Super Admin","permission_name":"manage_notifications"},
+  {"role_name":"Super Admin","permission_name":"manage_roles_permissions"},
+  {"role_name":"Super Admin","permission_name":"view_reports"},
+
+  {"role_name":"HR Manager","permission_name":"view_employees"},
+  {"role_name":"HR Manager","permission_name":"manage_employees"},
+  {"role_name":"HR Manager","permission_name":"view_attendances"},
+  {"role_name":"HR Manager","permission_name":"view_reports"},
+
+  {"role_name":"Super Admin","permission_name":"view_employee_personal_info"},
+  {"role_name":"Super Admin","permission_name":"manage_employee_personal_info"},
+  {"role_name":"Super Admin","permission_name":"view_employee_addresses"},
+  {"role_name":"Super Admin","permission_name":"manage_employee_addresses"},
+  {"role_name":"Super Admin","permission_name":"view_employee_legal_info"},
+  {"role_name":"Super Admin","permission_name":"manage_employee_legal_info"},
+  {"role_name":"Super Admin","permission_name":"view_employee_payroll_profile"},
+  {"role_name":"Super Admin","permission_name":"manage_employee_payroll_profile"},
+  {"role_name":"Super Admin","permission_name":"view_employee_emergency_contacts"},
+  {"role_name":"Super Admin","permission_name":"manage_employee_emergency_contacts"},
+
+  {"role_name":"HR Manager","permission_name":"view_employee_personal_info"},
+  {"role_name":"HR Manager","permission_name":"manage_employee_personal_info"},
+  {"role_name":"HR Manager","permission_name":"view_employee_addresses"},
+  {"role_name":"HR Manager","permission_name":"manage_employee_addresses"},
+  {"role_name":"HR Manager","permission_name":"view_employee_emergency_contacts"},
+  {"role_name":"HR Manager","permission_name":"manage_employee_emergency_contacts"}
 ]
