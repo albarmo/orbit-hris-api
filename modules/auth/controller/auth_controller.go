@@ -209,9 +209,7 @@ func (c *authController) ResetPassword(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, res)
 }
 
-// LoginByFace handles face ID login using external face-search API
 func (c *authController) LoginByFace(ctx *gin.Context) {
-	// receive uploaded image file from form field "image"
 	fileHeader, err := ctx.FormFile("image")
 	if err != nil {
 		res := utils.BuildResponseFailed("failed get file", err.Error(), nil)
@@ -239,7 +237,7 @@ func (c *authController) LoginByFace(ctx *gin.Context) {
 	result, err := c.authService.LoginByFace(ctx.Request.Context(), imgBytes, fileHeader.Filename)
 	if err != nil {
 		res := utils.BuildResponseFailed("failed login by face", err.Error(), nil)
-		ctx.JSON(http.StatusUnauthorized, res)
+		ctx.JSON(http.StatusNotFound, res)
 		return
 	}
 

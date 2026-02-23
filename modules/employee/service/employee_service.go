@@ -24,7 +24,7 @@ type EmployeeService interface {
 	UpdatePersonalInfo(ctx context.Context, employeeID uuid.UUID, req dto.EmployeePersonalInfoUpdateRequest) (dto.EmployeePersonalInfoUpdateRequest, error)
 	DeletePersonalInfo(ctx context.Context, employeeID uuid.UUID) error
 
-	CreateAddress(ctx context.Context, employeeID uuid.UUID, req dto.EmployeeAddressCreateRequest) (dto.EmployeeAddressCreateRequest, error)
+	CreateAddress(ctx context.Context, employeeID uuid.UUID, req dto.EmployeeAddressCreateRequest) (uuid.UUID, error)
 	GetAddresses(ctx context.Context, employeeID uuid.UUID) ([]dto.EmployeeAddressCreateRequest, error)
 	GetAddress(ctx context.Context, id uuid.UUID) (dto.EmployeeAddressCreateRequest, error)
 	UpdateAddress(ctx context.Context, id uuid.UUID, req dto.EmployeeAddressUpdateRequest) (dto.EmployeeAddressUpdateRequest, error)
@@ -39,6 +39,9 @@ type EmployeeService interface {
 	GetPayrollProfile(ctx context.Context, employeeID uuid.UUID) (dto.EmployeePayrollProfileCreateRequest, error)
 	UpdatePayrollProfile(ctx context.Context, employeeID uuid.UUID, req dto.EmployeePayrollProfileUpdateRequest) (dto.EmployeePayrollProfileUpdateRequest, error)
 	DeletePayrollProfile(ctx context.Context, employeeID uuid.UUID) error
+
+	// find employee by linked user id
+	FindByUserID(ctx context.Context, userID uuid.UUID) (dto.EmployeeResponse, error)
 }
 
 type employeeService struct {
@@ -302,7 +305,7 @@ func (s *employeeService) DeletePersonalInfo(ctx context.Context, employeeID uui
 }
 
 // Addresses
-func (s *employeeService) CreateAddress(ctx context.Context, employeeID uuid.UUID, req dto.EmployeeAddressCreateRequest) (dto.EmployeeAddressCreateRequest, error) {
+func (s *employeeService) CreateAddress(ctx context.Context, employeeID uuid.UUID, req dto.EmployeeAddressCreateRequest) (uuid.UUID, error) {
 	tx := s.db.Begin()
 	defer tx.Rollback()
 
@@ -315,15 +318,16 @@ func (s *employeeService) CreateAddress(ctx context.Context, employeeID uuid.UUI
 		PostalCode: req.PostalCode,
 	}
 
-	if _, err := s.employeeRepository.CreateAddress(ctx, tx, addr); err != nil {
-		return dto.EmployeeAddressCreateRequest{}, err
+	created, err := s.employeeRepository.CreateAddress(ctx, tx, addr)
+	if err != nil {
+		return uuid.Nil, err
 	}
 
 	if err := tx.Commit().Error; err != nil {
-		return dto.EmployeeAddressCreateRequest{}, err
+		return uuid.Nil, err
 	}
 
-	return req, nil
+	return created.ID, nil
 }
 
 func (s *employeeService) GetAddresses(ctx context.Context, employeeID uuid.UUID) ([]dto.EmployeeAddressCreateRequest, error) {
@@ -334,6 +338,7 @@ func (s *employeeService) GetAddresses(ctx context.Context, employeeID uuid.UUID
 	var res []dto.EmployeeAddressCreateRequest
 	for _, a := range addrs {
 		res = append(res, dto.EmployeeAddressCreateRequest{
+			ID:         a.ID,
 			Type:       a.Type,
 			Address:    a.Address,
 			City:       a.City,
@@ -539,6 +544,50 @@ func (s *employeeService) DeletePayrollProfile(ctx context.Context, employeeID u
 		return err
 	}
 	return tx.Commit().Error
+}
+
+func (s *employeeService) FindByUserID(ctx context.Context, userID uuid.UUID) (dto.EmployeeResponse, error) {
+	employee, err := s.employeeRepository.FindByUserID(ctx, s.db, userID)
+	if err != nil {
+		return dto.EmployeeResponse{}, err
+	}
+
+	return dto.EmployeeResponse{
+		ID:               employee.ID,
+		UserID:           employee.UserID,
+		EmployeeCode:     employee.EmployeeCode,
+		SupervisorID:     employee.SupervisorID,
+		DepartmentID:     employee.DepartmentID,
+		PositionID:       employee.PositionID,
+		JoinDate:         employee.JoinDate,
+		EndDate:          employee.EndDate,
+		EmploymentType:   employee.EmploymentType,
+		EmploymentStatus: employee.EmploymentStatus,
+		ProbationEndDate: employee.ProbationEndDate,
+		User: dto.UserResponse{
+			ID:         employee.User.ID,
+			Name:       employee.User.Name,
+			Email:      employee.User.Email,
+			TelpNumber: employee.User.TelpNumber,
+			Role:       employee.User.Role,
+			ImageUrl:   employee.User.ImageUrl,
+			IsVerified: employee.User.IsVerified,
+		},
+		Department: struct {
+			ID   uuid.UUID `json:"id"`
+			Name string    `json:"name"`
+		}{
+			ID:   employee.Department.ID,
+			Name: employee.Department.Name,
+		},
+		Position: struct {
+			ID   uuid.UUID `json:"id"`
+			Name string    `json:"name"`
+		}{
+			ID:   employee.Position.ID,
+			Name: employee.Position.Name,
+		},
+	}, nil
 }
 
 func (s *employeeService) Update(ctx context.Context, id uuid.UUID, req dto.EmployeeUpdateRequest) (dto.EmployeeResponse, error) {

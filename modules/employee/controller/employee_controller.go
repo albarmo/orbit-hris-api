@@ -15,6 +15,7 @@ import (
 type EmployeeController interface {
 	Create(ctx *gin.Context)
 	GetAllEmployee(ctx *gin.Context)
+	GetMe(ctx *gin.Context)
 	GetEmployeeByID(ctx *gin.Context)
 	Update(ctx *gin.Context)
 	Delete(ctx *gin.Context)
@@ -90,6 +91,40 @@ func (c *employeeController) GetAllEmployee(ctx *gin.Context) {
 	}
 
 	res := utils.BuildResponseSuccess(dto.MESSAGE_SUCCESS_GET_LIST_EMPLOYEE, employees)
+	ctx.JSON(http.StatusOK, res)
+}
+
+func (c *employeeController) GetMe(ctx *gin.Context) {
+	// middleware sets `user_id` as string
+	uidVal, ok := ctx.Get("user_id")
+	if !ok {
+		res := utils.BuildResponseFailed("Unauthorized", "user_id not found in context", nil)
+		ctx.AbortWithStatusJSON(http.StatusUnauthorized, res)
+		return
+	}
+
+	uidStr, ok := uidVal.(string)
+	if !ok {
+		res := utils.BuildResponseFailed("Unauthorized", "invalid user_id in context", nil)
+		ctx.AbortWithStatusJSON(http.StatusUnauthorized, res)
+		return
+	}
+
+	id, err := uuid.Parse(uidStr)
+	if err != nil {
+		res := utils.BuildResponseFailed("Invalid ID", err.Error(), nil)
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, res)
+		return
+	}
+
+	result, err := c.employeeService.FindByUserID(ctx.Request.Context(), id)
+	if err != nil {
+		res := utils.BuildResponseFailed("Failed get employee by token", err.Error(), nil)
+		ctx.JSON(http.StatusBadRequest, res)
+		return
+	}
+
+	res := utils.BuildResponseSuccess("Success get employee", result)
 	ctx.JSON(http.StatusOK, res)
 }
 
@@ -268,14 +303,14 @@ func (c *employeeController) CreateAddress(ctx *gin.Context) {
 		return
 	}
 
-	result, err := c.employeeService.CreateAddress(ctx.Request.Context(), id, req)
+	createdID, err := c.employeeService.CreateAddress(ctx.Request.Context(), id, req)
 	if err != nil {
 		res := utils.BuildResponseFailed("failed create address", err.Error(), nil)
 		ctx.JSON(http.StatusBadRequest, res)
 		return
 	}
 
-	res := utils.BuildResponseSuccess("success create address", result)
+	res := utils.BuildResponseSuccess("success create address", map[string]string{"id": createdID.String()})
 	ctx.JSON(http.StatusCreated, res)
 }
 

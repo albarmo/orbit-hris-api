@@ -37,6 +37,9 @@ type EmployeeRepository interface {
 	GetPayrollByEmployeeID(ctx context.Context, db *gorm.DB, employeeID uuid.UUID) (entities.EmployeePayrollProfile, error)
 	UpdatePayrollProfile(ctx context.Context, tx *gorm.DB, profile entities.EmployeePayrollProfile) (entities.EmployeePayrollProfile, error)
 	DeletePayrollProfile(ctx context.Context, tx *gorm.DB, employeeID uuid.UUID) error
+
+	// find by linked user id
+	FindByUserID(ctx context.Context, db *gorm.DB, userID uuid.UUID) (entities.Employee, error)
 }
 
 type employeeRepository struct {
@@ -317,4 +320,17 @@ func (r *employeeRepository) DeletePayrollProfile(ctx context.Context, tx *gorm.
 		return err
 	}
 	return nil
+}
+
+func (r *employeeRepository) FindByUserID(ctx context.Context, db *gorm.DB, userID uuid.UUID) (entities.Employee, error) {
+	if db == nil {
+		db = r.db
+	}
+
+	var employee entities.Employee
+	if err := db.WithContext(ctx).Preload("User").Preload("Department").Preload("Position").Preload("Supervisor").Where("user_id = ?", userID).First(&employee).Error; err != nil {
+		return entities.Employee{}, err
+	}
+
+	return employee, nil
 }

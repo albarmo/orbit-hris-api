@@ -18,6 +18,7 @@ func RegisterRoutes(server *gin.Engine, injector *do.Injector) {
 	{
 		employeeRoutes.POST("", middlewares.Authenticate(jwtService), employeeController.Create)
 		employeeRoutes.GET("", middlewares.Authenticate(jwtService), employeeController.GetAllEmployee)
+		employeeRoutes.GET("/me", middlewares.Authenticate(jwtService), employeeController.GetMe)
 		employeeRoutes.GET("/:id", middlewares.Authenticate(jwtService), employeeController.GetEmployeeByID)
 		employeeRoutes.PUT("/:id", middlewares.Authenticate(jwtService), employeeController.Update)
 		employeeRoutes.DELETE("/:id", middlewares.Authenticate(jwtService), employeeController.Delete)

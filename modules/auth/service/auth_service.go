@@ -5,9 +5,13 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
+	"log"
 	"mime/multipart"
 	"net/http"
+	"net/textproto"
+	"strings"
 	"time"
 
 	"github.com/Caknoooo/go-gin-clean-starter/database/entities"
@@ -274,7 +278,12 @@ func (s *authService) LoginByFace(ctx context.Context, image []byte, filename st
 	// Prepare multipart form
 	body := &bytes.Buffer{}
 	writer := multipart.NewWriter(body)
-	part, err := writer.CreateFormFile("image", filename)
+	// set content-type for the image part so the face service recognises it
+	ct := http.DetectContentType(image)
+	hdr := make(textproto.MIMEHeader)
+	hdr.Set("Content-Disposition", fmt.Sprintf(`form-data; name="image"; filename="%s"`, filename))
+	hdr.Set("Content-Type", ct)
+	part, err := writer.CreatePart(hdr)
 	if err != nil {
 		return dto.TokenResponse{}, err
 	}
@@ -284,24 +293,33 @@ func (s *authService) LoginByFace(ctx context.Context, image []byte, filename st
 	writer.Close()
 
 	// External API URL with query params
-	url := "http://206.189.153.254:8000/search?top_k_photos=50&top_k_persons=5&min_score=0.45"
+	url := "http://206.189.153.254:8000/search?top_k_photos=5&top_k_persons=5&min_score=0.45"
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodPost, url, body)
 	if err != nil {
 		return dto.TokenResponse{}, err
 	}
+
 	req.Header.Set("Content-Type", writer.FormDataContentType())
 	req.Header.Set("Accept", "application/json")
 
-	client := &http.Client{Timeout: 15 * time.Second}
+	client := &http.Client{Timeout: 30 * time.Second}
 	resp, err := client.Do(req)
+
 	if err != nil {
 		return dto.TokenResponse{}, err
 	}
 	defer resp.Body.Close()
 
+	// read body for debugging and decoding
+	bodyBytes, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return dto.TokenResponse{}, err
+	}
+	log.Printf("LoginByFace: face search status=%s code=%d body=%s", resp.Status, resp.StatusCode, string(bodyBytes))
+
 	if resp.StatusCode != http.StatusOK {
-		return dto.TokenResponse{}, errors.New("face verification service error")
+		return dto.TokenResponse{}, errors.New(resp.Status)
 	}
 
 	var searchResp struct {
@@ -313,7 +331,7 @@ func (s *authService) LoginByFace(ctx context.Context, image []byte, filename st
 		} `json:"results"`
 	}
 
-	if err := json.NewDecoder(resp.Body).Decode(&searchResp); err != nil {
+	if err := json.Unmarshal(bodyBytes, &searchResp); err != nil {
 		return dto.TokenResponse{}, err
 	}
 
@@ -323,7 +341,9 @@ func (s *authService) LoginByFace(ctx context.Context, image []byte, filename st
 
 	// take the top result
 	matched := searchResp.Results[0]
-	userID := matched.Name
+
+	// use the `name` field as the canonical user ID (do not use person_id)
+	userID := strings.TrimSpace(matched.Name)
 
 	user, err := s.userRepository.GetUserById(ctx, s.db, userID)
 	if err != nil {
@@ -356,7 +376,12 @@ func (s *authService) LoginByFace(ctx context.Context, image []byte, filename st
 func (s *authService) EnrollFace(ctx context.Context, image []byte, filename, name string) (map[string]any, error) {
 	body := &bytes.Buffer{}
 	writer := multipart.NewWriter(body)
-	part, err := writer.CreateFormFile("image", filename)
+	// set content-type for the image part so the enroll service recognises it
+	ct := http.DetectContentType(image)
+	hdr := make(textproto.MIMEHeader)
+	hdr.Set("Content-Disposition", fmt.Sprintf(`form-data; name="image"; filename="%s"`, filename))
+	hdr.Set("Content-Type", ct)
+	part, err := writer.CreatePart(hdr)
 	if err != nil {
 		return nil, err
 	}

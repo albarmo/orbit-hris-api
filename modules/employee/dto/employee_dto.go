@@ -55,6 +55,7 @@ type (
 	}
 
 	EmployeeAddressCreateRequest struct {
+		ID         uuid.UUID `json:"id,omitempty"`
 		Type       string `json:"type" binding:"required"`
 		Address    string `json:"address" binding:"required"`
 		City       string `json:"city" binding:"required"`
