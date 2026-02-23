@@ -1,0 +1,112 @@
+{
+  "info": {
+    "name": "RBAC API",
+    "_postman_id": "rbac-collection",
+    "description": "Collection for Role-Based Access Control endpoints (roles, permissions, user-role assignments)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8080" },
+    { "key": "access_token", "value": "" },
+    { "key": "page", "value": "1" },
+    { "key": "limit", "value": "10" }
+  ],
+  "item": [
+    {
+      "name": "Roles",
+      "item": [
+        {
+          "name": "List Roles",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" } ],
+            "url": { "raw": "{{base_url}}/api/rbac/roles?page={{page}}&limit={{limit}}&name={{name}}", "host": ["{{base_url}}"], "path": ["api","rbac","roles"] }
+          }
+        },
+        {
+          "name": "Get Role",
+          "request": { "method": "GET", "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" } ], "url": { "raw": "{{base_url}}/api/rbac/roles/:id", "host": ["{{base_url}}"], "path": ["api","rbac","roles",":id"] } }
+        },
+        {
+          "name": "Create Role",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Admin\",\n  \"description\": \"Administrator role\"\n}" },
+            "url": { "raw": "{{base_url}}/api/rbac/roles", "host": ["{{base_url}}"], "path": ["api","rbac","roles"] }
+          }
+        },
+        {
+          "name": "Update Role",
+          "request": {
+            "method": "PUT",
+            "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Admin Updated\",\n  \"description\": \"Updated description\"\n}" },
+            "url": { "raw": "{{base_url}}/api/rbac/roles/:id", "host": ["{{base_url}}"], "path": ["api","rbac","roles",":id"] }
+          }
+        },
+        {
+          "name": "Delete Role",
+          "request": { "method": "DELETE", "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" } ], "url": { "raw": "{{base_url}}/api/rbac/roles/:id", "host": ["{{base_url}}"], "path": ["api","rbac","roles",":id"] } }
+        }
+      ]
+    },
+    {
+      "name": "Permissions",
+      "item": [
+        {
+          "name": "List Permissions",
+          "request": { "method": "GET", "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" } ], "url": { "raw": "{{base_url}}/api/rbac/permissions?page={{page}}&limit={{limit}}&name={{name}}", "host": ["{{base_url}}"], "path": ["api","rbac","permissions"] } }
+        },
+        {
+          "name": "Get Permission",
+          "request": { "method": "GET", "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" } ], "url": { "raw": "{{base_url}}/api/rbac/permissions/:id", "host": ["{{base_url}}"], "path": ["api","rbac","permissions",":id"] } }
+        },
+        {
+          "name": "Create Permission",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"manage_users\",\n  \"description\": \"Manage users\"\n}" },
+            "url": { "raw": "{{base_url}}/api/rbac/permissions", "host": ["{{base_url}}"], "path": ["api","rbac","permissions"] }
+          }
+        },
+        {
+          "name": "Update Permission",
+          "request": {
+            "method": "PUT",
+            "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"manage_users_updated\",\n  \"description\": \"Updated\"\n}" },
+            "url": { "raw": "{{base_url}}/api/rbac/permissions/:id", "host": ["{{base_url}}"], "path": ["api","rbac","permissions",":id"] }
+          }
+        },
+        {
+          "name": "Delete Permission",
+          "request": { "method": "DELETE", "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" } ], "url": { "raw": "{{base_url}}/api/rbac/permissions/:id", "host": ["{{base_url}}"], "path": ["api","rbac","permissions",":id"] } }
+        }
+      ]
+    },
+    {
+      "name": "User Roles",
+      "item": [
+        {
+          "name": "Get Roles By User",
+          "request": { "method": "GET", "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" } ], "url": { "raw": "{{base_url}}/api/rbac/users/:user_id/roles", "host": ["{{base_url}}"], "path": ["api","rbac","users",":user_id","roles"] } }
+        },
+        {
+          "name": "Assign Role To User",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" }, { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"role_id\": \"<role-uuid>\"\n}" },
+            "url": { "raw": "{{base_url}}/api/rbac/users/:user_id/roles", "host": ["{{base_url}}"], "path": ["api","rbac","users",":user_id","roles"] }
+          }
+        },
+        {
+          "name": "Remove Role From User",
+          "request": { "method": "DELETE", "header": [ { "key": "Authorization", "value": "Bearer {{access_token}}" } ], "url": { "raw": "{{base_url}}/api/rbac/users/:user_id/roles/:role_id", "host": ["{{base_url}}"], "path": ["api","rbac","users",":user_id","roles",":role_id"] } }
+        }
+      ]
+    }
+  ]
+}
