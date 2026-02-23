@@ -62,6 +62,20 @@ type (
 		Role       string `json:"role"`
 		ImageUrl   string `json:"image_url"`
 		IsVerified bool   `json:"is_verified"`
+		Roles      []RoleResponse `json:"roles"`
+	}
+
+	RoleResponse struct {
+		ID          string               `json:"id"`
+		Name        string               `json:"name"`
+		Description string               `json:"description"`
+		Permissions []PermissionResponse `json:"permissions"`
+	}
+
+	PermissionResponse struct {
+		ID          string `json:"id"`
+		Name        string `json:"name"`
+		Description string `json:"description"`
 	}
 	UserUpdateRequest struct {
 		Name       string `json:"name" form:"name" binding:"omitempty,min=2,max=100"`

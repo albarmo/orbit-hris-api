@@ -8,6 +8,7 @@ import (
 
 func RegisterRoutes(server *gin.Engine, injector *do.Injector) {
 	authController := do.MustInvoke[controller.AuthController](injector)
+	pwc := do.MustInvoke[controller.PasswordResetController](injector)
 
 	authRoutes := server.Group("/api/auth")
 	{
@@ -23,5 +24,9 @@ func RegisterRoutes(server *gin.Engine, injector *do.Injector) {
 		authRoutes.POST("/verify-email", authController.VerifyEmail)
 		authRoutes.POST("/send-password-reset", authController.SendPasswordReset)
 		authRoutes.POST("/reset-password", authController.ResetPassword)
+		// Password reset admin endpoints
+		authRoutes.POST("/password-resets", pwc.Create)
+		authRoutes.GET("/password-resets/:token", pwc.GetByToken)
+		authRoutes.DELETE("/password-resets/:id", pwc.Delete)
 	}
 }

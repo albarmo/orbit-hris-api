@@ -3,6 +3,7 @@ package controller
 import (
 	"net/http"
 
+	rbacService "github.com/Caknoooo/go-gin-clean-starter/modules/rbac/service"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/user/dto"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/user/query"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/user/service"
@@ -11,6 +12,7 @@ import (
 	"github.com/Caknoooo/go-gin-clean-starter/pkg/utils"
 	"github.com/Caknoooo/go-pagination"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"github.com/samber/do"
 	"gorm.io/gorm"
 )
@@ -26,6 +28,7 @@ type (
 
 	userController struct {
 		userService    service.UserService
+		rbacService    rbacService.RbacService
 		userValidation *validation.UserValidation
 		db             *gorm.DB
 	}
@@ -33,9 +36,11 @@ type (
 
 func NewUserController(injector *do.Injector, us service.UserService) UserController {
 	db := do.MustInvokeNamed[*gorm.DB](injector, constants.DB)
+	rs := do.MustInvoke[rbacService.RbacService](injector)
 	userValidation := validation.NewUserValidation()
 	return &userController{
 		userService:    us,
+		rbacService:    rs,
 		userValidation: userValidation,
 		db:             db,
 	}
@@ -69,6 +74,28 @@ func (c *userController) GetUserById(ctx *gin.Context) {
 		return
 	}
 
+	if uid, err := uuid.Parse(result.ID); err == nil {
+		if roles, err := c.rbacService.GetRolesByUser(ctx.Request.Context(), nil, uid); err == nil {
+			result.Roles = make([]dto.RoleResponse, 0)
+			for _, r := range roles {
+				perms := make([]dto.PermissionResponse, 0)
+				for _, p := range r.Permissions {
+					perms = append(perms, dto.PermissionResponse{
+						ID:          p.ID.String(),
+						Name:        p.Name,
+						Description: p.Description,
+					})
+				}
+				result.Roles = append(result.Roles, dto.RoleResponse{
+					ID:          r.ID.String(),
+					Name:        r.Name,
+					Description: r.Description,
+					Permissions: perms,
+				})
+			}
+		}
+	}
+
 	res := utils.BuildResponseSuccess(dto.MESSAGE_SUCCESS_GET_USER, result)
 	ctx.JSON(http.StatusOK, res)
 }
@@ -81,6 +108,28 @@ func (c *userController) Me(ctx *gin.Context) {
 		res := utils.BuildResponseFailed(dto.MESSAGE_FAILED_GET_USER, err.Error(), nil)
 		ctx.JSON(http.StatusBadRequest, res)
 		return
+	}
+
+	if uid, err := uuid.Parse(result.ID); err == nil {
+		if roles, err := c.rbacService.GetRolesByUser(ctx.Request.Context(), nil, uid); err == nil {
+			result.Roles = make([]dto.RoleResponse, 0)
+			for _, r := range roles {
+				perms := make([]dto.PermissionResponse, 0)
+				for _, p := range r.Permissions {
+					perms = append(perms, dto.PermissionResponse{
+						ID:          p.ID.String(),
+						Name:        p.Name,
+						Description: p.Description,
+					})
+				}
+				result.Roles = append(result.Roles, dto.RoleResponse{
+					ID:          r.ID.String(),
+					Name:        r.Name,
+					Description: r.Description,
+					Permissions: perms,
+				})
+			}
+		}
 	}
 
 	res := utils.BuildResponseSuccess(dto.MESSAGE_SUCCESS_GET_USER, result)

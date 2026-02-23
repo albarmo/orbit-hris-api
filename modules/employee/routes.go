@@ -11,6 +11,7 @@ import (
 
 func RegisterRoutes(server *gin.Engine, injector *do.Injector) {
 	employeeController := do.MustInvoke[controller.EmployeeController](injector)
+	ecController := do.MustInvoke[controller.EmergencyContactController](injector)
 	jwtService := do.MustInvokeNamed[service.JWTService](injector, constants.JWTService)
 
 	employeeRoutes := server.Group("/api/employee")
@@ -42,5 +43,15 @@ func RegisterRoutes(server *gin.Engine, injector *do.Injector) {
 		employeeRoutes.GET("/:id/payroll_profile", middlewares.Authenticate(jwtService), employeeController.GetPayrollProfile)
 		employeeRoutes.PUT("/:id/payroll_profile", middlewares.Authenticate(jwtService), employeeController.UpdatePayrollProfile)
 		employeeRoutes.DELETE("/:id/payroll_profile", middlewares.Authenticate(jwtService), employeeController.DeletePayrollProfile)
+
+		// Emergency contacts
+		employeeRoutes.POST(":id/emergency_contacts", middlewares.Authenticate(jwtService), ecController.Create)
+		employeeRoutes.GET(":id/emergency_contacts", middlewares.Authenticate(jwtService), ecController.GetByEmployee)
+		employeeRoutes.DELETE(":id/emergency_contacts/:contact_id", middlewares.Authenticate(jwtService), ecController.Delete)
+
+		// Emergency contacts
+		employeeRoutes.POST("/:id/emergency_contacts", middlewares.Authenticate(jwtService), employeeController.CreatePersonalInfo)
+		employeeRoutes.GET("/:id/emergency_contacts", middlewares.Authenticate(jwtService), employeeController.GetPersonalInfo)
+		employeeRoutes.DELETE("/:id/emergency_contacts/:contact_id", middlewares.Authenticate(jwtService), employeeController.DeletePersonalInfo)
 	}
 }

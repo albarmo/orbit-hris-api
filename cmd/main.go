@@ -8,10 +8,20 @@ import (
 	"github.com/Caknoooo/go-gin-clean-starter/modules/attendance"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/auth"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/employee"
+	"github.com/Caknoooo/go-gin-clean-starter/modules/expenses"
+	"github.com/Caknoooo/go-gin-clean-starter/modules/leave_types"
+	"github.com/Caknoooo/go-gin-clean-starter/modules/notifications"
+	payrollitems "github.com/Caknoooo/go-gin-clean-starter/modules/payroll_items"
+	"github.com/Caknoooo/go-gin-clean-starter/modules/rbac"
+	rbacRepository "github.com/Caknoooo/go-gin-clean-starter/modules/rbac/repository"
+	rbacService "github.com/Caknoooo/go-gin-clean-starter/modules/rbac/service"
+	"github.com/Caknoooo/go-gin-clean-starter/modules/shifts"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/user"
+	"github.com/Caknoooo/go-gin-clean-starter/pkg/constants"
 	"github.com/Caknoooo/go-gin-clean-starter/providers"
 	"github.com/Caknoooo/go-gin-clean-starter/script"
 	"github.com/samber/do"
+	"gorm.io/gorm"
 
 	"github.com/common-nighthawk/go-figure"
 	"github.com/gin-gonic/gin"
@@ -55,6 +65,16 @@ func main() {
 	)
 
 	providers.RegisterDependencies(injector)
+	
+	do.Provide(injector, func(i *do.Injector) (rbacRepository.RbacRepository, error) {
+		db := do.MustInvokeNamed[*gorm.DB](i, constants.DB)
+		return rbacRepository.NewRbacRepository(db), nil
+	})
+	do.Provide(injector, func(i *do.Injector) (rbacService.RbacService, error) {
+		repo := do.MustInvoke[rbacRepository.RbacRepository](i)
+		db := do.MustInvokeNamed[*gorm.DB](i, constants.DB)
+		return rbacService.NewRbacService(repo, db), nil
+	})
 
 	if !args(injector) {
 		return
@@ -67,7 +87,13 @@ func main() {
 	user.RegisterRoutes(server, injector)
 	auth.RegisterRoutes(server, injector)
 	employee.RegisterRoutes(server, injector)
+	shifts.RegisterRoutes(server, injector)
+	leave_types.RegisterRoutes(server, injector)
+	expenses.RegisterRoutes(server, injector)
+	payrollitems.RegisterRoutes(server, injector)
+	notifications.RegisterRoutes(server, injector)
 	attendance.RegisterRoutes(server, injector)
+	rbac.RegisterRoutes(server, injector)
 
 	run(server)
 }
