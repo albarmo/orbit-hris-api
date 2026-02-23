@@ -16,6 +16,7 @@ type JWTService interface {
 	GenerateRefreshToken() (string, time.Time)
 	ValidateToken(token string) (*jwt.Token, error)
 	GetUserIDByToken(token string) (string, error)
+	GetAccessExpiry() time.Duration
 }
 
 type jwtCustomClaim struct {
@@ -101,4 +102,8 @@ func (j *jwtService) GetUserIDByToken(token string) (string, error) {
 	claims := tToken.Claims.(jwt.MapClaims)
 	id := fmt.Sprintf("%v", claims["user_id"])
 	return id, nil
+}
+
+func (j *jwtService) GetAccessExpiry() time.Duration {
+	return j.accessExpiry
 }

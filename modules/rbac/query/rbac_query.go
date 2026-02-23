@@ -26,4 +26,3 @@ func (f *PermissionFilter) Bind(ctx *gin.Context) {
 	f.Filter.Bind(ctx)
 	f.Name = ctx.Query("name")
 }
-

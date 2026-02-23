@@ -7,17 +7,17 @@ import (
 )
 
 type Employee struct {
-	ID               uuid.UUID `gorm:"type:uuid;primary_key;default:uuid_generate_v4()" json:"id"`
-	UserID           uuid.UUID `gorm:"type:uuid;unique" json:"user_id"`
-	EmployeeCode     string    `gorm:"type:varchar;unique;not null" json:"employee_code"`
+	ID               uuid.UUID  `gorm:"type:uuid;primary_key;default:uuid_generate_v4()" json:"id"`
+	UserID           uuid.UUID  `gorm:"type:uuid;unique" json:"user_id"`
+	EmployeeCode     string     `gorm:"type:varchar;unique;not null" json:"employee_code"`
 	SupervisorID     *uuid.UUID `gorm:"type:uuid" json:"supervisor_id"`
-	DepartmentID     uuid.UUID `gorm:"type:uuid" json:"department_id"`
-	PositionID       uuid.UUID `gorm:"type:uuid" json:"position_id"`
-	JoinDate         time.Time `gorm:"type:date" json:"join_date"`
-	EndDate          time.Time `gorm:"type:date" json:"end_date"`
-	EmploymentType   string    `gorm:"type:varchar" json:"employment_type"`
-	EmploymentStatus string    `gorm:"type:varchar" json:"employment_status"`
-	ProbationEndDate time.Time `gorm:"type:date" json:"probation_end_date"`
+	DepartmentID     uuid.UUID  `gorm:"type:uuid" json:"department_id"`
+	PositionID       uuid.UUID  `gorm:"type:uuid" json:"position_id"`
+	JoinDate         time.Time  `gorm:"type:date" json:"join_date"`
+	EndDate          time.Time  `gorm:"type:date" json:"end_date"`
+	EmploymentType   string     `gorm:"type:varchar" json:"employment_type"`
+	EmploymentStatus string     `gorm:"type:varchar" json:"employment_status"`
+	ProbationEndDate time.Time  `gorm:"type:date" json:"probation_end_date"`
 
 	User       User       `gorm:"foreignKey:UserID;references:ID" json:"user"`
 	Supervisor *Employee  `gorm:"foreignKey:SupervisorID;references:ID" json:"supervisor"`
@@ -28,17 +28,17 @@ type Employee struct {
 }
 
 type EmployeePersonalInfo struct {
-	ID             uuid.UUID `gorm:"type:uuid;primary_key;default:uuid_generate_v4()" json:"id"`
-	EmployeeID     uuid.UUID `gorm:"type:uuid;unique" json:"employee_id"`
-	NIK            string    `gorm:"type:varchar;unique" json:"nik"`
-	Gender         string    `gorm:"type:varchar" json:"gender"`
-	BirthPlace     string    `gorm:"type:varchar" json:"birth_place"`
-	BirthDate      time.Time `gorm:"type:date" json:"birth_date"`
-	MaritalStatus  string    `gorm:"type:varchar" json:"marital_status"`
-	Religion       string    `gorm:"type:varchar" json:"religion"`
-	Nationality    string    `gorm:"type:varchar" json:"nationality"`
-	PersonalEmail  string    `gorm:"type:varchar" json:"personal_email"`
-	PersonalPhone  string    `gorm:"type:varchar" json:"personal_phone"`
+	ID            uuid.UUID `gorm:"type:uuid;primary_key;default:uuid_generate_v4()" json:"id"`
+	EmployeeID    uuid.UUID `gorm:"type:uuid;unique" json:"employee_id"`
+	NIK           string    `gorm:"type:varchar;unique" json:"nik"`
+	Gender        string    `gorm:"type:varchar" json:"gender"`
+	BirthPlace    string    `gorm:"type:varchar" json:"birth_place"`
+	BirthDate     time.Time `gorm:"type:date" json:"birth_date"`
+	MaritalStatus string    `gorm:"type:varchar" json:"marital_status"`
+	Religion      string    `gorm:"type:varchar" json:"religion"`
+	Nationality   string    `gorm:"type:varchar" json:"nationality"`
+	PersonalEmail string    `gorm:"type:varchar" json:"personal_email"`
+	PersonalPhone string    `gorm:"type:varchar" json:"personal_phone"`
 
 	Timestamp
 }
@@ -75,12 +75,12 @@ func (EmployeeLegalInfo) TableName() string {
 }
 
 type EmployeePayrollProfile struct {
-	ID                  uuid.UUID `gorm:"type:uuid;primary_key;default:uuid_generate_v4()" json:"id"`
-	EmployeeID          uuid.UUID `gorm:"type:uuid;unique" json:"employee_id"`
-	BasicSalary         float64   `gorm:"type:numeric(15,2)" json:"basic_salary"`
-	BankName            string    `gorm:"type:varchar" json:"bank_name"`
-	BankAccountNumber   string    `gorm:"type:varchar" json:"bank_account_number"`
-	BankAccountHolder   string    `gorm:"type:varchar" json:"bank_account_holder"`
+	ID                uuid.UUID `gorm:"type:uuid;primary_key;default:uuid_generate_v4()" json:"id"`
+	EmployeeID        uuid.UUID `gorm:"type:uuid;unique" json:"employee_id"`
+	BasicSalary       float64   `gorm:"type:numeric(15,2)" json:"basic_salary"`
+	BankName          string    `gorm:"type:varchar" json:"bank_name"`
+	BankAccountNumber string    `gorm:"type:varchar" json:"bank_account_number"`
+	BankAccountHolder string    `gorm:"type:varchar" json:"bank_account_holder"`
 
 	Timestamp
 }

@@ -2,18 +2,34 @@ package migrations
 
 import (
 	"github.com/Caknoooo/go-gin-clean-starter/database"
-	"github.com/Caknoooo/go-gin-clean-starter/database/entities"
 	"gorm.io/gorm"
 )
 
 func init() {
-    database.RegisterMigration("20260223090000_create_auth_tokens_table", UpCreateAuthTokensTable, DownCreateAuthTokensTable)
+	database.RegisterMigration("20260223090000_create_auth_tokens_table", UpCreateAuthTokensTable, DownCreateAuthTokensTable)
 }
 
 func UpCreateAuthTokensTable(db *gorm.DB) error {
-    return db.AutoMigrate(&entities.AuthToken{})
+	return db.Transaction(func(tx *gorm.DB) error {
+		if err := tx.Exec(`CREATE TABLE IF NOT EXISTS auth_tokens (
+			id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+			user_id uuid NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+			access_uuid uuid UNIQUE,
+			refresh_uuid uuid UNIQUE,
+			expires_at timestamptz,
+			created_at timestamptz DEFAULT now()
+		);`).Error; err != nil {
+			return err
+		}
+		return nil
+	})
 }
 
 func DownCreateAuthTokensTable(db *gorm.DB) error {
-    return db.Migrator().DropTable(&entities.AuthToken{})
+	return db.Transaction(func(tx *gorm.DB) error {
+		if err := tx.Exec(`DROP TABLE IF EXISTS auth_tokens CASCADE;`).Error; err != nil {
+			return err
+		}
+		return nil
+	})
 }

@@ -48,7 +48,7 @@ type employeeService struct {
 
 func NewEmployeeService(employeeRepository repository.EmployeeRepository,
 	db *gorm.DB,
-	 ) EmployeeService {
+) EmployeeService {
 	return &employeeService{
 		employeeRepository: employeeRepository,
 		db:                 db,

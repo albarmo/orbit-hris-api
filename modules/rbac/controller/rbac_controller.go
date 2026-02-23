@@ -18,24 +18,24 @@ import (
 
 type (
 	RbacController interface {
-	// Roles
-	CreateRole(ctx *gin.Context)
-	GetRoles(ctx *gin.Context)
-	GetRoleByID(ctx *gin.Context)
-	UpdateRole(ctx *gin.Context)
-	DeleteRole(ctx *gin.Context)
+		// Roles
+		CreateRole(ctx *gin.Context)
+		GetRoles(ctx *gin.Context)
+		GetRoleByID(ctx *gin.Context)
+		UpdateRole(ctx *gin.Context)
+		DeleteRole(ctx *gin.Context)
 
-	// Permissions
-	CreatePermission(ctx *gin.Context)
-	GetPermissions(ctx *gin.Context)
-	GetPermissionByID(ctx *gin.Context)
-	UpdatePermission(ctx *gin.Context)
-	DeletePermission(ctx *gin.Context)
+		// Permissions
+		CreatePermission(ctx *gin.Context)
+		GetPermissions(ctx *gin.Context)
+		GetPermissionByID(ctx *gin.Context)
+		UpdatePermission(ctx *gin.Context)
+		DeletePermission(ctx *gin.Context)
 
-	// User-Role
-	AssignRole(ctx *gin.Context)
-	RemoveRole(ctx *gin.Context)
-	GetRolesByUser(ctx *gin.Context)
+		// User-Role
+		AssignRole(ctx *gin.Context)
+		RemoveRole(ctx *gin.Context)
+		GetRolesByUser(ctx *gin.Context)
 	}
 
 	rbacController struct {
@@ -135,7 +135,10 @@ func (c *rbacController) UpdateRole(ctx *gin.Context) {
 		ctx.AbortWithStatusJSON(http.StatusBadRequest, res)
 		return
 	}
-	rt := struct{ ID uuid.UUID; Name, Description string }{ID: id, Name: req.Name, Description: req.Description}
+	rt := struct {
+		ID                uuid.UUID
+		Name, Description string
+	}{ID: id, Name: req.Name, Description: req.Description}
 	result, err := c.rbacService.UpdateRole(ctx.Request.Context(), nil, structToRole(rt))
 	if err != nil {
 		res := utils.BuildResponseFailed("failed update role", err.Error(), nil)
@@ -234,7 +237,10 @@ func (c *rbacController) UpdatePermission(ctx *gin.Context) {
 		ctx.AbortWithStatusJSON(http.StatusBadRequest, res)
 		return
 	}
-	pt := struct{ ID uuid.UUID; Name, Description string }{ID: id, Name: req.Name, Description: req.Description}
+	pt := struct {
+		ID                uuid.UUID
+		Name, Description string
+	}{ID: id, Name: req.Name, Description: req.Description}
 	result, err := c.rbacService.UpdatePermission(ctx.Request.Context(), nil, structToPermission(pt))
 	if err != nil {
 		res := utils.BuildResponseFailed("failed update permission", err.Error(), nil)
@@ -341,7 +347,10 @@ func structToRole(src interface{}) entities.Role {
 	switch v := src.(type) {
 	case struct{ Name, Description string }:
 		return entities.Role{Name: v.Name, Description: v.Description}
-	case struct{ ID uuid.UUID; Name, Description string }:
+	case struct {
+		ID                uuid.UUID
+		Name, Description string
+	}:
 		return entities.Role{ID: v.ID, Name: v.Name, Description: v.Description}
 	}
 	return entities.Role{}
@@ -351,7 +360,10 @@ func structToPermission(src interface{}) entities.Permission {
 	switch v := src.(type) {
 	case struct{ Name, Description string }:
 		return entities.Permission{Name: v.Name, Description: v.Description}
-	case struct{ ID uuid.UUID; Name, Description string }:
+	case struct {
+		ID                uuid.UUID
+		Name, Description string
+	}:
 		return entities.Permission{ID: v.ID, Name: v.Name, Description: v.Description}
 	}
 	return entities.Permission{}

@@ -7,13 +7,13 @@ import (
 )
 
 func init() {
-    database.RegisterMigration("20260223090500_create_password_resets_table", UpCreatePasswordResetsTable, DownCreatePasswordResetsTable)
+	database.RegisterMigration("20260223090500_create_password_resets_table", UpCreatePasswordResetsTable, DownCreatePasswordResetsTable)
 }
 
 func UpCreatePasswordResetsTable(db *gorm.DB) error {
-    return db.AutoMigrate(&entities.PasswordReset{})
+	return db.AutoMigrate(&entities.PasswordReset{})
 }
 
 func DownCreatePasswordResetsTable(db *gorm.DB) error {
-    return db.Migrator().DropTable(&entities.PasswordReset{})
+	return db.Migrator().DropTable(&entities.PasswordReset{})
 }

@@ -48,10 +48,5 @@ func RegisterRoutes(server *gin.Engine, injector *do.Injector) {
 		employeeRoutes.POST(":id/emergency_contacts", middlewares.Authenticate(jwtService), ecController.Create)
 		employeeRoutes.GET(":id/emergency_contacts", middlewares.Authenticate(jwtService), ecController.GetByEmployee)
 		employeeRoutes.DELETE(":id/emergency_contacts/:contact_id", middlewares.Authenticate(jwtService), ecController.Delete)
-
-		// Emergency contacts
-		employeeRoutes.POST("/:id/emergency_contacts", middlewares.Authenticate(jwtService), employeeController.CreatePersonalInfo)
-		employeeRoutes.GET("/:id/emergency_contacts", middlewares.Authenticate(jwtService), employeeController.GetPersonalInfo)
-		employeeRoutes.DELETE("/:id/emergency_contacts/:contact_id", middlewares.Authenticate(jwtService), employeeController.DeletePersonalInfo)
 	}
 }

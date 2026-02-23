@@ -65,7 +65,7 @@ func main() {
 	)
 
 	providers.RegisterDependencies(injector)
-	
+
 	do.Provide(injector, func(i *do.Injector) (rbacRepository.RbacRepository, error) {
 		db := do.MustInvokeNamed[*gorm.DB](i, constants.DB)
 		return rbacRepository.NewRbacRepository(db), nil

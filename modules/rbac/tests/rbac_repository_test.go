@@ -1,10 +1,10 @@
 package tests
 
 import (
-	"testing"
 	"github.com/stretchr/testify/assert"
+	"testing"
 )
 
-func TestRbacurepository (t *testing.T) {
+func TestRbacurepository(t *testing.T) {
 	assert.True(t, true)
 }

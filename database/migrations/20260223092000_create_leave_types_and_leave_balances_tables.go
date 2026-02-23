@@ -7,19 +7,19 @@ import (
 )
 
 func init() {
-    database.RegisterMigration("20260223092000_create_leave_types_and_leave_balances_tables", UpCreateLeaveTypesAndLeaveBalancesTables, DownCreateLeaveTypesAndLeaveBalancesTables)
+	database.RegisterMigration("20260223092000_create_leave_types_and_leave_balances_tables", UpCreateLeaveTypesAndLeaveBalancesTables, DownCreateLeaveTypesAndLeaveBalancesTables)
 }
 
 func UpCreateLeaveTypesAndLeaveBalancesTables(db *gorm.DB) error {
-    if err := db.AutoMigrate(&entities.LeaveType{}); err != nil {
-        return err
-    }
-    return db.AutoMigrate(&entities.LeaveBalance{})
+	if err := db.AutoMigrate(&entities.LeaveType{}); err != nil {
+		return err
+	}
+	return db.AutoMigrate(&entities.LeaveBalance{})
 }
 
 func DownCreateLeaveTypesAndLeaveBalancesTables(db *gorm.DB) error {
-    if err := db.Migrator().DropTable(&entities.LeaveBalance{}); err != nil {
-        return err
-    }
-    return db.Migrator().DropTable(&entities.LeaveType{})
+	if err := db.Migrator().DropTable(&entities.LeaveBalance{}); err != nil {
+		return err
+	}
+	return db.Migrator().DropTable(&entities.LeaveType{})
 }

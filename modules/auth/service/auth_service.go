@@ -39,6 +39,7 @@ type AuthService interface {
 type authService struct {
 	userRepository         repository.UserRepository
 	refreshTokenRepository authRepo.RefreshTokenRepository
+	sessionRepository      authRepo.SessionRepository
 	jwtService             JWTService
 	db                     *gorm.DB
 }
@@ -46,12 +47,14 @@ type authService struct {
 func NewAuthService(
 	userRepo repository.UserRepository,
 	refreshTokenRepo authRepo.RefreshTokenRepository,
+	sessionRepo authRepo.SessionRepository,
 	jwtService JWTService,
 	db *gorm.DB,
 ) AuthService {
 	return &authService{
 		userRepository:         userRepo,
 		refreshTokenRepository: refreshTokenRepo,
+		sessionRepository:      sessionRepo,
 		jwtService:             jwtService,
 		db:                     db,
 	}
@@ -104,19 +107,20 @@ func (s *authService) Login(ctx context.Context, req userDto.UserLoginRequest) (
 	}
 
 	accessToken := s.jwtService.GenerateAccessToken(user.ID.String(), user.Role)
-	refreshTokenString, expiresAt := s.jwtService.GenerateRefreshToken()
+	refreshTokenString, refreshExpiresAt := s.jwtService.GenerateRefreshToken()
 
-	refreshToken := entities.RefreshToken{
-		ID:        uuid.New(),
-		UserID:    user.ID,
-		Token:     refreshTokenString,
-		ExpiresAt: expiresAt,
-	}
-
-	_, err = s.refreshTokenRepository.Create(ctx, s.db, refreshToken)
-	if err != nil {
+	if err := s.refreshTokenRepository.Create(ctx, s.db, refreshTokenString, user.ID, refreshExpiresAt); err != nil {
 		return dto.TokenResponse{}, err
 	}
+
+	// store session (access token) in Redis
+	// attempt to derive access expiry from JWT service if available
+	var accessExpiry time.Duration = time.Minute * 15
+	if ae, ok := s.jwtService.(interface{ GetAccessExpiry() time.Duration }); ok {
+		accessExpiry = ae.GetAccessExpiry()
+	}
+	accessExpiresAt := time.Now().Add(accessExpiry)
+	_ = s.sessionRepository.Create(ctx, s.db, accessToken, user.ID, accessExpiresAt)
 
 	return dto.TokenResponse{
 		AccessToken:  accessToken,
@@ -126,40 +130,52 @@ func (s *authService) Login(ctx context.Context, req userDto.UserLoginRequest) (
 }
 
 func (s *authService) RefreshToken(ctx context.Context, req dto.RefreshTokenRequest) (dto.TokenResponse, error) {
-	refreshToken, err := s.refreshTokenRepository.FindByToken(ctx, s.db, req.RefreshToken)
+	userID, err := s.refreshTokenRepository.FindByToken(ctx, s.db, req.RefreshToken)
 	if err != nil {
 		return dto.TokenResponse{}, dto.ErrRefreshTokenNotFound
 	}
 
-	accessToken := s.jwtService.GenerateAccessToken(refreshToken.UserID.String(), refreshToken.User.Role)
-	newRefreshTokenString, expiresAt := s.jwtService.GenerateRefreshToken()
-
-	err = s.refreshTokenRepository.DeleteByToken(ctx, s.db, req.RefreshToken)
+	// fetch user to obtain role
+	user, err := s.userRepository.GetUserById(ctx, s.db, userID.String())
 	if err != nil {
 		return dto.TokenResponse{}, err
 	}
 
-	newRefreshToken := entities.RefreshToken{
-		ID:        uuid.New(),
-		UserID:    refreshToken.UserID,
-		Token:     newRefreshTokenString,
-		ExpiresAt: expiresAt,
-	}
+	accessToken := s.jwtService.GenerateAccessToken(user.ID.String(), user.Role)
+	newRefreshTokenString, refreshExpiresAt := s.jwtService.GenerateRefreshToken()
 
-	_, err = s.refreshTokenRepository.Create(ctx, s.db, newRefreshToken)
-	if err != nil {
+	if err := s.refreshTokenRepository.DeleteByToken(ctx, s.db, req.RefreshToken); err != nil {
 		return dto.TokenResponse{}, err
 	}
+
+	if err := s.refreshTokenRepository.Create(ctx, s.db, newRefreshTokenString, user.ID, refreshExpiresAt); err != nil {
+		return dto.TokenResponse{}, err
+	}
+
+	// create a session for the new access token
+	var accessExpiry time.Duration = time.Minute * 15
+	if ae, ok := s.jwtService.(interface{ GetAccessExpiry() time.Duration }); ok {
+		accessExpiry = ae.GetAccessExpiry()
+	}
+	accessExpiresAt := time.Now().Add(accessExpiry)
+	_ = s.sessionRepository.Create(ctx, s.db, accessToken, user.ID, accessExpiresAt)
 
 	return dto.TokenResponse{
 		AccessToken:  accessToken,
 		RefreshToken: newRefreshTokenString,
-		Role:         refreshToken.User.Role,
+		Role:         user.Role,
 	}, nil
 }
 
 func (s *authService) Logout(ctx context.Context, userId string) error {
-	return s.refreshTokenRepository.DeleteByUserID(ctx, s.db, userId)
+	// delete refresh tokens and sessions for the user
+	if err := s.refreshTokenRepository.DeleteByUserID(ctx, s.db, userId); err != nil {
+		return err
+	}
+	if err := s.sessionRepository.DeleteByUserID(ctx, userId); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (s *authService) SendVerificationEmail(ctx context.Context, req userDto.SendVerificationEmailRequest) error {
@@ -318,17 +334,17 @@ func (s *authService) LoginByFace(ctx context.Context, image []byte, filename st
 	accessToken := s.jwtService.GenerateAccessToken(user.ID.String(), user.Role)
 	refreshTokenString, expiresAt := s.jwtService.GenerateRefreshToken()
 
-	refreshToken := entities.RefreshToken{
-		ID:        uuid.New(),
-		UserID:    user.ID,
-		Token:     refreshTokenString,
-		ExpiresAt: expiresAt,
-	}
-
-	_, err = s.refreshTokenRepository.Create(ctx, s.db, refreshToken)
-	if err != nil {
+	if err := s.refreshTokenRepository.Create(ctx, s.db, refreshTokenString, user.ID, expiresAt); err != nil {
 		return dto.TokenResponse{}, err
 	}
+
+	// save session for access token
+	var accessExpiry time.Duration = time.Minute * 15
+	if ae, ok := s.jwtService.(interface{ GetAccessExpiry() time.Duration }); ok {
+		accessExpiry = ae.GetAccessExpiry()
+	}
+	accessExpiresAt := time.Now().Add(accessExpiry)
+	_ = s.sessionRepository.Create(ctx, s.db, accessToken, user.ID, accessExpiresAt)
 
 	return dto.TokenResponse{
 		AccessToken:  accessToken,

@@ -5,15 +5,15 @@ import (
 )
 
 type PayrollItem struct {
-    ID        uuid.UUID `gorm:"type:uuid;primary_key;default:uuid_generate_v4()" json:"id"`
-    PayrollID uuid.UUID `gorm:"type:uuid;not null;index" json:"payroll_id"`
-    Type      string    `gorm:"type:varchar" json:"type"`
-    Name      string    `gorm:"type:varchar" json:"name"`
-    Amount    float64   `gorm:"type:numeric(15,2)" json:"amount"`
+	ID        uuid.UUID `gorm:"type:uuid;primary_key;default:uuid_generate_v4()" json:"id"`
+	PayrollID uuid.UUID `gorm:"type:uuid;not null;index" json:"payroll_id"`
+	Type      string    `gorm:"type:varchar" json:"type"`
+	Name      string    `gorm:"type:varchar" json:"name"`
+	Amount    float64   `gorm:"type:numeric(15,2)" json:"amount"`
 
-    Payroll Payroll `gorm:"foreignKey:PayrollID;references:ID" json:"-"`
+	Payroll Payroll `gorm:"foreignKey:PayrollID;references:ID" json:"-"`
 }
 
 func (PayrollItem) TableName() string {
-    return "payroll_items"
+	return "payroll_items"
 }

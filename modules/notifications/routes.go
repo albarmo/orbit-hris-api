@@ -7,14 +7,14 @@ import (
 )
 
 func RegisterRoutes(server *gin.Engine, injector *do.Injector) {
-    ctrl := do.MustInvoke[controller.NotificationController](injector)
+	ctrl := do.MustInvoke[controller.NotificationController](injector)
 
-    r := server.Group("/api/notifications")
-    {
-        r.POST("/", ctrl.Create)
-        r.GET("/user/:user_id", ctrl.GetByUser)
-        r.GET("/:id", ctrl.GetByID)
-        r.PUT("/:id", ctrl.Update)
-        r.DELETE("/:id", ctrl.Delete)
-    }
+	r := server.Group("/api/notifications")
+	{
+		r.POST("/", ctrl.Create)
+		r.GET("/user/:user_id", ctrl.GetByUser)
+		r.GET("/:id", ctrl.GetByID)
+		r.PUT("/:id", ctrl.Update)
+		r.DELETE("/:id", ctrl.Delete)
+	}
 }

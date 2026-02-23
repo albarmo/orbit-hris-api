@@ -1,10 +1,10 @@
 package tests
 
 import (
-	"testing"
 	"github.com/stretchr/testify/assert"
+	"testing"
 )
 
-func TestPayrollucontroller (t *testing.T) {
+func TestPayrollucontroller(t *testing.T) {
 	assert.True(t, true)
 }

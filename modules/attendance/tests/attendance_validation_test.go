@@ -1,10 +1,10 @@
 package tests
 
 import (
-	"testing"
 	"github.com/stretchr/testify/assert"
+	"testing"
 )
 
-func TestAttendanceuvalidation (t *testing.T) {
+func TestAttendanceuvalidation(t *testing.T) {
 	assert.True(t, true)
 }

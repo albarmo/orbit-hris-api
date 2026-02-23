@@ -12,23 +12,23 @@ import (
 )
 
 func ProvideFirebase(injector *do.Injector) {
-    do.ProvideNamed(injector, constants.FCMClient, func(i *do.Injector) (*messaging.Client, error) {
-        ctx := context.Background()
-        credPath := os.Getenv("FIREBASE_CREDENTIALS")
-        var app *firebase.App
-        var err error
-        if credPath != "" {
-            app, err = firebase.NewApp(ctx, nil, option.WithCredentialsFile(credPath))
-        } else {
-            app, err = firebase.NewApp(ctx, nil)
-        }
-        if err != nil {
-            return nil, err
-        }
-        client, err := app.Messaging(ctx)
-        if err != nil {
-            return nil, err
-        }
-        return client, nil
-    })
+	do.ProvideNamed(injector, constants.FCMClient, func(i *do.Injector) (*messaging.Client, error) {
+		ctx := context.Background()
+		credPath := os.Getenv("FIREBASE_CREDENTIALS")
+		var app *firebase.App
+		var err error
+		if credPath != "" {
+			app, err = firebase.NewApp(ctx, nil, option.WithCredentialsFile(credPath))
+		} else {
+			app, err = firebase.NewApp(ctx, nil)
+		}
+		if err != nil {
+			return nil, err
+		}
+		client, err := app.Messaging(ctx)
+		if err != nil {
+			return nil, err
+		}
+		return client, nil
+	})
 }

@@ -1,6 +1,9 @@
 package providers
 
 import (
+	"os"
+	"strings"
+
 	"github.com/Caknoooo/go-gin-clean-starter/config"
 	attendanceController "github.com/Caknoooo/go-gin-clean-starter/modules/attendance/controller"
 	attendanceRepository "github.com/Caknoooo/go-gin-clean-starter/modules/attendance/repository"
@@ -41,6 +44,7 @@ import (
 	leaveTypesService "github.com/Caknoooo/go-gin-clean-starter/modules/leave_types/service"
 
 	"github.com/Caknoooo/go-gin-clean-starter/pkg/constants"
+	"github.com/redis/go-redis/v9"
 	"github.com/samber/do"
 	"gorm.io/gorm"
 )
@@ -53,7 +57,22 @@ func InitDatabase(injector *do.Injector) {
 
 func RegisterDependencies(injector *do.Injector) {
 	InitDatabase(injector)
-	ProvideFirebase(injector)
+
+	// Detect if we're running migration-related CLI flags; if so, skip
+	// initialization of optional external providers (Firebase, Redis) so that
+	// migrations can run in environments without those services.
+	skipMigrate := false
+	for _, a := range os.Args[1:] {
+		if a == "--migrate" || a == "--migrate:run" || a == "--migrate:rollback" || a == "--migrate:rollback:all" || a == "--migrate:status" || strings.HasPrefix(a, "--migrate:create:") {
+			skipMigrate = true
+			break
+		}
+	}
+
+	if !skipMigrate {
+		ProvideFirebase(injector)
+		ProvideRedis(injector)
+	}
 
 	do.ProvideNamed(injector, constants.JWTService, func(i *do.Injector) (authService.JWTService, error) {
 		return authService.NewJWTService(), nil
@@ -63,7 +82,16 @@ func RegisterDependencies(injector *do.Injector) {
 	jwtService := do.MustInvokeNamed[authService.JWTService](injector, constants.JWTService)
 
 	userRepo := repository.NewUserRepository(db)
-	refreshTokenRepo := authRepo.NewRefreshTokenRepository(db)
+	var refreshTokenRepo authRepo.RefreshTokenRepository
+	var sessionRepo authRepo.SessionRepository
+	if !skipMigrate {
+		redisClient := do.MustInvokeNamed[*redis.Client](injector, constants.REDISClient)
+		refreshTokenRepo = authRepo.NewRefreshTokenRepository(redisClient)
+		sessionRepo = authRepo.NewSessionRepository(redisClient)
+	} else {
+		refreshTokenRepo = authRepo.NewNoopRefreshTokenRepository()
+		sessionRepo = authRepo.NewNoopSessionRepository()
+	}
 	employeeRepo := employeeRepository.NewEmployeeRepository(db)
 	attendanceRepo := attendanceRepository.NewAttendanceRepository(db)
 	masterRepo := masterRepository.NewMasterRepository(db)
@@ -86,7 +114,7 @@ func RegisterDependencies(injector *do.Injector) {
 	rbacRepository := rbacRepositoryPkg.NewRbacRepository(db)
 
 	userSvc := userService.NewUserService(userRepo, db)
-	authSvc := authService.NewAuthService(userRepo, refreshTokenRepo, jwtService, db)
+	authSvc := authService.NewAuthService(userRepo, refreshTokenRepo, sessionRepo, jwtService, db)
 
 	passwordResetRepository := authRepo.NewPasswordResetRepository(db)
 	passwordResetService := authService.NewPasswordResetService(passwordResetRepository)

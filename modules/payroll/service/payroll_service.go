@@ -20,7 +20,7 @@ type PayrollService interface {
 
 type payrollService struct {
 	payrollRepository repository.PayrollRepository
-	db                            *gorm.DB
+	db                *gorm.DB
 }
 
 func NewPayrollService(
@@ -29,7 +29,7 @@ func NewPayrollService(
 ) PayrollService {
 	return &payrollService{
 		payrollRepository: payrollRepo,
-		db:                            db,
+		db:                db,
 	}
 }
 

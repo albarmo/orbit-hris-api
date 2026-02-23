@@ -16,11 +16,11 @@ const (
 	MESSAGE_FAILED_DELETE_EMPLOYEE    = "failed delete employee"
 
 	// Success
-	MESSAGE_SUCCESS_CREATE_EMPLOYEE = "success create employee"
+	MESSAGE_SUCCESS_CREATE_EMPLOYEE   = "success create employee"
 	MESSAGE_SUCCESS_GET_LIST_EMPLOYEE = "success get list employee"
-	MESSAGE_SUCCESS_GET_EMPLOYEE    = "success get employee"
-	MESSAGE_SUCCESS_UPDATE_EMPLOYEE = "success update employee"
-	MESSAGE_SUCCESS_DELETE_EMPLOYEE = "success delete employee"
+	MESSAGE_SUCCESS_GET_EMPLOYEE      = "success get employee"
+	MESSAGE_SUCCESS_UPDATE_EMPLOYEE   = "success update employee"
+	MESSAGE_SUCCESS_DELETE_EMPLOYEE   = "success delete employee"
 )
 
 type (
@@ -36,9 +36,9 @@ type (
 		EmploymentStatus string     `json:"employment_status" binding:"required"`
 		ProbationEndDate time.Time  `json:"probation_end_date"`
 
-		PersonalInfo EmployeePersonalInfoCreateRequest `json:"personal_info" binding:"required"`
-		Addresses    []EmployeeAddressCreateRequest    `json:"addresses" binding:"required"`
-		LegalInfo    EmployeeLegalInfoCreateRequest    `json:"legal_info" binding:"required"`
+		PersonalInfo EmployeePersonalInfoCreateRequest   `json:"personal_info" binding:"required"`
+		Addresses    []EmployeeAddressCreateRequest      `json:"addresses" binding:"required"`
+		LegalInfo    EmployeeLegalInfoCreateRequest      `json:"legal_info" binding:"required"`
 		PayrollInfo  EmployeePayrollProfileCreateRequest `json:"payroll_info" binding:"required"`
 	}
 
@@ -86,9 +86,9 @@ type (
 		EmploymentStatus string     `json:"employment_status"`
 		ProbationEndDate time.Time  `json:"probation_end_date"`
 
-		PersonalInfo EmployeePersonalInfoUpdateRequest `json:"personal_info"`
-		Addresses    []EmployeeAddressUpdateRequest    `json:"addresses"`
-		LegalInfo    EmployeeLegalInfoUpdateRequest    `json:"legal_info"`
+		PersonalInfo EmployeePersonalInfoUpdateRequest   `json:"personal_info"`
+		Addresses    []EmployeeAddressUpdateRequest      `json:"addresses"`
+		LegalInfo    EmployeeLegalInfoUpdateRequest      `json:"legal_info"`
 		PayrollInfo  EmployeePayrollProfileUpdateRequest `json:"payroll_info"`
 	}
 
@@ -133,17 +133,17 @@ type (
 	}
 
 	EmployeeResponse struct {
-		ID               uuid.UUID `json:"id"`
-		UserID           uuid.UUID `json:"user_id"`
-		EmployeeCode     string    `json:"employee_code"`
+		ID               uuid.UUID  `json:"id"`
+		UserID           uuid.UUID  `json:"user_id"`
+		EmployeeCode     string     `json:"employee_code"`
 		SupervisorID     *uuid.UUID `json:"supervisor_id"`
-		DepartmentID     uuid.UUID `json:"department_id"`
-		PositionID       uuid.UUID `json:"position_id"`
-		JoinDate         time.Time `json:"join_date"`
-		EndDate          time.Time `json:"end_date"`
-		EmploymentType   string    `json:"employment_type"`
-		EmploymentStatus string    `json:"employment_status"`
-		ProbationEndDate time.Time `json:"probation_end_date"`
+		DepartmentID     uuid.UUID  `json:"department_id"`
+		PositionID       uuid.UUID  `json:"position_id"`
+		JoinDate         time.Time  `json:"join_date"`
+		EndDate          time.Time  `json:"end_date"`
+		EmploymentType   string     `json:"employment_type"`
+		EmploymentStatus string     `json:"employment_status"`
+		ProbationEndDate time.Time  `json:"probation_end_date"`
 
 		User       UserResponse `json:"user"`
 		Department struct {

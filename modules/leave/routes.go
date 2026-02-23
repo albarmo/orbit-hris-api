@@ -17,10 +17,10 @@ func RegisterRoutes(server *gin.Engine, injector *do.Injector) {
 	leaveRoutes := server.Group("/api/leaves")
 	leaveRoutes.Use(middlewares.Authenticate(jwtService))
 	{
-		leaveRoutes.GET("", leaveController.GetAll)
-		leaveRoutes.GET(":id", leaveController.GetByID)
 		leaveRoutes.POST("", leaveController.Create)
-		leaveRoutes.PUT(":id", leaveController.Update)
-		leaveRoutes.DELETE(":id", leaveController.Delete)
+		leaveRoutes.GET("", leaveController.GetAll)
+		leaveRoutes.GET("/:id", leaveController.GetByID)
+		leaveRoutes.PUT("/:id", leaveController.Update)
+		leaveRoutes.DELETE("/:id", leaveController.Delete)
 	}
 }

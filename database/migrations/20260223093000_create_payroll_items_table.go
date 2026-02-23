@@ -7,13 +7,13 @@ import (
 )
 
 func init() {
-    database.RegisterMigration("20260223093000_create_payroll_items_table", UpCreatePayrollItemsTable, DownCreatePayrollItemsTable)
+	database.RegisterMigration("20260223093000_create_payroll_items_table", UpCreatePayrollItemsTable, DownCreatePayrollItemsTable)
 }
 
 func UpCreatePayrollItemsTable(db *gorm.DB) error {
-    return db.AutoMigrate(&entities.PayrollItem{})
+	return db.AutoMigrate(&entities.PayrollItem{})
 }
 
 func DownCreatePayrollItemsTable(db *gorm.DB) error {
-    return db.Migrator().DropTable(&entities.PayrollItem{})
+	return db.Migrator().DropTable(&entities.PayrollItem{})
 }

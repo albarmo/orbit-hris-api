@@ -28,7 +28,7 @@ type (
 	payrollController struct {
 		payrollService    service.PayrollService
 		payrollValidation *validation.PayrollValidation
-		db                             *gorm.DB
+		db                *gorm.DB
 	}
 )
 
@@ -38,7 +38,7 @@ func NewPayrollController(injector *do.Injector, s service.PayrollService) Payro
 	return &payrollController{
 		payrollService:    s,
 		payrollValidation: payrollValidation,
-		db:                             db,
+		db:                db,
 	}
 }
 

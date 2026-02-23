@@ -7,13 +7,13 @@ import (
 )
 
 func init() {
-    database.RegisterMigration("20260223093500_create_notifications_table", UpCreateNotificationsTable, DownCreateNotificationsTable)
+	database.RegisterMigration("20260223093500_create_notifications_table", UpCreateNotificationsTable, DownCreateNotificationsTable)
 }
 
 func UpCreateNotificationsTable(db *gorm.DB) error {
-    return db.AutoMigrate(&entities.Notification{})
+	return db.AutoMigrate(&entities.Notification{})
 }
 
 func DownCreateNotificationsTable(db *gorm.DB) error {
-    return db.Migrator().DropTable(&entities.Notification{})
+	return db.Migrator().DropTable(&entities.Notification{})
 }
