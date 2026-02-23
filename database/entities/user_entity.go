@@ -17,6 +17,13 @@ type User struct {
 	ImageUrl   string    `gorm:"type:varchar(255)" json:"image_url"`
 	IsVerified bool      `gorm:"default:false" json:"is_verified"`
 
+	// Face recognition metadata
+	FaceRecognitionModelID   *uuid.UUID `gorm:"type:uuid" json:"face_recognition_model_id"`
+	FaceRecognitionUserID    *uuid.UUID `gorm:"type:uuid" json:"face_recognition_user_id"`
+	FaceRecognitionBestPhotoPath string  `gorm:"type:varchar(512)" json:"face_recognition_best_photo_path"`
+	FaceRecognitionBestPhotoID  *uuid.UUID `gorm:"type:uuid" json:"face_recognition_best_photo_id"`
+	FaceRecognitionScore     *float64   `gorm:"type:double precision" json:"face_recognition_score"`
+
 	Timestamp
 }
 
