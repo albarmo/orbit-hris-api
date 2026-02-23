@@ -20,9 +20,7 @@ import (
 	rbacController "github.com/Caknoooo/go-gin-clean-starter/modules/rbac/controller"
 	rbacRepositoryPkg "github.com/Caknoooo/go-gin-clean-starter/modules/rbac/repository"
 	rbacService "github.com/Caknoooo/go-gin-clean-starter/modules/rbac/service"
-	shiftsController "github.com/Caknoooo/go-gin-clean-starter/modules/shifts/controller"
-	shiftsRepository "github.com/Caknoooo/go-gin-clean-starter/modules/shifts/repository"
-	shiftsService "github.com/Caknoooo/go-gin-clean-starter/modules/shifts/service"
+
 	userController "github.com/Caknoooo/go-gin-clean-starter/modules/user/controller"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/user/repository"
 	userService "github.com/Caknoooo/go-gin-clean-starter/modules/user/service"
@@ -31,9 +29,9 @@ import (
 	expensesRepository "github.com/Caknoooo/go-gin-clean-starter/modules/expenses/repository"
 	expensesService "github.com/Caknoooo/go-gin-clean-starter/modules/expenses/service"
 
-	payrollItemsController "github.com/Caknoooo/go-gin-clean-starter/modules/payroll_items/controller"
-	payrollItemsRepository "github.com/Caknoooo/go-gin-clean-starter/modules/payroll_items/repository"
-	payrollItemsService "github.com/Caknoooo/go-gin-clean-starter/modules/payroll_items/service"
+	payrollcontroller "github.com/Caknoooo/go-gin-clean-starter/modules/payroll/controller"
+	payrollRepository "github.com/Caknoooo/go-gin-clean-starter/modules/payroll/repository"
+	payrollServicePkg "github.com/Caknoooo/go-gin-clean-starter/modules/payroll/service"
 
 	notificationsController "github.com/Caknoooo/go-gin-clean-starter/modules/notifications/controller"
 	notificationsRepository "github.com/Caknoooo/go-gin-clean-starter/modules/notifications/repository"
@@ -95,7 +93,7 @@ func RegisterDependencies(injector *do.Injector) {
 	employeeRepo := employeeRepository.NewEmployeeRepository(db)
 	attendanceRepo := attendanceRepository.NewAttendanceRepository(db)
 	masterRepo := masterRepository.NewMasterRepository(db)
-	shiftRepo := shiftsRepository.NewShiftRepository(db)
+	shiftRepo := masterRepository.NewShiftRepository(db)
 
 	emergencyContactRepo := employeeRepository.NewEmergencyContactRepository(db)
 
@@ -105,8 +103,11 @@ func RegisterDependencies(injector *do.Injector) {
 	expenseRepo := expensesRepository.NewExpenseRepository(db)
 	expenseSvc := expensesService.NewExpenseService(expenseRepo)
 
-	payrollItemRepo := payrollItemsRepository.NewPayrollItemRepository(db)
-	payrollItemSvc := payrollItemsService.NewPayrollItemService(payrollItemRepo)
+	payrollRepo := payrollRepository.NewPayrollRepository(db)
+	payrollSvc := payrollServicePkg.NewPayrollService(payrollRepo, db)
+
+	payrollItemRepo := payrollRepository.NewPayrollItemRepository(db)
+	payrollItemSvc := payrollServicePkg.NewPayrollItemService(payrollItemRepo)
 
 	notificationRepo := notificationsRepository.NewNotificationRepository(db)
 	notificationSvc := notificationsService.NewNotificationService(notificationRepo, injector)
@@ -122,7 +123,7 @@ func RegisterDependencies(injector *do.Injector) {
 
 	emergencyContactService := employeeService.NewEmergencyContactService(emergencyContactRepo)
 
-	shiftSvc := shiftsService.NewShiftService(shiftRepo)
+	shiftSvc := masterService.NewShiftService(shiftRepo)
 	attendanceSvc := attendanceService.NewAttendanceService(attendanceRepo, db)
 	masterSvc := masterService.NewMasterService(masterRepo, db)
 	rbacSvc := rbacService.NewRbacService(rbacRepository, db)
@@ -158,8 +159,8 @@ func RegisterDependencies(injector *do.Injector) {
 	)
 
 	do.Provide(
-		injector, func(i *do.Injector) (shiftsController.ShiftController, error) {
-			return shiftsController.NewShiftController(shiftSvc), nil
+		injector, func(i *do.Injector) (masterController.ShiftController, error) {
+			return masterController.NewShiftController(shiftSvc), nil
 		},
 	)
 
@@ -170,8 +171,14 @@ func RegisterDependencies(injector *do.Injector) {
 	)
 
 	do.Provide(
-		injector, func(i *do.Injector) (payrollItemsController.PayrollItemController, error) {
-			return payrollItemsController.NewPayrollItemController(payrollItemSvc), nil
+		injector, func(i *do.Injector) (payrollcontroller.PayrollController, error) {
+			return payrollcontroller.NewPayrollController(i, payrollSvc), nil
+		},
+	)
+
+	do.Provide(
+		injector, func(i *do.Injector) (payrollcontroller.PayrollItemController, error) {
+			return payrollcontroller.NewPayrollItemController(payrollItemSvc), nil
 		},
 	)
 

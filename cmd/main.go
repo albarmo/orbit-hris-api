@@ -10,12 +10,12 @@ import (
 	"github.com/Caknoooo/go-gin-clean-starter/modules/employee"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/expenses"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/leave_types"
+	"github.com/Caknoooo/go-gin-clean-starter/modules/master"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/notifications"
-	payrollitems "github.com/Caknoooo/go-gin-clean-starter/modules/payroll_items"
+	"github.com/Caknoooo/go-gin-clean-starter/modules/payroll"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/rbac"
 	rbacRepository "github.com/Caknoooo/go-gin-clean-starter/modules/rbac/repository"
 	rbacService "github.com/Caknoooo/go-gin-clean-starter/modules/rbac/service"
-	"github.com/Caknoooo/go-gin-clean-starter/modules/shifts"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/user"
 	"github.com/Caknoooo/go-gin-clean-starter/pkg/constants"
 	"github.com/Caknoooo/go-gin-clean-starter/providers"
@@ -87,10 +87,10 @@ func main() {
 	user.RegisterRoutes(server, injector)
 	auth.RegisterRoutes(server, injector)
 	employee.RegisterRoutes(server, injector)
-	shifts.RegisterRoutes(server, injector)
+	master.RegisterRoutes(server, injector)
 	leave_types.RegisterRoutes(server, injector)
 	expenses.RegisterRoutes(server, injector)
-	payrollitems.RegisterRoutes(server, injector)
+	payroll.RegisterRoutes(server, injector)
 	notifications.RegisterRoutes(server, injector)
 	attendance.RegisterRoutes(server, injector)
 	rbac.RegisterRoutes(server, injector)
