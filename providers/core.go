@@ -37,6 +37,10 @@ import (
 	notificationsRepository "github.com/Caknoooo/go-gin-clean-starter/modules/notifications/repository"
 	notificationsService "github.com/Caknoooo/go-gin-clean-starter/modules/notifications/service"
 
+	leaveController "github.com/Caknoooo/go-gin-clean-starter/modules/leave/controller"
+	leaveRepository "github.com/Caknoooo/go-gin-clean-starter/modules/leave/repository"
+	leaveService "github.com/Caknoooo/go-gin-clean-starter/modules/leave/service"
+
 	leaveTypesController "github.com/Caknoooo/go-gin-clean-starter/modules/leave_types/controller"
 	leaveTypesRepository "github.com/Caknoooo/go-gin-clean-starter/modules/leave_types/repository"
 	leaveTypesService "github.com/Caknoooo/go-gin-clean-starter/modules/leave_types/service"
@@ -99,6 +103,9 @@ func RegisterDependencies(injector *do.Injector) {
 
 	leaveTypeRepo := leaveTypesRepository.NewLeaveTypeRepository(db)
 	leaveTypeSvc := leaveTypesService.NewLeaveTypeService(leaveTypeRepo)
+
+	leaveRepo := leaveRepository.NewLeaveRepository(db)
+	leaveSvc := leaveService.NewLeaveService(leaveRepo, db)
 
 	expenseRepo := expensesRepository.NewExpenseRepository(db)
 	expenseSvc := expensesService.NewExpenseService(expenseRepo)
@@ -185,6 +192,12 @@ func RegisterDependencies(injector *do.Injector) {
 	do.Provide(
 		injector, func(i *do.Injector) (notificationsController.NotificationController, error) {
 			return notificationsController.NewNotificationController(notificationSvc), nil
+		},
+	)
+
+	do.Provide(
+		injector, func(i *do.Injector) (leaveController.LeaveController, error) {
+			return leaveController.NewLeaveController(i, leaveSvc), nil
 		},
 	)
 

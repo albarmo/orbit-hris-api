@@ -1,7 +1,12 @@
 package controller
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
+	"encoding/json"
 	"net/http"
+	"strings"
+	"time"
 
 	"github.com/Caknoooo/go-gin-clean-starter/modules/attendance/dto"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/attendance/service"
@@ -10,13 +15,34 @@ import (
 	"github.com/Caknoooo/go-gin-clean-starter/pkg/pagination"
 	"github.com/Caknoooo/go-gin-clean-starter/pkg/utils"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
+	"github.com/redis/go-redis/v9"
 	"github.com/samber/do"
 	"gorm.io/gorm"
 )
 
+const (
+	checkInIdempotencyHeader   = "Idempotency-Key"
+	idempotencyStateProcessing = "processing"
+	idempotencyStateCompleted  = "completed"
+)
+
+var (
+	checkInProcessingTTL = 90 * time.Second
+	checkInCompletedTTL  = 24 * time.Hour
+)
+
+type checkInIdempotencyRecord struct {
+	State       string          `json:"state"`
+	RequestHash string          `json:"request_hash"`
+	StatusCode  int             `json:"status_code,omitempty"`
+	Response    json.RawMessage `json:"response,omitempty"`
+}
+
 type (
 	AttendanceController interface {
 		GetAll(ctx *gin.Context)
+		GetTodayAttendances(ctx *gin.Context)
 		GetByID(ctx *gin.Context)
 		GetByEmployeeID(ctx *gin.Context)
 		CheckIn(ctx *gin.Context)
@@ -30,15 +56,22 @@ type (
 		service    service.AttendanceService
 		validation *validation.AttendanceValidation
 		db         *gorm.DB
+		redis      *redis.Client
 	}
 )
 
 func NewAttendanceController(injector *do.Injector, s service.AttendanceService) AttendanceController {
 	db := do.MustInvokeNamed[*gorm.DB](injector, constants.DB)
+	var redisClient *redis.Client
+	if c, err := do.InvokeNamed[*redis.Client](injector, constants.REDISClient); err == nil {
+		redisClient = c
+	}
+
 	return &attendanceController{
 		service:    s,
 		validation: validation.NewAttendanceValidation(),
 		db:         db,
+		redis:      redisClient,
 	}
 }
 
@@ -64,6 +97,19 @@ func (c *attendanceController) GetAll(ctx *gin.Context) {
 	}
 
 	res := utils.BuildResponseSuccess("success", page)
+	ctx.JSON(http.StatusOK, res)
+}
+
+func (c *attendanceController) GetTodayAttendances(ctx *gin.Context) {
+	userID := ctx.GetString("user_id")
+	attendance, err := c.service.FindToday(ctx.Request.Context(), userID)
+	if err != nil {
+		res := utils.BuildResponseFailed("failed get today attendances", err.Error(), nil)
+		ctx.JSON(http.StatusBadRequest, res)
+		return
+	}
+
+	res := utils.BuildResponseSuccess("success", attendance)
 	ctx.JSON(http.StatusOK, res)
 }
 
@@ -128,13 +174,90 @@ func (c *attendanceController) CheckIn(ctx *gin.Context) {
 		return
 	}
 
+	idempotencyKey := strings.TrimSpace(ctx.GetHeader(checkInIdempotencyHeader))
+	redisKey := ""
+	useIdempotency := idempotencyKey != "" && c.redis != nil
+	reqHash := ""
+
+	if useIdempotency {
+		reqHash = hashCheckInRequest(req)
+		redisKey = buildCheckInIdempotencyRedisKey(req.EmployeeID, idempotencyKey)
+
+		record := checkInIdempotencyRecord{
+			State:       idempotencyStateProcessing,
+			RequestHash: reqHash,
+		}
+		recordPayload, err := json.Marshal(record)
+		if err != nil {
+			useIdempotency = false
+		} else {
+			isNew, err := c.redis.SetNX(ctx.Request.Context(), redisKey, recordPayload, checkInProcessingTTL).Result()
+			if err != nil {
+				useIdempotency = false
+			} else if !isNew {
+				// Existing idempotency key found: replay completed response or reject conflicting/in-progress requests.
+				cachedPayload, err := c.redis.Get(ctx.Request.Context(), redisKey).Bytes()
+				if err != nil {
+					res := utils.BuildResponseFailed("failed check-in", "idempotency key is being processed", nil)
+					ctx.JSON(http.StatusConflict, res)
+					return
+				}
+
+				var cached checkInIdempotencyRecord
+				if err := json.Unmarshal(cachedPayload, &cached); err != nil {
+					res := utils.BuildResponseFailed("failed check-in", "idempotency record is invalid", nil)
+					ctx.JSON(http.StatusConflict, res)
+					return
+				}
+
+				if cached.RequestHash != reqHash {
+					res := utils.BuildResponseFailed("failed check-in", "idempotency key already used with a different request", nil)
+					ctx.JSON(http.StatusConflict, res)
+					return
+				}
+
+				if cached.State == idempotencyStateCompleted && cached.StatusCode != 0 && len(cached.Response) > 0 {
+					ctx.Header("Idempotency-Replayed", "true")
+					ctx.Data(cached.StatusCode, "application/json; charset=utf-8", cached.Response)
+					return
+				}
+
+				res := utils.BuildResponseFailed("failed check-in", "idempotency key is being processed", nil)
+				ctx.JSON(http.StatusConflict, res)
+				return
+			}
+		}
+	}
+
 	result, err := c.service.CheckIn(req)
 	if err != nil {
+		if useIdempotency && redisKey != "" {
+			// Release the key on failure so the same idempotency key can be retried.
+			_ = c.redis.Del(ctx.Request.Context(), redisKey).Err()
+		}
+
 		res := utils.BuildResponseFailed("failed check-in", err.Error(), nil)
 		ctx.JSON(http.StatusInternalServerError, res)
 		return
 	}
+
 	res := utils.BuildResponseSuccess("check-in successful", result)
+
+	if useIdempotency && redisKey != "" {
+		responsePayload, err := json.Marshal(res)
+		if err == nil {
+			finalRecord := checkInIdempotencyRecord{
+				State:       idempotencyStateCompleted,
+				RequestHash: reqHash,
+				StatusCode:  http.StatusCreated,
+				Response:    responsePayload,
+			}
+			if finalPayload, err := json.Marshal(finalRecord); err == nil {
+				_ = c.redis.Set(ctx.Request.Context(), redisKey, finalPayload, checkInCompletedTTL).Err()
+			}
+		}
+	}
+
 	ctx.JSON(http.StatusCreated, res)
 }
 
@@ -260,4 +383,15 @@ func (c *attendanceController) Delete(ctx *gin.Context) {
 	}
 	res := utils.BuildResponseSuccess("delete successful", nil)
 	ctx.JSON(http.StatusOK, res)
+}
+
+func buildCheckInIdempotencyRedisKey(employeeID uuid.UUID, idempotencyKey string) string {
+	// Scope the key by employee and date so a reused key across different days does not collide forever.
+	datePart := time.Now().UTC().Format("2006-01-02")
+	return "idem:attendance:checkin:" + employeeID.String() + ":" + datePart + ":" + idempotencyKey
+}
+
+func hashCheckInRequest(req dto.CheckInDTO) string {
+	sum := sha256.Sum256([]byte(req.EmployeeID.String() + "|" + req.LocationID.String()))
+	return hex.EncodeToString(sum[:])
 }

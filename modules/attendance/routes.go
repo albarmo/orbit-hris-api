@@ -17,6 +17,7 @@ func RegisterRoutes(server *gin.Engine, injector *do.Injector) {
 	attendanceRoutes.Use(middlewares.Authenticate(jwtService))
 	{
 		attendanceRoutes.GET("", middlewares.Authenticate(jwtService), attendanceController.GetAll)
+		attendanceRoutes.GET("/today", middlewares.Authenticate(jwtService), attendanceController.GetTodayAttendances)
 		attendanceRoutes.GET("/:id", middlewares.Authenticate(jwtService), attendanceController.GetByID)
 		attendanceRoutes.POST("/check-in", middlewares.Authenticate(jwtService), attendanceController.CheckIn)
 		attendanceRoutes.PUT("/check-out", middlewares.Authenticate(jwtService), attendanceController.CheckOut)

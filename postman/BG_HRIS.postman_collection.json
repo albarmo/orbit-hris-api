@@ -3297,7 +3297,65 @@
               ]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "Get Attendances",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/attendances",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "attendances"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                },
+                {
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 23 Feb 2026 15:50:04 GMT"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"success\",\n    \"data\": {\n        \"page\": 1,\n        \"limit\": 10,\n        \"total\": 3,\n        \"total_pages\": 1,\n        \"data\": [\n            {\n                \"id\": \"a1b2c3d4-1111-4e67-a6f6-4a5d6a7f8b9c\",\n                \"employee_id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n                \"location_id\": \"f8d8c3b1-3e4a-4b6a-8b6e-3d1f8a7b3c2d\",\n                \"check_in_time\": \"2024-07-22T09:01:15+07:00\",\n                \"check_out_time\": \"2024-07-22T18:05:30+07:00\",\n                \"status\": \"Present\",\n                \"created_at\": \"2026-02-18T11:47:00.794861+07:00\",\n                \"employee\": {\n                    \"id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n                    \"user_id\": \"344faa2e-074b-4a45-b57c-123654f1a158\",\n                    \"employee_code\": \"EMP001\",\n                    \"supervisor_id\": null,\n                    \"department_id\": \"e6f4cf8a-8c3d-4c3e-9c7f-1d8a9d1e1bf2\",\n                    \"position_id\": \"1b3a4c17-7c73-4f51-b2e6-a8cf21e25a22\",\n                    \"join_date\": \"2023-01-15T00:00:00Z\",\n                    \"end_date\": \"0001-01-01T00:00:00Z\",\n                    \"employment_type\": \"Permanent\",\n                    \"employment_status\": \"Active\",\n                    \"probation_end_date\": \"0001-01-01T00:00:00Z\",\n                    \"user\": {\n                        \"id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"name\": \"\",\n                        \"email\": \"\",\n                        \"telp_number\": \"\",\n                        \"password\": \"\",\n                        \"role\": \"\",\n                        \"image_url\": \"\",\n                        \"is_verified\": false,\n                        \"face_recognition_model_id\": null,\n                        \"face_recognition_user_id\": null,\n                        \"face_recognition_best_photo_path\": \"\",\n                        \"face_recognition_best_photo_id\": null,\n                        \"face_recognition_score\": null,\n                        \"created_at\": \"0001-01-01T00:00:00Z\",\n                        \"updated_at\": \"0001-01-01T00:00:00Z\"\n                    },\n                    \"supervisor\": null,\n                    \"department\": {\n                        \"id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"name\": \"\",\n                        \"description\": \"\"\n                    },\n                    \"position\": {\n                        \"id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"department_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"name\": \"\",\n                        \"level\": \"\",\n                        \"department\": {\n                            \"id\": \"00000000-0000-0000-0000-000000000000\",\n                            \"name\": \"\",\n                            \"description\": \"\"\n                        }\n                    },\n                    \"created_at\": \"2026-02-18T11:40:19.511066+07:00\",\n                    \"updated_at\": \"2026-02-18T11:40:19.511066+07:00\"\n                },\n                \"location\": {\n                    \"id\": \"f8d8c3b1-3e4a-4b6a-8b6e-3d1f8a7b3c2d\",\n                    \"name\": \"Main Office\",\n                    \"latitude\": -6.2088,\n                    \"longitude\": 106.8456,\n                    \"radius_meters\": 100,\n                    \"polygon\": null,\n                    \"is_active\": true,\n                    \"created_at\": \"2026-02-18T11:33:23.009883+07:00\"\n                }\n            },\n            {\n                \"id\": \"a1b2c3d4-2222-4e67-a6f6-4a5d6a7f8b9c\",\n                \"employee_id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n                \"location_id\": \"f8d8c3b1-3e4a-4b6a-8b6e-3d1f8a7b3c2d\",\n                \"check_in_time\": \"2024-07-23T08:58:00+07:00\",\n                \"check_out_time\": \"2024-07-23T17:59:00+07:00\",\n                \"status\": \"Present\",\n                \"created_at\": \"2026-02-18T11:47:00.804072+07:00\",\n                \"employee\": {\n                    \"id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n                    \"user_id\": \"344faa2e-074b-4a45-b57c-123654f1a158\",\n                    \"employee_code\": \"EMP001\",\n                    \"supervisor_id\": null,\n                    \"department_id\": \"e6f4cf8a-8c3d-4c3e-9c7f-1d8a9d1e1bf2\",\n                    \"position_id\": \"1b3a4c17-7c73-4f51-b2e6-a8cf21e25a22\",\n                    \"join_date\": \"2023-01-15T00:00:00Z\",\n                    \"end_date\": \"0001-01-01T00:00:00Z\",\n                    \"employment_type\": \"Permanent\",\n                    \"employment_status\": \"Active\",\n                    \"probation_end_date\": \"0001-01-01T00:00:00Z\",\n                    \"user\": {\n                        \"id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"name\": \"\",\n                        \"email\": \"\",\n                        \"telp_number\": \"\",\n                        \"password\": \"\",\n                        \"role\": \"\",\n                        \"image_url\": \"\",\n                        \"is_verified\": false,\n                        \"face_recognition_model_id\": null,\n                        \"face_recognition_user_id\": null,\n                        \"face_recognition_best_photo_path\": \"\",\n                        \"face_recognition_best_photo_id\": null,\n                        \"face_recognition_score\": null,\n                        \"created_at\": \"0001-01-01T00:00:00Z\",\n                        \"updated_at\": \"0001-01-01T00:00:00Z\"\n                    },\n                    \"supervisor\": null,\n                    \"department\": {\n                        \"id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"name\": \"\",\n                        \"description\": \"\"\n                    },\n                    \"position\": {\n                        \"id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"department_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"name\": \"\",\n                        \"level\": \"\",\n                        \"department\": {\n                            \"id\": \"00000000-0000-0000-0000-000000000000\",\n                            \"name\": \"\",\n                            \"description\": \"\"\n                        }\n                    },\n                    \"created_at\": \"2026-02-18T11:40:19.511066+07:00\",\n                    \"updated_at\": \"2026-02-18T11:40:19.511066+07:00\"\n                },\n                \"location\": {\n                    \"id\": \"f8d8c3b1-3e4a-4b6a-8b6e-3d1f8a7b3c2d\",\n                    \"name\": \"Main Office\",\n                    \"latitude\": -6.2088,\n                    \"longitude\": 106.8456,\n                    \"radius_meters\": 100,\n                    \"polygon\": null,\n                    \"is_active\": true,\n                    \"created_at\": \"2026-02-18T11:33:23.009883+07:00\"\n                }\n            },\n            {\n                \"id\": \"a1b2c3d4-3333-4e67-a6f6-4a5d6a7f8b9c\",\n                \"employee_id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n                \"location_id\": \"f8d8c3b1-3e4a-4b6a-8b6e-3d1f8a7b3c2d\",\n                \"check_in_time\": \"2024-07-24T09:10:00+07:00\",\n                \"check_out_time\": null,\n                \"status\": \"On-going\",\n                \"created_at\": \"2026-02-18T11:47:00.805726+07:00\",\n                \"employee\": {\n                    \"id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n                    \"user_id\": \"344faa2e-074b-4a45-b57c-123654f1a158\",\n                    \"employee_code\": \"EMP001\",\n                    \"supervisor_id\": null,\n                    \"department_id\": \"e6f4cf8a-8c3d-4c3e-9c7f-1d8a9d1e1bf2\",\n                    \"position_id\": \"1b3a4c17-7c73-4f51-b2e6-a8cf21e25a22\",\n                    \"join_date\": \"2023-01-15T00:00:00Z\",\n                    \"end_date\": \"0001-01-01T00:00:00Z\",\n                    \"employment_type\": \"Permanent\",\n                    \"employment_status\": \"Active\",\n                    \"probation_end_date\": \"0001-01-01T00:00:00Z\",\n                    \"user\": {\n                        \"id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"name\": \"\",\n                        \"email\": \"\",\n                        \"telp_number\": \"\",\n                        \"password\": \"\",\n                        \"role\": \"\",\n                        \"image_url\": \"\",\n                        \"is_verified\": false,\n                        \"face_recognition_model_id\": null,\n                        \"face_recognition_user_id\": null,\n                        \"face_recognition_best_photo_path\": \"\",\n                        \"face_recognition_best_photo_id\": null,\n                        \"face_recognition_score\": null,\n                        \"created_at\": \"0001-01-01T00:00:00Z\",\n                        \"updated_at\": \"0001-01-01T00:00:00Z\"\n                    },\n                    \"supervisor\": null,\n                    \"department\": {\n                        \"id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"name\": \"\",\n                        \"description\": \"\"\n                    },\n                    \"position\": {\n                        \"id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"department_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"name\": \"\",\n                        \"level\": \"\",\n                        \"department\": {\n                            \"id\": \"00000000-0000-0000-0000-000000000000\",\n                            \"name\": \"\",\n                            \"description\": \"\"\n                        }\n                    },\n                    \"created_at\": \"2026-02-18T11:40:19.511066+07:00\",\n                    \"updated_at\": \"2026-02-18T11:40:19.511066+07:00\"\n                },\n                \"location\": {\n                    \"id\": \"f8d8c3b1-3e4a-4b6a-8b6e-3d1f8a7b3c2d\",\n                    \"name\": \"Main Office\",\n                    \"latitude\": -6.2088,\n                    \"longitude\": 106.8456,\n                    \"radius_meters\": 100,\n                    \"polygon\": null,\n                    \"is_active\": true,\n                    \"created_at\": \"2026-02-18T11:33:23.009883+07:00\"\n                }\n            }\n        ]\n    }\n}"
+            }
+          ]
         },
         {
           "name": "Get Attendance by ID",
@@ -3322,12 +3380,77 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": ""
+                  "value": "a1b2c3d4-1111-4e67-a6f6-4a5d6a7f8b9c"
                 }
               ]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "Get Attendance by ID",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/attendances/:id",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "attendances",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "a1b2c3d4-1111-4e67-a6f6-4a5d6a7f8b9c"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                },
+                {
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 23 Feb 2026 15:50:30 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1812"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"success\",\n    \"data\": {\n        \"id\": \"a1b2c3d4-1111-4e67-a6f6-4a5d6a7f8b9c\",\n        \"employee_id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n        \"location_id\": \"f8d8c3b1-3e4a-4b6a-8b6e-3d1f8a7b3c2d\",\n        \"check_in_time\": \"2024-07-22T09:01:15+07:00\",\n        \"check_out_time\": \"2024-07-22T18:05:30+07:00\",\n        \"status\": \"Present\",\n        \"created_at\": \"2026-02-18T11:47:00.794861+07:00\",\n        \"employee\": {\n            \"id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n            \"user_id\": \"344faa2e-074b-4a45-b57c-123654f1a158\",\n            \"employee_code\": \"EMP001\",\n            \"supervisor_id\": null,\n            \"department_id\": \"e6f4cf8a-8c3d-4c3e-9c7f-1d8a9d1e1bf2\",\n            \"position_id\": \"1b3a4c17-7c73-4f51-b2e6-a8cf21e25a22\",\n            \"join_date\": \"2023-01-15T00:00:00Z\",\n            \"end_date\": \"0001-01-01T00:00:00Z\",\n            \"employment_type\": \"Permanent\",\n            \"employment_status\": \"Active\",\n            \"probation_end_date\": \"0001-01-01T00:00:00Z\",\n            \"user\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"email\": \"\",\n                \"telp_number\": \"\",\n                \"password\": \"\",\n                \"role\": \"\",\n                \"image_url\": \"\",\n                \"is_verified\": false,\n                \"face_recognition_model_id\": null,\n                \"face_recognition_user_id\": null,\n                \"face_recognition_best_photo_path\": \"\",\n                \"face_recognition_best_photo_id\": null,\n                \"face_recognition_score\": null,\n                \"created_at\": \"0001-01-01T00:00:00Z\",\n                \"updated_at\": \"0001-01-01T00:00:00Z\"\n            },\n            \"supervisor\": null,\n            \"department\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"description\": \"\"\n            },\n            \"position\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"department_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"level\": \"\",\n                \"department\": {\n                    \"id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"name\": \"\",\n                    \"description\": \"\"\n                }\n            },\n            \"created_at\": \"2026-02-18T11:40:19.511066+07:00\",\n            \"updated_at\": \"2026-02-18T11:40:19.511066+07:00\"\n        },\n        \"location\": {\n            \"id\": \"f8d8c3b1-3e4a-4b6a-8b6e-3d1f8a7b3c2d\",\n            \"name\": \"Main Office\",\n            \"latitude\": -6.2088,\n            \"longitude\": 106.8456,\n            \"radius_meters\": 100,\n            \"polygon\": null,\n            \"is_active\": true,\n            \"created_at\": \"2026-02-18T11:33:23.009883+07:00\"\n        }\n    }\n}"
+            }
+          ]
         },
         {
           "name": "Get Attendance by Employee ID",
@@ -3353,12 +3476,78 @@
               "variable": [
                 {
                   "key": "employee_id",
-                  "value": ""
+                  "value": "e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c"
                 }
               ]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "Get Attendance by Employee ID",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/attendances/employee/:employee_id",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "attendances",
+                    "employee",
+                    ":employee_id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "employee_id",
+                      "value": "e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                },
+                {
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 23 Feb 2026 15:50:55 GMT"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"success\",\n    \"data\": {\n        \"page\": 1,\n        \"limit\": 10,\n        \"total\": 3,\n        \"total_pages\": 1,\n        \"data\": [\n            {\n                \"id\": \"a1b2c3d4-1111-4e67-a6f6-4a5d6a7f8b9c\",\n                \"employee_id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n                \"location_id\": \"f8d8c3b1-3e4a-4b6a-8b6e-3d1f8a7b3c2d\",\n                \"check_in_time\": \"2024-07-22T09:01:15+07:00\",\n                \"check_out_time\": \"2024-07-22T18:05:30+07:00\",\n                \"status\": \"Present\",\n                \"created_at\": \"2026-02-18T11:47:00.794861+07:00\",\n                \"employee\": {\n                    \"id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n                    \"user_id\": \"344faa2e-074b-4a45-b57c-123654f1a158\",\n                    \"employee_code\": \"EMP001\",\n                    \"supervisor_id\": null,\n                    \"department_id\": \"e6f4cf8a-8c3d-4c3e-9c7f-1d8a9d1e1bf2\",\n                    \"position_id\": \"1b3a4c17-7c73-4f51-b2e6-a8cf21e25a22\",\n                    \"join_date\": \"2023-01-15T00:00:00Z\",\n                    \"end_date\": \"0001-01-01T00:00:00Z\",\n                    \"employment_type\": \"Permanent\",\n                    \"employment_status\": \"Active\",\n                    \"probation_end_date\": \"0001-01-01T00:00:00Z\",\n                    \"user\": {\n                        \"id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"name\": \"\",\n                        \"email\": \"\",\n                        \"telp_number\": \"\",\n                        \"password\": \"\",\n                        \"role\": \"\",\n                        \"image_url\": \"\",\n                        \"is_verified\": false,\n                        \"face_recognition_model_id\": null,\n                        \"face_recognition_user_id\": null,\n                        \"face_recognition_best_photo_path\": \"\",\n                        \"face_recognition_best_photo_id\": null,\n                        \"face_recognition_score\": null,\n                        \"created_at\": \"0001-01-01T00:00:00Z\",\n                        \"updated_at\": \"0001-01-01T00:00:00Z\"\n                    },\n                    \"supervisor\": null,\n                    \"department\": {\n                        \"id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"name\": \"\",\n                        \"description\": \"\"\n                    },\n                    \"position\": {\n                        \"id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"department_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"name\": \"\",\n                        \"level\": \"\",\n                        \"department\": {\n                            \"id\": \"00000000-0000-0000-0000-000000000000\",\n                            \"name\": \"\",\n                            \"description\": \"\"\n                        }\n                    },\n                    \"created_at\": \"2026-02-18T11:40:19.511066+07:00\",\n                    \"updated_at\": \"2026-02-18T11:40:19.511066+07:00\"\n                },\n                \"location\": {\n                    \"id\": \"f8d8c3b1-3e4a-4b6a-8b6e-3d1f8a7b3c2d\",\n                    \"name\": \"Main Office\",\n                    \"latitude\": -6.2088,\n                    \"longitude\": 106.8456,\n                    \"radius_meters\": 100,\n                    \"polygon\": null,\n                    \"is_active\": true,\n                    \"created_at\": \"2026-02-18T11:33:23.009883+07:00\"\n                }\n            },\n            {\n                \"id\": \"a1b2c3d4-2222-4e67-a6f6-4a5d6a7f8b9c\",\n                \"employee_id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n                \"location_id\": \"f8d8c3b1-3e4a-4b6a-8b6e-3d1f8a7b3c2d\",\n                \"check_in_time\": \"2024-07-23T08:58:00+07:00\",\n                \"check_out_time\": \"2024-07-23T17:59:00+07:00\",\n                \"status\": \"Present\",\n                \"created_at\": \"2026-02-18T11:47:00.804072+07:00\",\n                \"employee\": {\n                    \"id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n                    \"user_id\": \"344faa2e-074b-4a45-b57c-123654f1a158\",\n                    \"employee_code\": \"EMP001\",\n                    \"supervisor_id\": null,\n                    \"department_id\": \"e6f4cf8a-8c3d-4c3e-9c7f-1d8a9d1e1bf2\",\n                    \"position_id\": \"1b3a4c17-7c73-4f51-b2e6-a8cf21e25a22\",\n                    \"join_date\": \"2023-01-15T00:00:00Z\",\n                    \"end_date\": \"0001-01-01T00:00:00Z\",\n                    \"employment_type\": \"Permanent\",\n                    \"employment_status\": \"Active\",\n                    \"probation_end_date\": \"0001-01-01T00:00:00Z\",\n                    \"user\": {\n                        \"id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"name\": \"\",\n                        \"email\": \"\",\n                        \"telp_number\": \"\",\n                        \"password\": \"\",\n                        \"role\": \"\",\n                        \"image_url\": \"\",\n                        \"is_verified\": false,\n                        \"face_recognition_model_id\": null,\n                        \"face_recognition_user_id\": null,\n                        \"face_recognition_best_photo_path\": \"\",\n                        \"face_recognition_best_photo_id\": null,\n                        \"face_recognition_score\": null,\n                        \"created_at\": \"0001-01-01T00:00:00Z\",\n                        \"updated_at\": \"0001-01-01T00:00:00Z\"\n                    },\n                    \"supervisor\": null,\n                    \"department\": {\n                        \"id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"name\": \"\",\n                        \"description\": \"\"\n                    },\n                    \"position\": {\n                        \"id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"department_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"name\": \"\",\n                        \"level\": \"\",\n                        \"department\": {\n                            \"id\": \"00000000-0000-0000-0000-000000000000\",\n                            \"name\": \"\",\n                            \"description\": \"\"\n                        }\n                    },\n                    \"created_at\": \"2026-02-18T11:40:19.511066+07:00\",\n                    \"updated_at\": \"2026-02-18T11:40:19.511066+07:00\"\n                },\n                \"location\": {\n                    \"id\": \"f8d8c3b1-3e4a-4b6a-8b6e-3d1f8a7b3c2d\",\n                    \"name\": \"Main Office\",\n                    \"latitude\": -6.2088,\n                    \"longitude\": 106.8456,\n                    \"radius_meters\": 100,\n                    \"polygon\": null,\n                    \"is_active\": true,\n                    \"created_at\": \"2026-02-18T11:33:23.009883+07:00\"\n                }\n            },\n            {\n                \"id\": \"a1b2c3d4-3333-4e67-a6f6-4a5d6a7f8b9c\",\n                \"employee_id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n                \"location_id\": \"f8d8c3b1-3e4a-4b6a-8b6e-3d1f8a7b3c2d\",\n                \"check_in_time\": \"2024-07-24T09:10:00+07:00\",\n                \"check_out_time\": null,\n                \"status\": \"On-going\",\n                \"created_at\": \"2026-02-18T11:47:00.805726+07:00\",\n                \"employee\": {\n                    \"id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n                    \"user_id\": \"344faa2e-074b-4a45-b57c-123654f1a158\",\n                    \"employee_code\": \"EMP001\",\n                    \"supervisor_id\": null,\n                    \"department_id\": \"e6f4cf8a-8c3d-4c3e-9c7f-1d8a9d1e1bf2\",\n                    \"position_id\": \"1b3a4c17-7c73-4f51-b2e6-a8cf21e25a22\",\n                    \"join_date\": \"2023-01-15T00:00:00Z\",\n                    \"end_date\": \"0001-01-01T00:00:00Z\",\n                    \"employment_type\": \"Permanent\",\n                    \"employment_status\": \"Active\",\n                    \"probation_end_date\": \"0001-01-01T00:00:00Z\",\n                    \"user\": {\n                        \"id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"name\": \"\",\n                        \"email\": \"\",\n                        \"telp_number\": \"\",\n                        \"password\": \"\",\n                        \"role\": \"\",\n                        \"image_url\": \"\",\n                        \"is_verified\": false,\n                        \"face_recognition_model_id\": null,\n                        \"face_recognition_user_id\": null,\n                        \"face_recognition_best_photo_path\": \"\",\n                        \"face_recognition_best_photo_id\": null,\n                        \"face_recognition_score\": null,\n                        \"created_at\": \"0001-01-01T00:00:00Z\",\n                        \"updated_at\": \"0001-01-01T00:00:00Z\"\n                    },\n                    \"supervisor\": null,\n                    \"department\": {\n                        \"id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"name\": \"\",\n                        \"description\": \"\"\n                    },\n                    \"position\": {\n                        \"id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"department_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"name\": \"\",\n                        \"level\": \"\",\n                        \"department\": {\n                            \"id\": \"00000000-0000-0000-0000-000000000000\",\n                            \"name\": \"\",\n                            \"description\": \"\"\n                        }\n                    },\n                    \"created_at\": \"2026-02-18T11:40:19.511066+07:00\",\n                    \"updated_at\": \"2026-02-18T11:40:19.511066+07:00\"\n                },\n                \"location\": {\n                    \"id\": \"f8d8c3b1-3e4a-4b6a-8b6e-3d1f8a7b3c2d\",\n                    \"name\": \"Main Office\",\n                    \"latitude\": -6.2088,\n                    \"longitude\": 106.8456,\n                    \"radius_meters\": 100,\n                    \"polygon\": null,\n                    \"is_active\": true,\n                    \"created_at\": \"2026-02-18T11:33:23.009883+07:00\"\n                }\n            }\n        ]\n    }\n}"
+            }
+          ]
         },
         {
           "name": "Check In",
@@ -3376,7 +3565,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"employee_id\": \"<employee-uuid>\",\n  \"location_id\": \"<location-uuid>\"\n}"
+              "raw": "{\n    \"employee_id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n    \"location_id\": \"c1b2a3d4-e5f6-7890-1234-567890abcdef\"\n}"
             },
             "url": {
               "raw": "{{BASE_URL}}/api/attendances/check-in",
@@ -3390,7 +3579,74 @@
               ]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "Check In",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"employee_id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n    \"location_id\": \"c1b2a3d4-e5f6-7890-1234-567890abcdef\"\n}"
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/api/attendances/check-in",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "attendances",
+                    "check-in"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                },
+                {
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 23 Feb 2026 15:51:33 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1809"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"check-in successful\",\n    \"data\": {\n        \"id\": \"501ba96b-2602-4f9d-a537-0546229963a3\",\n        \"employee_id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n        \"location_id\": \"c1b2a3d4-e5f6-7890-1234-567890abcdef\",\n        \"check_in_time\": \"2026-02-23T22:51:33.460077+07:00\",\n        \"check_out_time\": null,\n        \"status\": \"present\",\n        \"created_at\": \"2026-02-23T22:51:33.460253+07:00\",\n        \"employee\": {\n            \"id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n            \"user_id\": \"344faa2e-074b-4a45-b57c-123654f1a158\",\n            \"employee_code\": \"EMP001\",\n            \"supervisor_id\": null,\n            \"department_id\": \"e6f4cf8a-8c3d-4c3e-9c7f-1d8a9d1e1bf2\",\n            \"position_id\": \"1b3a4c17-7c73-4f51-b2e6-a8cf21e25a22\",\n            \"join_date\": \"2023-01-15T00:00:00Z\",\n            \"end_date\": \"0001-01-01T00:00:00Z\",\n            \"employment_type\": \"Permanent\",\n            \"employment_status\": \"Active\",\n            \"probation_end_date\": \"0001-01-01T00:00:00Z\",\n            \"user\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"email\": \"\",\n                \"telp_number\": \"\",\n                \"password\": \"\",\n                \"role\": \"\",\n                \"image_url\": \"\",\n                \"is_verified\": false,\n                \"face_recognition_model_id\": null,\n                \"face_recognition_user_id\": null,\n                \"face_recognition_best_photo_path\": \"\",\n                \"face_recognition_best_photo_id\": null,\n                \"face_recognition_score\": null,\n                \"created_at\": \"0001-01-01T00:00:00Z\",\n                \"updated_at\": \"0001-01-01T00:00:00Z\"\n            },\n            \"supervisor\": null,\n            \"department\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"description\": \"\"\n            },\n            \"position\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"department_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"level\": \"\",\n                \"department\": {\n                    \"id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"name\": \"\",\n                    \"description\": \"\"\n                }\n            },\n            \"created_at\": \"2026-02-18T11:40:19.511066+07:00\",\n            \"updated_at\": \"2026-02-18T11:40:19.511066+07:00\"\n        },\n        \"location\": {\n            \"id\": \"c1b2a3d4-e5f6-7890-1234-567890abcdef\",\n            \"name\": \"Branch Office\",\n            \"latitude\": -6.9175,\n            \"longitude\": 107.6191,\n            \"radius_meters\": 50,\n            \"polygon\": null,\n            \"is_active\": true,\n            \"created_at\": \"2026-02-18T11:33:23.014538+07:00\"\n        }\n    }\n}"
+            }
+          ]
         },
         {
           "name": "Check Out",
@@ -3408,7 +3664,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"employee_id\": \"<employee-uuid>\"\n}"
+              "raw": "{\n    \"employee_id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\"\n}"
             },
             "url": {
               "raw": "{{BASE_URL}}/api/attendances/check-out",
@@ -3422,7 +3678,74 @@
               ]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "Check Out",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"employee_id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\"\n}"
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/api/attendances/check-out",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "attendances",
+                    "check-out"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                },
+                {
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 23 Feb 2026 15:52:24 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1840"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"check-out successful\",\n    \"data\": {\n        \"id\": \"501ba96b-2602-4f9d-a537-0546229963a3\",\n        \"employee_id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n        \"location_id\": \"c1b2a3d4-e5f6-7890-1234-567890abcdef\",\n        \"check_in_time\": \"2026-02-23T22:51:33.460077+07:00\",\n        \"check_out_time\": \"2026-02-23T22:52:24.655104+07:00\",\n        \"status\": \"present\",\n        \"created_at\": \"2026-02-23T22:51:33.460253+07:00\",\n        \"employee\": {\n            \"id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n            \"user_id\": \"344faa2e-074b-4a45-b57c-123654f1a158\",\n            \"employee_code\": \"EMP001\",\n            \"supervisor_id\": null,\n            \"department_id\": \"e6f4cf8a-8c3d-4c3e-9c7f-1d8a9d1e1bf2\",\n            \"position_id\": \"1b3a4c17-7c73-4f51-b2e6-a8cf21e25a22\",\n            \"join_date\": \"2023-01-15T00:00:00Z\",\n            \"end_date\": \"0001-01-01T00:00:00Z\",\n            \"employment_type\": \"Permanent\",\n            \"employment_status\": \"Active\",\n            \"probation_end_date\": \"0001-01-01T00:00:00Z\",\n            \"user\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"email\": \"\",\n                \"telp_number\": \"\",\n                \"password\": \"\",\n                \"role\": \"\",\n                \"image_url\": \"\",\n                \"is_verified\": false,\n                \"face_recognition_model_id\": null,\n                \"face_recognition_user_id\": null,\n                \"face_recognition_best_photo_path\": \"\",\n                \"face_recognition_best_photo_id\": null,\n                \"face_recognition_score\": null,\n                \"created_at\": \"0001-01-01T00:00:00Z\",\n                \"updated_at\": \"0001-01-01T00:00:00Z\"\n            },\n            \"supervisor\": null,\n            \"department\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"description\": \"\"\n            },\n            \"position\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"department_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"level\": \"\",\n                \"department\": {\n                    \"id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"name\": \"\",\n                    \"description\": \"\"\n                }\n            },\n            \"created_at\": \"2026-02-18T11:40:19.511066+07:00\",\n            \"updated_at\": \"2026-02-18T11:40:19.511066+07:00\"\n        },\n        \"location\": {\n            \"id\": \"c1b2a3d4-e5f6-7890-1234-567890abcdef\",\n            \"name\": \"Branch Office\",\n            \"latitude\": -6.9175,\n            \"longitude\": 107.6191,\n            \"radius_meters\": 50,\n            \"polygon\": null,\n            \"is_active\": true,\n            \"created_at\": \"2026-02-18T11:33:23.014538+07:00\"\n        }\n    }\n}"
+            }
+          ]
         },
         {
           "name": "Update Attendance",
@@ -3455,12 +3778,85 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": ""
+                  "value": "501ba96b-2602-4f9d-a537-0546229963a3"
                 }
               ]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "Update Attendance",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"present\"\n}"
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/api/attendances/:id",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "attendances",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "501ba96b-2602-4f9d-a537-0546229963a3"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                },
+                {
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 23 Feb 2026 15:52:49 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1837"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"update successful\",\n    \"data\": {\n        \"id\": \"501ba96b-2602-4f9d-a537-0546229963a3\",\n        \"employee_id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n        \"location_id\": \"c1b2a3d4-e5f6-7890-1234-567890abcdef\",\n        \"check_in_time\": \"2026-02-23T22:51:33.460077+07:00\",\n        \"check_out_time\": \"2026-02-23T22:52:24.655104+07:00\",\n        \"status\": \"present\",\n        \"created_at\": \"2026-02-23T22:51:33.460253+07:00\",\n        \"employee\": {\n            \"id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n            \"user_id\": \"344faa2e-074b-4a45-b57c-123654f1a158\",\n            \"employee_code\": \"EMP001\",\n            \"supervisor_id\": null,\n            \"department_id\": \"e6f4cf8a-8c3d-4c3e-9c7f-1d8a9d1e1bf2\",\n            \"position_id\": \"1b3a4c17-7c73-4f51-b2e6-a8cf21e25a22\",\n            \"join_date\": \"2023-01-15T00:00:00Z\",\n            \"end_date\": \"0001-01-01T00:00:00Z\",\n            \"employment_type\": \"Permanent\",\n            \"employment_status\": \"Active\",\n            \"probation_end_date\": \"0001-01-01T00:00:00Z\",\n            \"user\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"email\": \"\",\n                \"telp_number\": \"\",\n                \"password\": \"\",\n                \"role\": \"\",\n                \"image_url\": \"\",\n                \"is_verified\": false,\n                \"face_recognition_model_id\": null,\n                \"face_recognition_user_id\": null,\n                \"face_recognition_best_photo_path\": \"\",\n                \"face_recognition_best_photo_id\": null,\n                \"face_recognition_score\": null,\n                \"created_at\": \"0001-01-01T00:00:00Z\",\n                \"updated_at\": \"0001-01-01T00:00:00Z\"\n            },\n            \"supervisor\": null,\n            \"department\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"description\": \"\"\n            },\n            \"position\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"department_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"level\": \"\",\n                \"department\": {\n                    \"id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"name\": \"\",\n                    \"description\": \"\"\n                }\n            },\n            \"created_at\": \"2026-02-18T11:40:19.511066+07:00\",\n            \"updated_at\": \"2026-02-18T11:40:19.511066+07:00\"\n        },\n        \"location\": {\n            \"id\": \"c1b2a3d4-e5f6-7890-1234-567890abcdef\",\n            \"name\": \"Branch Office\",\n            \"latitude\": -6.9175,\n            \"longitude\": 107.6191,\n            \"radius_meters\": 50,\n            \"polygon\": null,\n            \"is_active\": true,\n            \"created_at\": \"2026-02-18T11:33:23.014538+07:00\"\n        }\n    }\n}"
+            }
+          ]
         },
         {
           "name": "Approve Attendance",
@@ -3494,12 +3890,86 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": ""
+                  "value": "501ba96b-2602-4f9d-a537-0546229963a3"
                 }
               ]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "Approve Attendance",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"approved\"\n}"
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/api/attendances/:id/approve",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "attendances",
+                    ":id",
+                    "approve"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "501ba96b-2602-4f9d-a537-0546229963a3"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                },
+                {
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 23 Feb 2026 15:52:53 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1840"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"approval successful\",\n    \"data\": {\n        \"id\": \"501ba96b-2602-4f9d-a537-0546229963a3\",\n        \"employee_id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n        \"location_id\": \"c1b2a3d4-e5f6-7890-1234-567890abcdef\",\n        \"check_in_time\": \"2026-02-23T22:51:33.460077+07:00\",\n        \"check_out_time\": \"2026-02-23T22:52:24.655104+07:00\",\n        \"status\": \"approved\",\n        \"created_at\": \"2026-02-23T22:51:33.460253+07:00\",\n        \"employee\": {\n            \"id\": \"e1a7f7e3-14b3-4e67-a6f6-4a5d6a7f8b9c\",\n            \"user_id\": \"344faa2e-074b-4a45-b57c-123654f1a158\",\n            \"employee_code\": \"EMP001\",\n            \"supervisor_id\": null,\n            \"department_id\": \"e6f4cf8a-8c3d-4c3e-9c7f-1d8a9d1e1bf2\",\n            \"position_id\": \"1b3a4c17-7c73-4f51-b2e6-a8cf21e25a22\",\n            \"join_date\": \"2023-01-15T00:00:00Z\",\n            \"end_date\": \"0001-01-01T00:00:00Z\",\n            \"employment_type\": \"Permanent\",\n            \"employment_status\": \"Active\",\n            \"probation_end_date\": \"0001-01-01T00:00:00Z\",\n            \"user\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"email\": \"\",\n                \"telp_number\": \"\",\n                \"password\": \"\",\n                \"role\": \"\",\n                \"image_url\": \"\",\n                \"is_verified\": false,\n                \"face_recognition_model_id\": null,\n                \"face_recognition_user_id\": null,\n                \"face_recognition_best_photo_path\": \"\",\n                \"face_recognition_best_photo_id\": null,\n                \"face_recognition_score\": null,\n                \"created_at\": \"0001-01-01T00:00:00Z\",\n                \"updated_at\": \"0001-01-01T00:00:00Z\"\n            },\n            \"supervisor\": null,\n            \"department\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"description\": \"\"\n            },\n            \"position\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"department_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"level\": \"\",\n                \"department\": {\n                    \"id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"name\": \"\",\n                    \"description\": \"\"\n                }\n            },\n            \"created_at\": \"2026-02-18T11:40:19.511066+07:00\",\n            \"updated_at\": \"2026-02-18T11:40:19.511066+07:00\"\n        },\n        \"location\": {\n            \"id\": \"c1b2a3d4-e5f6-7890-1234-567890abcdef\",\n            \"name\": \"Branch Office\",\n            \"latitude\": -6.9175,\n            \"longitude\": 107.6191,\n            \"radius_meters\": 50,\n            \"polygon\": null,\n            \"is_active\": true,\n            \"created_at\": \"2026-02-18T11:33:23.014538+07:00\"\n        }\n    }\n}"
+            }
+          ]
         },
         {
           "name": "Delete Attendance",
@@ -3524,12 +3994,77 @@
               "variable": [
                 {
                   "key": "id",
-                  "value": ""
+                  "value": "a1b2c3d4-3333-4e67-a6f6-4a5d6a7f8b9c"
                 }
               ]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "Delete Attendance",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/attendances/:id",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "attendances",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "a1b2c3d4-3333-4e67-a6f6-4a5d6a7f8b9c"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                },
+                {
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 23 Feb 2026 15:53:16 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "45"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"delete successful\"\n}"
+            }
+          ]
         }
       ]
     },
@@ -3555,7 +4090,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{}"
+                  "raw": "{\n    \"name\":\"Healing Leave\",\n    \"max_days_per_year\": 10\n}"
                 },
                 "url": {
                   "raw": "{{BASE_URL}}/api/leave-types",
@@ -3568,7 +4103,73 @@
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Create LeaveType",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{auth_token}}"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"name\":\"Sick\",\n    \"max_days_per_year\": 10\n}"
+                    },
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/leave-types",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "leave-types"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 16:37:12 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "98"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"id\": \"769abbdd-a515-4688-b332-30effa608924\",\n    \"name\": \"Sick\",\n    \"max_days_per_year\": 10,\n    \"is_paid\": false\n}"
+                }
+              ]
             },
             {
               "name": "List LeaveTypes",
@@ -3591,7 +4192,65 @@
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "List LeaveTypes",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{auth_token}}"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/leave-types",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "leave-types"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 16:37:32 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "100"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n    {\n        \"id\": \"769abbdd-a515-4688-b332-30effa608924\",\n        \"name\": \"Sick\",\n        \"max_days_per_year\": 10,\n        \"is_paid\": false\n    }\n]"
+                }
+              ]
             },
             {
               "name": "Get LeaveType",
@@ -3604,18 +4263,89 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{BASE_URL}}/api/leave-types/{{id}}",
+                  "raw": "{{BASE_URL}}/api/leave-types/:id",
                   "host": [
                     "{{BASE_URL}}"
                   ],
                   "path": [
                     "api",
                     "leave-types",
-                    "{{id}}"
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "769abbdd-a515-4688-b332-30effa608924"
+                    }
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Get LeaveType",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{auth_token}}"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/leave-types/:id",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "leave-types",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "769abbdd-a515-4688-b332-30effa608924"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 16:38:14 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "98"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"id\": \"769abbdd-a515-4688-b332-30effa608924\",\n    \"name\": \"Sick\",\n    \"max_days_per_year\": 10,\n    \"is_paid\": false\n}"
+                }
+              ]
             },
             {
               "name": "Update LeaveType",
@@ -3633,21 +4363,100 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{}"
+                  "raw": "{\n    \"name\":\"Sick\",\n    \"max_days_per_year\": 100\n}"
                 },
                 "url": {
-                  "raw": "{{BASE_URL}}/api/leave-types/{{id}}",
+                  "raw": "{{BASE_URL}}/api/leave-types/:id",
                   "host": [
                     "{{BASE_URL}}"
                   ],
                   "path": [
                     "api",
                     "leave-types",
-                    "{{id}}"
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "769abbdd-a515-4688-b332-30effa608924"
+                    }
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Update LeaveType",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{auth_token}}"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"name\":\"Sick\",\n    \"max_days_per_year\": 100\n}"
+                    },
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/leave-types/:id",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "leave-types",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "769abbdd-a515-4688-b332-30effa608924"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 16:38:24 GMT"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "99"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"id\": \"769abbdd-a515-4688-b332-30effa608924\",\n    \"name\": \"Sick\",\n    \"max_days_per_year\": 100,\n    \"is_paid\": false\n}"
+                }
+              ]
             },
             {
               "name": "Delete LeaveType",
@@ -3660,18 +4469,81 @@
                   }
                 ],
                 "url": {
-                  "raw": "{{BASE_URL}}/api/leave-types/{{id}}",
+                  "raw": "{{BASE_URL}}/api/leave-types/:id",
                   "host": [
                     "{{BASE_URL}}"
                   ],
                   "path": [
                     "api",
                     "leave-types",
-                    "{{id}}"
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "869c4cbe-1ada-418f-a1f5-7676a067eda9"
+                    }
                   ]
                 }
               },
-              "response": []
+              "response": [
+                {
+                  "name": "Delete LeaveType",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Authorization",
+                        "value": "Bearer {{auth_token}}"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{BASE_URL}}/api/leave-types/:id",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "leave-types",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "869c4cbe-1ada-418f-a1f5-7676a067eda9"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Headers",
+                      "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Methods",
+                      "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Mon, 23 Feb 2026 16:39:26 GMT"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": null
+                }
+              ]
             }
           ]
         },
@@ -3696,7 +4568,65 @@
               ]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "Get Leaves",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/leaves",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "leaves"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                },
+                {
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 23 Feb 2026 16:56:41 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1599"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"success\",\n    \"data\": {\n        \"page\": 1,\n        \"limit\": 10,\n        \"total\": 1,\n        \"total_pages\": 1,\n        \"data\": [\n            {\n                \"id\": \"9608c35a-db9d-45f3-8a29-842563887d57\",\n                \"employee_id\": \"3dbfa338-7968-495a-8ed8-3484e4fa7cb1\",\n                \"start_date\": \"2024-01-15T00:00:00Z\",\n                \"end_date\": \"2024-01-18T00:00:00Z\",\n                \"reason\": \"Vacation\",\n                \"status\": \"pending\",\n                \"created_at\": \"2026-02-23T23:56:36.67904+07:00\",\n                \"employee\": {\n                    \"id\": \"3dbfa338-7968-495a-8ed8-3484e4fa7cb1\",\n                    \"user_id\": \"a117854f-1db9-4f32-925b-3469afd0abbc\",\n                    \"employee_code\": \"EMP-001\",\n                    \"supervisor_id\": null,\n                    \"department_id\": \"f5a5c5d5-c5e5-4a5a-a5c5-a5c5a5c5a5c5\",\n                    \"position_id\": \"5e1f7c5e-8f5a-4b6e-8e8e-8e8e8e8e8e8e\",\n                    \"join_date\": \"2024-01-15T00:00:00Z\",\n                    \"end_date\": \"0001-01-01T00:00:00Z\",\n                    \"employment_type\": \"full_time\",\n                    \"employment_status\": \"active\",\n                    \"probation_end_date\": \"0001-01-01T00:00:00Z\",\n                    \"user\": {\n                        \"id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"name\": \"\",\n                        \"email\": \"\",\n                        \"telp_number\": \"\",\n                        \"password\": \"\",\n                        \"role\": \"\",\n                        \"image_url\": \"\",\n                        \"is_verified\": false,\n                        \"face_recognition_model_id\": null,\n                        \"face_recognition_user_id\": null,\n                        \"face_recognition_best_photo_path\": \"\",\n                        \"face_recognition_best_photo_id\": null,\n                        \"face_recognition_score\": null,\n                        \"created_at\": \"0001-01-01T00:00:00Z\",\n                        \"updated_at\": \"0001-01-01T00:00:00Z\"\n                    },\n                    \"supervisor\": null,\n                    \"department\": {\n                        \"id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"name\": \"\",\n                        \"description\": \"\"\n                    },\n                    \"position\": {\n                        \"id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"department_id\": \"00000000-0000-0000-0000-000000000000\",\n                        \"name\": \"\",\n                        \"level\": \"\",\n                        \"department\": {\n                            \"id\": \"00000000-0000-0000-0000-000000000000\",\n                            \"name\": \"\",\n                            \"description\": \"\"\n                        }\n                    },\n                    \"created_at\": \"2026-02-18T14:40:37.854836+07:00\",\n                    \"updated_at\": \"2026-02-18T14:40:37.854836+07:00\"\n                }\n            }\n        ]\n    }\n}"
+            }
+          ]
         },
         {
           "name": "Get Leave by ID",
@@ -3726,7 +4656,72 @@
               ]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "Get Leave by ID",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/leaves/:id",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "leaves",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "9608c35a-db9d-45f3-8a29-842563887d57"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                },
+                {
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 23 Feb 2026 16:56:58 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1542"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"success\",\n    \"data\": {\n        \"id\": \"9608c35a-db9d-45f3-8a29-842563887d57\",\n        \"employee_id\": \"3dbfa338-7968-495a-8ed8-3484e4fa7cb1\",\n        \"start_date\": \"2024-01-15T00:00:00Z\",\n        \"end_date\": \"2024-01-18T00:00:00Z\",\n        \"reason\": \"Vacation\",\n        \"status\": \"pending\",\n        \"created_at\": \"2026-02-23T23:56:36.67904+07:00\",\n        \"employee\": {\n            \"id\": \"3dbfa338-7968-495a-8ed8-3484e4fa7cb1\",\n            \"user_id\": \"a117854f-1db9-4f32-925b-3469afd0abbc\",\n            \"employee_code\": \"EMP-001\",\n            \"supervisor_id\": null,\n            \"department_id\": \"f5a5c5d5-c5e5-4a5a-a5c5-a5c5a5c5a5c5\",\n            \"position_id\": \"5e1f7c5e-8f5a-4b6e-8e8e-8e8e8e8e8e8e\",\n            \"join_date\": \"2024-01-15T00:00:00Z\",\n            \"end_date\": \"0001-01-01T00:00:00Z\",\n            \"employment_type\": \"full_time\",\n            \"employment_status\": \"active\",\n            \"probation_end_date\": \"0001-01-01T00:00:00Z\",\n            \"user\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"email\": \"\",\n                \"telp_number\": \"\",\n                \"password\": \"\",\n                \"role\": \"\",\n                \"image_url\": \"\",\n                \"is_verified\": false,\n                \"face_recognition_model_id\": null,\n                \"face_recognition_user_id\": null,\n                \"face_recognition_best_photo_path\": \"\",\n                \"face_recognition_best_photo_id\": null,\n                \"face_recognition_score\": null,\n                \"created_at\": \"0001-01-01T00:00:00Z\",\n                \"updated_at\": \"0001-01-01T00:00:00Z\"\n            },\n            \"supervisor\": null,\n            \"department\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"description\": \"\"\n            },\n            \"position\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"department_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"level\": \"\",\n                \"department\": {\n                    \"id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"name\": \"\",\n                    \"description\": \"\"\n                }\n            },\n            \"created_at\": \"2026-02-18T14:40:37.854836+07:00\",\n            \"updated_at\": \"2026-02-18T14:40:37.854836+07:00\"\n        }\n    }\n}"
+            }
+          ]
         },
         {
           "name": "Create Leave",
@@ -3744,7 +4739,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"employee_id\": \"<employee-uuid>\",\n  \"start_date\": \"2026-03-01\",\n  \"end_date\": \"2026-03-05\",\n  \"reason\": \"Vacation\"\n}"
+              "raw": "{\n  \"employee_id\": \"3dbfa338-7968-495a-8ed8-3484e4fa7cb1\",\n  \"start_date\": \"2024-01-15T00:00:00Z\",\n  \"end_date\": \"2024-01-18T00:00:00Z\",\n  \"reason\": \"Vacation\"\n}"
             },
             "url": {
               "raw": "{{BASE_URL}}/api/leaves",
@@ -3757,7 +4752,73 @@
               ]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "Create Leave",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employee_id\": \"3dbfa338-7968-495a-8ed8-3484e4fa7cb1\",\n  \"start_date\": \"2024-01-15T00:00:00Z\",\n  \"end_date\": \"2024-01-18T00:00:00Z\",\n  \"reason\": \"Vacation\"\n}"
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/api/leaves",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "leaves"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                },
+                {
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 23 Feb 2026 16:56:36 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1555"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"success create leave\",\n    \"data\": {\n        \"id\": \"9608c35a-db9d-45f3-8a29-842563887d57\",\n        \"employee_id\": \"3dbfa338-7968-495a-8ed8-3484e4fa7cb1\",\n        \"start_date\": \"2024-01-15T00:00:00Z\",\n        \"end_date\": \"2024-01-18T00:00:00Z\",\n        \"reason\": \"Vacation\",\n        \"status\": \"pending\",\n        \"created_at\": \"2026-02-23T23:56:36.67904+07:00\",\n        \"employee\": {\n            \"id\": \"3dbfa338-7968-495a-8ed8-3484e4fa7cb1\",\n            \"user_id\": \"a117854f-1db9-4f32-925b-3469afd0abbc\",\n            \"employee_code\": \"EMP-001\",\n            \"supervisor_id\": null,\n            \"department_id\": \"f5a5c5d5-c5e5-4a5a-a5c5-a5c5a5c5a5c5\",\n            \"position_id\": \"5e1f7c5e-8f5a-4b6e-8e8e-8e8e8e8e8e8e\",\n            \"join_date\": \"2024-01-15T00:00:00Z\",\n            \"end_date\": \"0001-01-01T00:00:00Z\",\n            \"employment_type\": \"full_time\",\n            \"employment_status\": \"active\",\n            \"probation_end_date\": \"0001-01-01T00:00:00Z\",\n            \"user\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"email\": \"\",\n                \"telp_number\": \"\",\n                \"password\": \"\",\n                \"role\": \"\",\n                \"image_url\": \"\",\n                \"is_verified\": false,\n                \"face_recognition_model_id\": null,\n                \"face_recognition_user_id\": null,\n                \"face_recognition_best_photo_path\": \"\",\n                \"face_recognition_best_photo_id\": null,\n                \"face_recognition_score\": null,\n                \"created_at\": \"0001-01-01T00:00:00Z\",\n                \"updated_at\": \"0001-01-01T00:00:00Z\"\n            },\n            \"supervisor\": null,\n            \"department\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"description\": \"\"\n            },\n            \"position\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"department_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"level\": \"\",\n                \"department\": {\n                    \"id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"name\": \"\",\n                    \"description\": \"\"\n                }\n            },\n            \"created_at\": \"2026-02-18T14:40:37.854836+07:00\",\n            \"updated_at\": \"2026-02-18T14:40:37.854836+07:00\"\n        }\n    }\n}"
+            }
+          ]
         },
         {
           "name": "Update Leave",
@@ -3795,7 +4856,80 @@
               ]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "Update Leave",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"approved\"\n}"
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/api/leaves/:id",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "leaves",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "9608c35a-db9d-45f3-8a29-842563887d57"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                },
+                {
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 23 Feb 2026 16:57:06 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1556"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"success update leave\",\n    \"data\": {\n        \"id\": \"9608c35a-db9d-45f3-8a29-842563887d57\",\n        \"employee_id\": \"3dbfa338-7968-495a-8ed8-3484e4fa7cb1\",\n        \"start_date\": \"2024-01-15T00:00:00Z\",\n        \"end_date\": \"2024-01-18T00:00:00Z\",\n        \"reason\": \"Vacation\",\n        \"status\": \"approved\",\n        \"created_at\": \"2026-02-23T23:56:36.67904+07:00\",\n        \"employee\": {\n            \"id\": \"3dbfa338-7968-495a-8ed8-3484e4fa7cb1\",\n            \"user_id\": \"a117854f-1db9-4f32-925b-3469afd0abbc\",\n            \"employee_code\": \"EMP-001\",\n            \"supervisor_id\": null,\n            \"department_id\": \"f5a5c5d5-c5e5-4a5a-a5c5-a5c5a5c5a5c5\",\n            \"position_id\": \"5e1f7c5e-8f5a-4b6e-8e8e-8e8e8e8e8e8e\",\n            \"join_date\": \"2024-01-15T00:00:00Z\",\n            \"end_date\": \"0001-01-01T00:00:00Z\",\n            \"employment_type\": \"full_time\",\n            \"employment_status\": \"active\",\n            \"probation_end_date\": \"0001-01-01T00:00:00Z\",\n            \"user\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"email\": \"\",\n                \"telp_number\": \"\",\n                \"password\": \"\",\n                \"role\": \"\",\n                \"image_url\": \"\",\n                \"is_verified\": false,\n                \"face_recognition_model_id\": null,\n                \"face_recognition_user_id\": null,\n                \"face_recognition_best_photo_path\": \"\",\n                \"face_recognition_best_photo_id\": null,\n                \"face_recognition_score\": null,\n                \"created_at\": \"0001-01-01T00:00:00Z\",\n                \"updated_at\": \"0001-01-01T00:00:00Z\"\n            },\n            \"supervisor\": null,\n            \"department\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"description\": \"\"\n            },\n            \"position\": {\n                \"id\": \"00000000-0000-0000-0000-000000000000\",\n                \"department_id\": \"00000000-0000-0000-0000-000000000000\",\n                \"name\": \"\",\n                \"level\": \"\",\n                \"department\": {\n                    \"id\": \"00000000-0000-0000-0000-000000000000\",\n                    \"name\": \"\",\n                    \"description\": \"\"\n                }\n            },\n            \"created_at\": \"2026-02-18T14:40:37.854836+07:00\",\n            \"updated_at\": \"2026-02-18T14:40:37.854836+07:00\"\n        }\n    }\n}"
+            }
+          ]
         },
         {
           "name": "Delete Leave",
@@ -3825,7 +4959,72 @@
               ]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "Delete Leave",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{token}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/leaves/:id",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "leaves",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "740e443f-793b-4156-bf8b-434ccdaeecf4"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+                },
+                {
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 23 Feb 2026 16:57:27 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "48"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"status\": true,\n    \"message\": \"success delete leave\"\n}"
+            }
+          ]
         }
       ]
     },

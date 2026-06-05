@@ -13,6 +13,7 @@ import (
 type AttendanceRepository interface {
 	FindAll(ctx context.Context, db *gorm.DB, filter *pagination.Filter) (*pagination.Page[entities.Attendance], error)
 	FindByEmployeeID(ctx context.Context, db *gorm.DB, filter *pagination.Filter, employeeID uuid.UUID) (*pagination.Page[entities.Attendance], error)
+	FindToday(ctx context.Context, db *gorm.DB, userID uuid.UUID) (*entities.Attendance, error)
 	FindByID(id uuid.UUID) (*entities.Attendance, error)
 	FindTodayByEmployeeID(employeeID uuid.UUID) (*entities.Attendance, error)
 	Create(attendance *entities.Attendance) (*entities.Attendance, error)
@@ -94,6 +95,29 @@ func (r *attendanceRepository) FindByEmployeeID(ctx context.Context, db *gorm.DB
 
 	page.Set(attendances, paginator.Page, paginator.Limit, paginator.Total)
 	return &page, nil
+}
+
+func (r *attendanceRepository) FindToday(ctx context.Context, db *gorm.DB, userID uuid.UUID) (*entities.Attendance, error) {
+	if db == nil {
+		db = r.db
+	}
+
+	var attendance entities.Attendance
+
+	today := time.Now().Truncate(24 * time.Hour)
+	tomorrow := today.Add(24 * time.Hour)
+
+	err := db.WithContext(ctx).Model(&entities.Attendance{}).
+		Joins("JOIN employees ON employees.id = attendance.employee_id").
+		Where("employees.user_id = ?", userID).
+		Where("attendance.check_in_time >= ? AND attendance.check_in_time < ?", today, tomorrow).
+		Preload("Employee").Preload("Location").
+		First(&attendance).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &attendance, nil
 }
 
 func (r *attendanceRepository) Create(attendance *entities.Attendance) (*entities.Attendance, error) {

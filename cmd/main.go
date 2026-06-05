@@ -9,6 +9,7 @@ import (
 	"github.com/Caknoooo/go-gin-clean-starter/modules/auth"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/employee"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/expenses"
+	"github.com/Caknoooo/go-gin-clean-starter/modules/leave"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/leave_types"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/master"
 	"github.com/Caknoooo/go-gin-clean-starter/modules/notifications"
@@ -88,6 +89,7 @@ func main() {
 	auth.RegisterRoutes(server, injector)
 	employee.RegisterRoutes(server, injector)
 	master.RegisterRoutes(server, injector)
+	leave.RegisterRoutes(server, injector)
 	leave_types.RegisterRoutes(server, injector)
 	expenses.RegisterRoutes(server, injector)
 	payroll.RegisterRoutes(server, injector)

@@ -22,6 +22,7 @@ type AttendanceService interface {
 	Delete(id string) error
 	FindAll(ctx context.Context, filter *pagination.Filter) (*pagination.Page[entities.Attendance], error)
 	FindByEmployeeID(ctx context.Context, employeeID string, filter *pagination.Filter) (*pagination.Page[entities.Attendance], error)
+	FindToday(ctx context.Context, userID string) (*entities.Attendance, error)
 }
 
 type attendanceService struct {
@@ -71,6 +72,19 @@ func (s *attendanceService) FindByEmployeeID(ctx context.Context, employeeID str
 		return nil, err
 	}
 	return page, nil
+}
+
+func (s *attendanceService) FindToday(ctx context.Context, userID string) (*entities.Attendance, error) {
+	uid, err := uuid.Parse(userID)
+	if err != nil {
+		return nil, errors.New("invalid user id")
+	}
+
+	attendance, err := s.attendanceRepository.FindToday(ctx, s.db, uid)
+	if err != nil {
+		return nil, err
+	}
+	return attendance, nil
 }
 
 func (s *attendanceService) CheckIn(req dto.CheckInDTO) (*entities.Attendance, error) {
